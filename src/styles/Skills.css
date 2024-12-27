@@ -1,0 +1,89 @@
+/* Section Styling */
+.skills-section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #f9f9f9, #eef2f3);
+    text-align: center;
+  }
+  
+  .skills-title {
+    font-size: 2.5rem;
+    color: #0071e3;
+    margin-bottom: 40px;
+  }
+  
+  /* Skills Container */
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .skill-category {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .category-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .skills-list {
+    margin-top: 10px;
+  }
+  
+  /* Skill Item */
+  .skill-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  
+  .skill-name {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .skill-level {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+  }
+  
+  /* Skill Levels */
+  .skill-expert {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .skill-advanced {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .skill-intermediate {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .skill-beginner {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .skill-category:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+  }
+  

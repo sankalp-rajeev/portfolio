@@ -1,0 +1,117 @@
+.certification-container {
+    padding: 40px;
+    background: linear-gradient(135deg, #f5f5f7, #e8e8e8);
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  .certification-title {
+    font-size: 2.5rem;
+    color: #0071e3;
+    margin-bottom: 20px;
+  }
+  
+  .certification-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .cert-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .cert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cert-card.active {
+    border: 2px solid #0071e3;
+  }
+  
+  .cert-title {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .pdf-viewer {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    margin: 0 auto;
+  }
+  
+  .viewer-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+    height: 600px;
+    margin: 0 auto;
+  }
+  
+  .pdf-iframe,
+  .external-iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .ongoing-certification {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #eef7ff;
+    border-left: 4px solid #0078d4;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: left;
+    position: relative;
+}
+
+.certification-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+.cert-name {
+    display: block;
+    font-size: 1rem;
+    color: #0071e3;
+    margin-top: 5px;
+}
+
+.cert-progress-container {
+    background: #e0e0e0;
+    border-radius: 8px;
+    height: 12px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.cert-progress-bar {
+    background: linear-gradient(90deg, #0078d4, #0056b3);
+    height: 100%;
+    transition: width 0.4s ease-in-out;
+}
+
+.estimated-time {
+    color: #555;
+    font-style: italic;
+    margin-top: 5px;
+    display: block;
+}
+
+  

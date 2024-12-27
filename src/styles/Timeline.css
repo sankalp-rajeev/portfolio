@@ -1,0 +1,110 @@
+/* Container */
+.timeline-container {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f5f5f7, #e8e8e8);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+
+.timeline-title {
+  font-size: 2.5rem;
+  color: #0071e3;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+/* Story Timeline */
+.story-timeline {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.story-event {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 50px;
+  position: relative;
+  padding-left: 70px; /* Space for icons */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-event.highlight .story-content {
+  background: #d1ecf9; /* Light blue highlight for current year */
+  border-left: 4px solid #0071e3;
+}
+
+.story-icon {
+  width: 50px;
+  height: 50px;
+  background: #0071e3;
+  color: white;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: -25px;
+}
+
+.story-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-year {
+  font-size: 1.5rem;
+  color: #0071e3;
+  margin-bottom: 10px;
+}
+
+.story-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.story-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Connecting Line */
+.story-timeline:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 25px;
+  width: 4px;
+  background: #0071e3;
+  z-index: -1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .story-event {
+    padding-left: 0;
+  }
+
+  .story-icon {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .story-timeline:before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

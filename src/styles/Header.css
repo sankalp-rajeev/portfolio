@@ -1,0 +1,84 @@
+/* Navbar Styling */
+.navbar {
+  position: fixed; /* Fix header to the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem; /* Slightly larger padding for elegance */
+  background-color: rgba(255, 255, 255, 0.75); /* Frosted glass effect */
+  color: #000; /* Dark text for contrast */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  backdrop-filter: blur(12px); /* Blur effect for transparency */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Add a light border */
+  transform: translateY(-100%); /* Initially hidden */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Show Navbar When Scrolling or Hovering */
+.navbar.visible,
+.navbar:hover {
+  transform: translateY(0); /* Slide into view */
+  background-color: rgba(255, 255, 255, 0.85); /* Slightly darker on hover */
+}
+
+/* Logo Styling */
+.logo {
+  font-size: 1.5rem; /* Larger font size for emphasis */
+  font-weight: bold;
+  color: #007aff; /* Apple-style blue */
+  text-decoration: none;
+  margin-right: 1rem;
+  white-space: nowrap; /* Prevent logo text from wrapping */
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #0056b3; /* Slightly darker blue on hover */
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem; /* Spaced-out links for better readability */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  justify-content: flex-end; /* Align links to the right */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: #000; /* Dark text for visibility */
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem; /* Balanced font size */
+  transition: color 0.3s ease, transform 0.3s ease;
+  white-space: nowrap; /* Prevent text from wrapping */
+  padding: 0.5rem 0.8rem; /* Add padding for clickable areas */
+  border-radius: 8px; /* Rounded edges for a softer look */
+}
+
+.nav-links li a:hover {
+  color: #007aff; /* Apple blue on hover */
+  background-color: rgba(0, 0, 0, 0.05); /* Subtle highlight on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column; /* Stack links vertically */
+    align-items: flex-start; /* Align links to the left */
+    gap: 0.8rem;
+  }
+
+  .navbar {
+    padding: 0.5rem 1rem; /* Compact padding for mobile screens */
+  }
+}
