@@ -7,7 +7,7 @@ const Timeline = () => {
   const story = [
     {
       year: "2020",
-      title: "Humble Beginnings",
+      title: "The First Step",
       description: `I started my Bachelor's in Computer Science at Arizona State University, armed with curiosity but little knowledge. Every class felt like a mountain to climb.`,
       icon: "🎓",
     },

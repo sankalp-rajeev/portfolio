@@ -10,10 +10,10 @@ const Footer = () => {
 
     emailjs
       .sendForm(
-        "service_mf7kx1g", // Replace with your EmailJS Service ID
-        "template_tdo27e9", // Replace with your EmailJS Template ID
+        "service_mf7kx1g", 
+        "template_tdo27e9", 
         form.current,
-        "wIV7shGRkzZTPSkGq" // Replace with your EmailJS Public Key
+        "wIV7shGRkzZTPSkGq"
       )
       .then(
         (result) => {
@@ -25,7 +25,7 @@ const Footer = () => {
         }
       );
 
-    e.target.reset(); // Reset form after submission
+    e.target.reset(); 
   };
 
   return (

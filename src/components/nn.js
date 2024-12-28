@@ -51,7 +51,7 @@ const GlassBackground = () => {
         ctx.arc(gradient.x, gradient.y, gradient.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Animate gradient movement
+        
         gradient.x += index % 2 === 0 ? 0.2 : -0.2;
         gradient.y += index % 2 === 0 ? 0.1 : -0.1;
 

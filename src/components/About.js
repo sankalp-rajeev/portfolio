@@ -3,7 +3,7 @@ import "../styles/About.css";
 
 const educationDetails = [
   {
-    degree: "Bachelor of Science in Computer Science",
+    degree: "B.SC in Computer Science",
     institution: "Arizona State University",
     years: "08/2020 - 05/2024",
     gpa: "3.71/4.0",
@@ -11,7 +11,7 @@ const educationDetails = [
     description: "Certified in Mathematical Concepts of Engineering.",
   },
   {
-    degree: "MSc. in AI - Computer Vision | MSE. in Robotics Engineering",
+    degree: "M.SC in AI - Computer Vision | M.SE in Robotics Engineering",
     institution: "University of Michigan - Dearborn",
     years: "09/2024 - 05/2026",
     gpa: "3.9/4.0",

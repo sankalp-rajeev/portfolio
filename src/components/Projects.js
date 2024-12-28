@@ -68,7 +68,7 @@ const projectCategories = {
         "Python",
         "PyTorch",
         "NumPy",
-        "MNIST36 Dataset"
+        "NIST36 Dataset"
       ],
       link: "https://github.com/sankalp-rajeev/hand-written-digit-classification",
     },
@@ -88,7 +88,8 @@ const projectCategories = {
         "RecyclerView",
         "SharedPreferences",
       ],
-      link: "https://github.com/srajeev234/ConversionsApp",
+      link: "https://github.com/sankalp-rajeev/ConversionsApp",
+      paperLink: "/reports/Final Report UnitGenie.pdf", 
     },
     {
       title: "Social Media Photo Share App",
@@ -148,7 +149,7 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="button button-paper"
                       >
-                        View Paper
+                        View Report
                       </a>
                     )}
                     <a

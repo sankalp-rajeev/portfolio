@@ -1,6 +1,6 @@
 /* Navbar Styling */
 .navbar {
-  position: fixed; /* Fix header to the top */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -8,77 +8,130 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 1.5rem; /* Slightly larger padding for elegance */
-  background-color: rgba(255, 255, 255, 0.75); /* Frosted glass effect */
-  color: #000; /* Dark text for contrast */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  backdrop-filter: blur(12px); /* Blur effect for transparency */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Add a light border */
-  transform: translateY(-100%); /* Initially hidden */
+  padding: 0.8rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transform: translateY(-100%);
   transition: transform 0.3s ease, background-color 0.3s ease;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
-/* Show Navbar When Scrolling or Hovering */
-.navbar.visible,
+.navbar.visible {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
 .navbar:hover {
-  transform: translateY(0); /* Slide into view */
-  background-color: rgba(255, 255, 255, 0.85); /* Slightly darker on hover */
+  transform: translateY(0); /* Prevent hiding on hover */
 }
 
-/* Logo Styling */
-.logo {
-  font-size: 1.5rem; /* Larger font size for emphasis */
-  font-weight: bold;
-  color: #007aff; /* Apple-style blue */
-  text-decoration: none;
-  margin-right: 1rem;
-  white-space: nowrap; /* Prevent logo text from wrapping */
-  transition: color 0.3s ease;
-}
-
-.logo:hover {
-  color: #0056b3; /* Slightly darker blue on hover */
-}
 
 /* Navigation Links */
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.2rem; /* Spaced-out links for better readability */
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  justify-content: flex-end; /* Align links to the right */
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   margin: 0;
   padding: 0;
 }
 
 .nav-links li a {
-  color: #000; /* Dark text for visibility */
+  color: #000;
   text-decoration: none;
   font-weight: 500;
-  font-size: 1rem; /* Balanced font size */
+  font-size: 1rem;
   transition: color 0.3s ease, transform 0.3s ease;
-  white-space: nowrap; /* Prevent text from wrapping */
-  padding: 0.5rem 0.8rem; /* Add padding for clickable areas */
-  border-radius: 8px; /* Rounded edges for a softer look */
+  white-space: nowrap;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
 }
 
 .nav-links li a:hover {
-  color: #007aff; /* Apple blue on hover */
-  background-color: rgba(0, 0, 0, 0.05); /* Subtle highlight on hover */
-  transform: scale(1.05); /* Slight zoom effect */
+  color: #007aff;
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.05);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px; 
+  height: 24px; 
+  gap: 3px; 
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1050;
+}
+
+.hamburger-line {
+  width: 100%; 
+  height: 3px; 
+  background-color: #000;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hamburger Menu Open State */
+.hamburger.open .line1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open .line2 {
+  opacity: 0;
+}
+
+.hamburger.open .line3 {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* Responsive Design for Smaller Screens */
 @media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column; /* Stack links vertically */
-    align-items: flex-start; /* Align links to the left */
-    gap: 0.8rem;
+  .navbar {
+    padding: 0.5rem 1rem;
   }
 
-  .navbar {
-    padding: 0.5rem 1rem; /* Compact padding for mobile screens */
+  /* Hide navigation links initially */
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-height: 0; 
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+  }
+
+  /* Show menu when open */
+  .nav-links.open {
+    max-height: 300px; 
+    opacity: 1;
+  }
+
+  .nav-links li {
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  .nav-links li:last-child {
+    border-bottom: none;
+  }
+
+  /* Hamburger Menu - Show for small screens */
+  .hamburger {
+    display: flex;
   }
 }

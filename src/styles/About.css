@@ -1,6 +1,6 @@
 /* About Section */
 .about-section {
-  height: 100vh;
+  height: auto; 
   padding: 50px 20px;
   background: #f9f9f9;
   display: flex;
@@ -10,18 +10,19 @@
 }
 
 .about-container {
-  max-width: 1400px; /* Increased max width for larger screens */
-  width: 100%; /* Full width */
+  max-width: 1400px;
+  width: 100%;
   display: flex;
-  gap: 60px; /* More spacing between image and content */
+  gap: 60px;
   align-items: center;
+  flex-wrap: wrap; 
 }
 
 /* Image Section */
 .about-image {
   flex: 1;
-  max-width: 600px; /* Control maximum image width */
-  text-align: center; /* Center the image and button */
+  max-width: 600px;
+  text-align: center;
 }
 
 .about-image img {
@@ -30,30 +31,30 @@
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   object-fit: cover;
-  margin-bottom: 20px; /* Space between image and resume button */
+  margin-bottom: 20px;
 }
 
-/* Resume Button Section Below Image */
+/* Resume Button */
 .resume-button-container {
-  text-align: center; /* Center the button below the image */
+  text-align: center;
 }
 
 .resume-button {
   display: inline-block;
   text-decoration: none;
-  padding: 12px 24px; /* Increased padding for larger button */
+  padding: 12px 24px;
   font-size: 1rem;
   font-weight: bold;
   color: #ffffff;
-  background-color: #007aff; /* Apple blue */
+  background-color: #007aff;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for button */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .resume-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.05); /* Slight zoom effect */
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 /* Content Section */
@@ -64,14 +65,14 @@
 
 .about-content h2 {
   font-size: 2rem;
-  color: #0071e3; /* Accent color */
+  color: #0071e3;
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
 
 .about-content h3 {
-  font-size: 2.5rem; /* Larger font size for heading */
+  font-size: 2.5rem;
   color: #333;
   margin-bottom: 30px;
   font-weight: bold;
@@ -83,69 +84,68 @@
 }
 
 .about-content p {
-  font-size: 1.25rem; /* Larger font size for readability */
+  font-size: 1.25rem;
   color: #555;
-  line-height: 2; /* Increased line spacing */
+  line-height: 2;
   margin-bottom: 30px;
 }
 
 /* Education Section */
 .education-section {
   margin-top: 40px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
+  text-align: center;
 }
 
 .education-title {
-  text-align: center;
   font-size: 1.8rem;
-  margin-bottom: 20px;
   color: #333;
+  margin-bottom: 30px;
 }
 
+/* Education Grid */
 .education-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic grid */
   gap: 20px;
   justify-content: center;
 }
 
+/* Individual Education Card */
 .education-card {
-  background: #fff;
-  padding: 15px;
+  background: white;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   text-align: center;
-  max-width: 300px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .education-card:hover {
-  transform: scale(1.05); /* Slightly enlarges the card */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a more prominent shadow */
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .education-degree {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #444;
 }
 
 .education-institution,
 .education-years {
-  color: #666;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
 }
 
 .education-description {
+  font-size: 0.9rem;
+  color: #666;
   margin-top: 10px;
-  font-size: 0.85rem;
-  color: #555;
 }
 
 .education-gpa {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #444;
   margin: 5px 0;
 }
@@ -153,12 +153,12 @@
 .transcript-link {
   display: inline-block;
   margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #0078d4;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
+  padding: 10px 15px;
   font-size: 0.9rem;
+  background-color: #0078d4;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
@@ -169,21 +169,17 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .about-container {
-    flex-direction: column; /* Stack content vertically on smaller screens */
+    flex-direction: column;
     text-align: center;
   }
 
   .about-image {
-    max-width: 400px; /* Adjust image size for medium screens */
+    max-width: 400px;
     margin-bottom: 30px;
   }
 
   .resume-button-container {
-    margin-top: 20px; /* Adjust spacing for smaller screens */
-  }
-
-  .about-content {
-    padding: 0;
+    margin-top: 20px;
   }
 
   .about-content h3 {
@@ -192,16 +188,21 @@
 
   .about-content p {
     font-size: 1.2rem;
+    line-height: 1.8;
+  }
+
+  .education-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .about-container {
-    gap: 20px; /* Reduce gap on smaller screens */
+    gap: 20px;
   }
 
   .about-image {
-    max-width: 300px; /* Smaller image size */
+    max-width: 300px;
   }
 
   .about-content h3 {
@@ -210,6 +211,30 @@
 
   .about-content p {
     font-size: 1rem;
-    line-height: 1.8;
+    line-height: 1.5;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr; 
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-card {
+    padding: 10px;
+  }
+
+  .education-degree {
+    font-size: 1.2rem;
+  }
+
+  .education-description {
+    font-size: 0.85rem;
+  }
+
+  .transcript-link {
+    font-size: 0.85rem;
+    padding: 8px 12px;
   }
 }

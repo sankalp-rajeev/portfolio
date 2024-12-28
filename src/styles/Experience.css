@@ -1,166 +1,166 @@
 /* Experience Section */
 .experience-section {
-    padding: 50px 20px;
-    background-color: #f9f9f9; /* Soft gray for a clean Apple-like background */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Apple system font */
-    color: #333; /* Clean, readable text color */
-  }
-  
-  .experience-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #0078d4; /* Subtle blue for accent */
-    margin-bottom: 40px;
-    opacity: 0; /* Start invisible */
-    transform: translateY(50px); /* Start shifted */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-  
-  .experience-title.in-view {
-    opacity: 1; /* Fade in */
-    transform: translateY(0); /* Slide up */
-  }
-  
-  .experience-timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  
-  .experience-card {
-    display: flex;
-    flex-direction: row; /* Side-by-side layout */
-    align-items: center;
-    gap: 20px;
-    background: #fff; /* Clean white card background */
-    padding: 20px;
-    border-radius: 12px; /* Slightly rounded corners */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    opacity: 0; /* Start invisible */
-    transform: translateY(30px); /* Start shifted */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s ease;
-    animation-delay: calc(var(--card-order) * 0.2s); /* Staggered delay */
-  }
-  
-  .experience-card.in-view {
-    opacity: 1; /* Fade in */
-    transform: translateY(0); /* Slide up */
-  }
-  
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Apple system font */
+  color: #333;
+}
 
+.experience-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #0078d4;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.experience-title.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.experience-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s ease;
+  animation-delay: calc(var(--card-order) * 0.2s);
+}
+
+.experience-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-content {
+  flex: 2;
   
-  .experience-content {
-    flex: 2; /* Take up more space for text */
+}
+
+.experience-image {
+  flex: 1;
+  text-align: center;
+}
+
+.experience-image img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.experience-role {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.experience-company {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.experience-duration {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.experience-contributions {
+  margin-bottom: 15px;
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #555;
+}
+
+.experience-contributions li {
+  margin-bottom: 10px;
+}
+
+.experience-technologies {
+  font-size: 1rem;
+  color: #0078d4;
+}
+
+.experience-report-link {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 12px;
+  background-color: #0078d4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.experience-report-link:hover {
+  background-color: #005bb5;
+  transform: scale(1.05);
+}
+
+/* Keyframes for Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
   }
-  
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .experience-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .experience-image {
-    flex: 1; /* Fixed space for image */
     text-align: center;
   }
-  
+
   .experience-image img {
-    width: 100%;
-    height: auto;
-    max-width: 300px; /* Control the max size */
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
   }
-  
+}
+
+@media (max-width: 768px) {
   .experience-role {
-    font-size: 1.5rem;
-    font-weight: 600; /* Semi-bold for emphasis */
-    color: #333;
+    font-size: 1.3rem;
   }
-  
+
   .experience-company {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 5px;
+    font-size: 1.1rem;
   }
-  
+
   .experience-duration {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 15px;
-  }
-  
-  .experience-contributions {
-    margin-bottom: 15px;
-    list-style-type: disc;
-    padding-left: 20px;
-    color: #555;
-  }
-  
-  .experience-contributions li {
-    margin-bottom: 10px;
-  }
-  
-  .experience-technologies {
-    font-size: 1rem;
-    color: #0078d4; /* Accent blue for technologies */
-  }
-  
-  .experience-report-link {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px 12px;
-    background-color: #0078d4;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 6px; /* Smooth button corners */
     font-size: 0.9rem;
-    font-weight: 500; /* Medium weight for clear readability */
-    transition: background-color 0.3s ease, transform 0.3s ease;
   }
-  
-  .experience-report-link:hover {
-    background-color: #005bb5; /* Darker blue on hover */
-    transform: scale(1.05); /* Slight enlarge for the link */
+
+  .experience-technologies {
+    font-size: 0.9rem;
   }
-  
-  /* Keyframes for Animation */
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(50px); /* Start shifted */
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0); /* End in place */
-    }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .experience-card {
-      flex-direction: column; /* Stack content vertically */
-      align-items: flex-start;
-    }
-  
-    .experience-image {
-      text-align: center;
-    }
-  
-    .experience-image img {
-      max-width: 100%; /* Adjust image size for smaller screens */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .experience-role {
-      font-size: 1.3rem;
-    }
-  
-    .experience-company {
-      font-size: 1.1rem;
-    }
-  
-    .experience-duration {
-      font-size: 0.9rem;
-    }
-  
-    .experience-technologies {
-      font-size: 0.9rem;
-    }
-  }
-  
+}

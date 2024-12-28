@@ -6,11 +6,13 @@
 }
 
 
-.projects-title {
-  font-size: 2.5rem;
-  color: #000000;
-  margin-bottom: 40px;
+.project-title {
+  font-size: 1.5rem;
+  color: #1d1d1f; 
+  margin-bottom: 10px;
+  font-weight: 600; 
 }
+
 
 .projects-grid {
   display: flex;
@@ -38,11 +40,6 @@
   padding: 10px 0;
 }
 
-.project-title {
-  font-size: 1.5rem;
-  color: #0071e3;
-  margin-bottom: 10px;
-}
 
 .project-description {
   font-size: 1rem;
@@ -106,11 +103,11 @@
 }
 
 .project-links .button-paper {
-  background: #28a745; /* Green for "View Paper" */
+  background: #28a745; 
 }
 
 .project-links .button-paper:hover {
-  background: #218838; /* Darker green on hover */
+  background: #218838; 
 }
 
 .project-category {
@@ -121,7 +118,6 @@
   font-size: 2rem;
   color: #0071e3;
   margin-bottom: 30px;
-  /* border-bottom: 2px solid #0071e3; */
   display: inline-block;
   padding-bottom: 5px;
 }
