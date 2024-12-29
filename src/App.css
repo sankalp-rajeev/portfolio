@@ -34,17 +34,6 @@ main {
   padding-top: 80px; /* Prevent content overlap with fixed header */
 }
 
-/* Glass Background Styling */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0; /* Keep it behind all content */
-  pointer-events: none; /* Prevent canvas from blocking interactions */
-}
-
 /* Full Page Scrollable Section Styling */
 section {
   min-height: 100vh;
@@ -56,6 +45,17 @@ section {
   padding: 50px 20px;
   background-color: var(--section-background-color);
   z-index: 1; /* Ensure content is above the background */
+}
+
+/* Glass Background Styling */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Keep it behind all content */
+  pointer-events: none; /* Prevent canvas from blocking interactions */
 }
 
 /* Header Styling */
@@ -185,4 +185,39 @@ html {
 
 .scroll-snap-container {
   scroll-snap-type: y mandatory;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .about-image img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-text p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .about-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-text p {
+    font-size: 0.8rem;
+  }
+
+  .nav-links {
+    display: none; 
+  }
 }

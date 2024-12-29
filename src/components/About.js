@@ -28,7 +28,19 @@ const About = () => {
         {/* Image Section */}
         <div className="about-image">
           <img src="/img.jpg" alt="Sankalp" />
-          {/* Resume Button Below Image */}
+        </div>
+
+        {/* Content Section */}
+        <div className="about-content">
+          <h2>ABOUT</h2>
+          <h3>
+            Here’s a <span className="highlight">little</span> about me
+          </h3>
+          <p>
+            👋 Hi, I’m Sankalp—a Software and Machine Learning Engineer passionate about advancing AI and robotics. I hold a Computer Science degree from <strong>Arizona State University</strong> and am currently pursuing a dual Master’s in <strong>Artificial Intelligence</strong> (focused on Computer Vision) and <strong>Robotics Engineering</strong> at the <strong>University of Michigan</strong>. I’m seeking AI/ML roles for 2025 to drive innovation in deep learning and autonomous systems.
+          </p>
+
+          {/* Centered Resume Button */}
           <div className="resume-button-container">
             <a
               href="/resume.pdf"
@@ -40,30 +52,16 @@ const About = () => {
             </a>
           </div>
         </div>
-
-        {/* Content Section */}
-        <div className="about-content">
-          <h2>ABOUT</h2>
-          <h3>
-            Here is a <span className="highlight">little</span> background
-          </h3>
-          <p>
-            👋 Hi, I am Sankalp, a Software / Machine Learning Engineer passionate about pushing the boundaries of AI and robotics. I recently completed my undergraduate degree in Computer Science at Arizona State University, specializing in machine learning and computer vision. Currently, I am pursuing my Master's in Artificial Intelligence and Robotics Engineering at the University of Michigan. I am actively seeking AI/ML roles for 2025 where I can contribute to innovative projects and apply my expertise in deep learning, robotics, and autonomous systems.
-          </p>
-          <p>
-            Apart from coding, I am an avid wildlife photographer and hiker. I enjoy tackling new challenges that inspire me to think creatively and develop cutting-edge solutions. My dedication to problem-solving and passion for technology drives me to excel in every endeavor.
-          </p>
-        </div>
       </div>
 
       {/* Education Section */}
-      <div className="education-section">
+      <div id="education" className="education-section">
         <h3 className="education-title">Education</h3>
         <div className="education-grid">
           {educationDetails.map((edu, index) => (
             <div key={index} className="education-card">
               <h4 className="education-degree">{edu.degree}</h4>
-              <h5 className="education-institution">{edu.institution}</h5>
+              <p className="education-institution">{edu.institution}</p>
               <p className="education-years">{edu.years}</p>
               <p className="education-gpa">
                 <strong>GPA:</strong> {edu.gpa}

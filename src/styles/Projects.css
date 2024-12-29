@@ -121,3 +121,19 @@
   display: inline-block;
   padding-bottom: 5px;
 }
+.project-achievements {
+  margin-top: 1rem;
+}
+
+.project-achievements h3 {
+  font-size: 1.1rem;
+  color: #007aff;
+  margin-bottom: 0.5rem;
+}
+
+.achievement-item {
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.5;
+  margin-left: 1rem;
+}

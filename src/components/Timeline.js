@@ -8,69 +8,66 @@ const Timeline = () => {
     {
       year: "2020",
       title: "The First Step",
-      description: `I started my Bachelor's in Computer Science at Arizona State University, armed with curiosity but little knowledge. Every class felt like a mountain to climb.`,
+      description: `I began my Bachelor's in Computer Science at Arizona State University, taking my first steps into the world of programming and problem-solving.`,
       icon: "🎓",
     },
     {
       year: "2021",
       title: "A Year of Struggles",
-      description: `I encountered significant academic challenges that tested my resolve. Through relentless effort and determination, I overcame these hurdles by focusing on core computer science courses to build a strong foundation. This journey not only deepened my technical understanding but also instilled in me the importance of perseverance and resilience in the face of adversity.`,
+      description: `I faced academic challenges that tested my resilience, but my focus on core courses helped me build a strong foundation.`,
       icon: "⚠️",
     },
     {
       year: "2022",
       title: "Building Foundations",
-      description: `2022 marked the start of my journey as a Software Development Engineer (SDE) intern. The experience was both fun and enriching, as I tackled challenges, learned new skills, and grew professionally. During this time, I also delved into applied data analytics, strengthening my analytical and problem-solving foundation.`,
+      description: `As an SDE intern, I tackled real-world problems, strengthened my skills, and explored data analytics to enhance problem-solving.`,
       icon: "📊",
     },
     {
       year: "2023",
       title: "Diving Into AI",
-      description: `My passion for machine learning grew stronger as I earned an Advanced Computer Vision certification. It was a steep learning curve, but the satisfaction was unmatched.`,
+      description: `I deepened my passion for AI by earning an Advanced Computer Vision certification, tackling steep learning curves along the way.`,
       icon: "📜",
     },
     {
       year: "2024",
       title: "A Year of Milestones",
-      description: `2024 was a pivotal year in my journey, marked by key achievements and significant transitions.`,
+      description: `2024 was a transformative year with key achievements and exciting transitions.`,
       icon: "🌟",
       subsections: [
         {
           title: "Graduated from ASU",
-          description: `After years of dedication and hard work, I proudly graduated magna cum laude from Arizona State University with a degree in Computer Science.`,
+          description: `Graduated magna cum laude from Arizona State University with a Computer Science degree.`,
           icon: "🎓",
         },
         {
           title: "Internship as AI/ML Engineer",
-          description: `During my internship, I worked on cutting-edge machine learning models, applying AI to solve real-world problems.`,
+          description: `Worked on cutting-edge machine learning models, applying AI to solve real-world problems.`,
           icon: "🖥️",
         },
         {
           title: "Started Dual Master's",
-          description: `Embarking on a dual Master's program in AI and Robotics Engineering marked the beginning of an exciting new chapter.`,
+          description: `Embarked on a dual Master's in AI and Robotics Engineering, opening a new chapter in my academic journey.`,
           icon: "🚀",
         },
       ],
     },
   ];
 
-  const currentYear = new Date().getFullYear().toString();
-
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000, once: true }); // Initialize AOS with the 'once' option for single animation
   }, []);
 
   return (
-    <div className="timeline-container">
+    <div id="timeline" className="timeline-container">
       <h2 className="timeline-title">My Journey</h2>
       <div className="story-timeline">
         {story.map((milestone, index) => (
           <div
             key={index}
-            className={`story-event ${milestone.year === currentYear ? "highlight" : ""
-              }`}
+            className="story-event"
             data-aos="fade-up"
-            data-aos-delay={`${index * 200}`}
+            data-aos-delay={`${index * 200}`} // Apply staggered delays
           >
             <div className="story-icon">{milestone.icon}</div>
             <div className="story-content">
