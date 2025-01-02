@@ -43,7 +43,7 @@ const About = () => {
           {/* Centered Resume Button */}
           <div className="resume-button-container">
             <a
-              href="/resume.pdf"
+              href="/Sankalp_Rajeev-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="resume-button"
