@@ -16,20 +16,20 @@ const projectCategories = {
         "LSTM",
       ],
       link: "https://github.com/srajeev234/ece5831-2024-final-project",
-      paperLink: "/Final Report.pdf", 
+      paperLink: "/Final Report.pdf",
     },
     {
       title: "Camera Calibration and 3D Reconstruction",
       description:
         "Explored 3D reconstruction and camera calibration techniques, implementing algorithms for reconstructing 3D scenes from image pairs.",
-        tools: [
-          "Python",
-          "OpenCV",
-          "NumPy",
-          "Matplotlib",
-          "Scipy",
-          "Checkerboard Patterns",
-        ],        
+      tools: [
+        "Python",
+        "OpenCV",
+        "NumPy",
+        "Matplotlib",
+        "Scipy",
+        "Checkerboard Patterns",
+      ],
       link: "https://github.com/sankalp-rajeev/Camera-Calibration-and-3D-Reconstruction",
     },
     {
@@ -41,35 +41,43 @@ const projectCategories = {
         "OpenCV",
         "NumPy",
         "RANSAC",
-        "Image Blending Algorithms"
+        "Image Blending Algorithms",
       ],
       link: "https://github.com/sankalp-rajeev/Panorama-Auto-Stitching",
+    },
+    {
+      title: "Scene Analyzer",
+      description:
+        "A Flask-based web application that uses MobileNetV2 and OpenAI's GPT-3.5 to analyze images and provide photography improvement suggestions. The app integrates image recognition and AI-generated tips to assist users in enhancing their photography skills.",
+      tools: [
+        "Python",
+        "Flask",
+        "TensorFlow",
+        "MobileNetV2",
+        "OpenAI API",
+      ],
+      link: "https://github.com/sankalp-rajeev/scene-analyzer",
     },
     {
       title: "Image Blending",
       description:
         "Designed and implemented advanced image blending techniques to merge multiple images seamlessly. The project focused on using multi-band blending and other image processing algorithms for smooth transitions.",
-        tools: [
-          "Python",
-          "OpenCV",
-          "NumPy",
-          "Gaussian Pyramids",
-          "Laplacian Pyramids",
-          "Image Reconstruction Algorithms",
-          "Image Blending Techniques"
-        ],
+      tools: [
+        "Python",
+        "OpenCV",
+        "NumPy",
+        "Gaussian Pyramids",
+        "Laplacian Pyramids",
+        "Image Reconstruction Algorithms",
+        "Image Blending Techniques",
+      ],
       link: "https://github.com/sankalp-rajeev/Image-Blending",
     },
     {
       title: "Hand-Written Digit Classification",
       description:
         "Implemented a neural network from scratch for hand-written digit classification and later enhanced it using PyTorch. The project covered network initialization, gradient computation, and training on the NIST36 dataset. Achieved a classification accuracy of 78%.",
-      tools: [
-        "Python",
-        "PyTorch",
-        "NumPy",
-        "NIST36 Dataset"
-      ],
+      tools: ["Python", "PyTorch", "NumPy", "NIST36 Dataset"],
       link: "https://github.com/sankalp-rajeev/hand-written-digit-classification",
     },
   ],
@@ -89,13 +97,13 @@ const projectCategories = {
         "SharedPreferences",
       ],
       link: "https://github.com/sankalp-rajeev/ConversionsApp",
-      paperLink: "/reports/Final Report UnitGenie.pdf", 
+      paperLink: "/reports/Final Report UnitGenie.pdf",
     },
     {
       title: "Social Media Photo Share App",
       description:
         "Created a comprehensive social media platform for users to interact, share, and engage with multimedia content.",
-      tools: ["Javascript","React", "Node.js","mySQL"],
+      tools: ["Javascript", "React", "Node.js", "mySQL"],
       link: "https://github.com/sankalp-rajeev/social-media-2023",
     },
   ],
@@ -114,7 +122,6 @@ const projectCategories = {
       tools: ["Javascript", "HTML", "CSS", "d3.js"],
       link: "https://github.com/sankalp-rajeev/Car-Data-Viz",
     },
-
   ],
 };
 

@@ -14,7 +14,7 @@ const educationDetails = [
     degree: "M.SC in AI - Computer Vision | M.SE in Robotics Engineering",
     institution: "University of Michigan - Dearborn",
     years: "09/2024 - 05/2026",
-    gpa: "3.9/4.0",
+    gpa: "3.8/4.0",
     transcriptLink: "/transcripts/umich_transcript.pdf",
     description:
       "Focusing on advanced AI models, robotics engineering, and computer vision.",
