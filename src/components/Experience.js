@@ -15,7 +15,7 @@ const experienceDetails = [
             "Accelerated documentation workflows and automated SDLC compliance, saving an estimated ~1,000 engineer-hours annually while ensuring audit-ready traceability across enterprise systems.",
         ],
         technologies: ["Python", "Streamlit", "MySQL", "LLM APIs", "Plotly", "AKS", "Posit Connect"],
-        image: "/experience/zoetis.png",
+        image: "/assets/experience/zoetis.png",
     },
     {
         title: "AI/ML Engineer Intern",
@@ -29,7 +29,7 @@ const experienceDetails = [
             "Implemented obstacle detection and response mechanisms using Lightware LW20/C Lidar, enhancing operational safety during autonomous missions.",
         ],
         technologies: ["Python", "TensorFlow", "YOLOv8", "Arduino", "Lua", "Qualcomm SNPE SDK"],
-        image: "/experience/mistral1.png",
+        image: "/assets/experience/mistral1.png",
         report: "reports/Internship Report.pdf",
     },
     {
@@ -44,7 +44,7 @@ const experienceDetails = [
             "Optimized autonomous navigation through 2D SLAM, achieving reliable path planning and obstacle avoidance for seamless operations within confined spaces.",
         ],
         technologies: ["YOLOv5", "SLAM", "Python", "ROS", "Gazebo"],
-        image: "/experience/astroseed.png",
+        image: "/assets/experience/astroseed.png",
         report: "reports/Final Report_astroseed.pdf",
     },
     {
@@ -56,7 +56,7 @@ const experienceDetails = [
             "Mentored 100+ freshmen, boosting academic performance with customized guidance programs.",
         ],
         technologies: ["Mentoring", "Academic Guidance"],
-        image: "/experience/asu.png",
+        image: "/assets/experience/asu.png",
     },
     {
         title: "Software Development Engineering Intern",
@@ -70,7 +70,7 @@ const experienceDetails = [
             "Configured CAN communication protocols to control RMD motors, ensuring synchronized movement across multiple actuators and enhancing operational reliability.",
         ],
         technologies: ["Python", "ROS", "C++", "CAN Communication", "3D Depth Cameras"],
-        image: "/experience/machani-robotics.png",
+        image: "/assets/experience/machani-robotics.png",
         report: "reports/PROJECT REPORT_machanirobotics.pdf",
     },
 ];

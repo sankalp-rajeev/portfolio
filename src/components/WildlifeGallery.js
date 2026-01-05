@@ -10,7 +10,7 @@ const WildlifeGallery = () => {
     { src: "/photos/photo5.jpg", caption: "A lion's intense stare, a window into the king of the jungle's soul." },
     { src: "/photos/photo6.jpg", caption: "A lioness yawning in the golden savanna, showcasing the raw beauty of the wild." },
     { src: "/photos/photo7.jpg", caption: "A rare black panther prowling through the dense jungle, embodying mystery." },
-    { src: "/photos/photo8.jpg", caption: "A majestic bird of prey perched gracefully, surveying its surroundings." },
+    { src: "/photos/elephant2.jpg", caption: "An elephant shot in Maasai Mara, Kenya." },
     { src: "/photos/photo9.jpg", caption: "A peacock flaunts its vibrant feathers, a dazzling display of nature's artistry." },
     { src: "/photos/photo10.jpg", caption: "A leopard rests on a tree, blending perfectly with its surroundings." },
     { src: "/photos/photo11.jpg", caption: "Leopard paws dangle from a branch, a picture of relaxation and stealth." },

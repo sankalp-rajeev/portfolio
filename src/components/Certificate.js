@@ -4,12 +4,12 @@ import "../styles/Certificate.css";
 const certifications = [
   {
     title: "Bsc Computer Science Diploma",
-    pdf: "/certificates/eDiploma.pdf",
+    pdf: "/assets/certificates/eDiploma.pdf",
     type: "pdf",
   },
   {
     title: "Computer Vision",
-    pdf: "/certificates/computervisionCertificate.pdf",
+    pdf: "/assets/certificates/computervisionCertificate.pdf",
     type: "pdf",
   },
   {
