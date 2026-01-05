@@ -14,7 +14,7 @@ const certifications = [
   },
   {
     title: "Intro to Applied Data Analytics",
-    pdf: "https://www.credential.net/b8c8897b-7a62-4358-997d-1b7addd0e239#acc.kfhEQs3g", 
+    pdf: "https://www.credential.net/b8c8897b-7a62-4358-997d-1b7addd0e239#acc.kfhEQs3g",
     type: "external",
   },
   {
@@ -58,21 +58,6 @@ const Certificate = () => {
           ></iframe>
         ) : null}
       </div>
-      <div className="ongoing-certification">
-        <div className="certification-header">
-          <strong>Current Pursuit:</strong>
-          <span className="cert-name">Google Cloud Professional Machine Learning Engineer (PMLE)</span>
-        </div>
-        <div className="cert-progress-container">
-          <div className="cert-progress-bar" style={{ width: "10%" }}></div>
-        </div>
-        <p className="ongoing-text">
-          I am passionately working towards earning my <strong>Google Cloud Professional Machine Learning Engineer</strong> certification. This journey is enhancing my skills in cloud-native ML solutions, data pipeline design, and model deployment.
-          <br />
-          <span className="estimated-time">Estimated Completion: May 2025</span>
-        </p>
-      </div>
-
     </div>
   );
 };

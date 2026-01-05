@@ -1,46 +1,72 @@
 import React from "react";
 import "../styles/Skills.css";
 
+// Map skills to their devicon class names
+const skillIcons = {
+  "Python": "devicon-python-plain",
+  "C/C++": "devicon-cplusplus-plain",
+  "SQL": "devicon-mysql-plain",
+  "JavaScript": "devicon-javascript-plain",
+  "Java": "devicon-java-plain",
+  "Lua": "devicon-lua-plain",
+  "MATLAB": "devicon-matlab-plain",
+  "PyTorch": "devicon-pytorch-original",
+  "TensorFlow": "devicon-tensorflow-original",
+  "FastAPI": "devicon-fastapi-plain",
+  "React": "devicon-react-original",
+  "LangChain": "fas fa-link",
+  "HuggingFace": "fas fa-face-smile",
+  "ROS": "fas fa-robot",
+  "OpenCV": "devicon-opencv-plain",
+  "scikit-learn": "devicon-scikitlearn-plain",
+  "Docker": "devicon-docker-plain",
+  "Git": "devicon-git-plain",
+  "GCP (Cloud Run, Vertex AI)": "devicon-googlecloud-plain",
+  "Azure": "devicon-azure-plain",
+  "Generative AI": "fas fa-wand-magic-sparkles",
+  "NLP": "fas fa-language",
+  "Computer Vision": "fas fa-eye",
+  "Reinforcement Learning": "fas fa-gamepad",
+  "Full-Stack Development": "fas fa-layer-group",
+  "MLOps": "fas fa-gears",
+};
+
 const skillsData = [
   {
-    category: "Programming Languages",
+    category: "Languages",
+    icon: "fas fa-code",
+    skills: ["Python", "C/C++", "SQL", "JavaScript", "Java", "Lua", "MATLAB"],
+  },
+  {
+    category: "Frameworks & Libraries",
+    icon: "fas fa-layer-group",
     skills: [
-      { name: "Python", level: "Advanced" },
-      { name: "C++", level: "Intermediate" },
-      { name: "JavaScript", level: "Intermediate" },
-      { name: "Java", level: "Intermediate" },
-      { name: "Lua", level: "Intermediate" },
-      { name: "MATLAB", level: "Intermediate" },
+      "PyTorch",
+      "TensorFlow",
+      "FastAPI",
+      "React",
+      "LangChain",
+      "HuggingFace",
+      "ROS",
+      "OpenCV",
+      "scikit-learn",
     ],
   },
   {
-    category: "AI/ML Frameworks",
-    skills: [
-      { name: "TensorFlow", level: "Advanced" },
-      { name: "PyTorch", level: "Advanced" },
-      { name: "Scikit-learn", level: "Advanced" },
-      { name: "OpenCV", level: "Advanced" },
-      { name: "NumPy", level: "Advanced" },
-      { name: "Pandas", level: "Advanced" },
-    ],
+    category: "Cloud/DevOps",
+    icon: "fas fa-cloud",
+    skills: ["Docker", "Git", "GCP (Cloud Run, Vertex AI)", "Azure"],
   },
   {
-    category: "Tools & Platforms",
+    category: "Domains",
+    icon: "fas fa-brain",
     skills: [
-      { name: "ROS", level: "Advanced" },
-      { name: "Qualcomm SNPE SDK", level: "Intermediate" },
-      { name: "Mission Planner", level: "Intermediate" },
-    ],
-  },
-  {
-    category: "Specialized Skills",
-    skills: [
-      { name: "Computer Vision", level: "Expert" },
-      { name: "AI Model Deployment", level: "Advanced" },
-      { name: "Embedded Systems", level: "Advanced" },
-      { name: "Robotics", level: "Advanced" },
-      { name: "3D Reconstruction", level: "Advanced" },
-      { name: "SLAM (Simultaneous Localization and Mapping)", level: "Intermediate" },
+      "Generative AI",
+      "NLP",
+      "Computer Vision",
+      "Reinforcement Learning",
+      "Full-Stack Development",
+      "MLOps",
     ],
   },
 ];
@@ -52,15 +78,15 @@ const Skills = () => {
       <div className="skills-container">
         {skillsData.map((category, index) => (
           <div key={index} className="skill-category">
-            <h2 className="category-title">{category.category}</h2>
+            <h2 className="skill-category-title">
+              {category.category}
+            </h2>
             <div className="skills-list">
               {category.skills.map((skill, skillIndex) => (
-                <div key={skillIndex} className="skill-item">
-                  <span className="skill-name">{skill.name}</span>
-                  <span className={`skill-level skill-${skill.level.toLowerCase()}`}>
-                    {skill.level}
-                  </span>
-                </div>
+                <span key={skillIndex} className="skill-tag">
+                  <span className="skill-text">{skill}</span>
+                  <i className={`skill-icon ${skillIcons[skill] || 'fas fa-code'}`}></i>
+                </span>
               ))}
             </div>
           </div>

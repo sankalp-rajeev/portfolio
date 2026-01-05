@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Chatbot from "./Chatbot"; // Import Chatbot component
-import { FaRobot } from "react-icons/fa"; // Modern robot icon
 import "../styles/Header.css";
 
 const Header = () => {
@@ -10,7 +8,6 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
-  const [isChatbotOpen, setIsChatbotOpen] = useState(false); // Chatbot state
 
   // Detect if the device is in mobile view
   useEffect(() => {
@@ -100,7 +97,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light fixed-top shadow-sm">
+    <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container-fluid">
         <button
           className="navbar-toggler"
@@ -124,7 +121,11 @@ const Header = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (isMobileView) toggleDropdown();
+                  if (isMobileView) {
+                    toggleDropdown();
+                  } else {
+                    handleNavigation("/");
+                  }
                 }}
               >
                 Home
@@ -152,13 +153,13 @@ const Header = () => {
                 </a>
                 <a
                   className="dropdown-item"
-                  href="#timeline"
+                  href="#journey"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavigation("#timeline");
+                    handleNavigation("#journey");
                   }}
                 >
-                  Timeline
+                  My Journey
                 </a>
                 <a
                   className="dropdown-item"
@@ -220,17 +221,6 @@ const Header = () => {
             </li>
           </ul>
         </div>
-
-        {/* Chatbot Floating Button */}
-        <button
-          className="chatbot-toggle"
-          onClick={() => setIsChatbotOpen(!isChatbotOpen)}
-          title="Chat with me"
-        >
-          <FaRobot /> {/* Add this icon using react-icons */}
-        </button>
-
-        {isChatbotOpen && <Chatbot onClose={() => setIsChatbotOpen(false)} />}
       </div>
     </nav>
   );

@@ -12,10 +12,12 @@ const educationDetails = [
   },
   {
     degree: "M.SC in AI - Computer Vision | M.SE in Robotics Engineering",
+    institutionJsx: true,
     institution: "University of Michigan - Dearborn",
-    years: "09/2024 - 05/2026",
-    gpa: "3.8/4.0",
+    years: "09/2024 - 12/2026",
+    gpa: "3.90/4.0",
     transcriptLink: "/transcripts/umich_transcript.pdf",
+    descriptionJsx: true,
     description:
       "Focusing on advanced AI models, robotics engineering, and computer vision.",
   },
@@ -32,12 +34,12 @@ const About = () => {
 
         {/* Content Section */}
         <div className="about-content">
-          <h2>ABOUT</h2>
+          <h2 className="section-title">About</h2>
           <h3>
             Here’s a <span className="highlight">little</span> about me
           </h3>
           <p>
-            👋 Hi, I’m Sankalp—a Software and Machine Learning Engineer passionate about advancing AI and robotics. I hold a Computer Science degree from <strong>Arizona State University</strong> and am currently pursuing a dual Master’s in <strong>Artificial Intelligence</strong> (focused on Computer Vision) and <strong>Robotics Engineering</strong> at the <strong>University of Michigan</strong>. I’m seeking AI/ML roles for 2025 to drive innovation in deep learning and autonomous systems.
+            I am a <strong>Machine Learning and Robotics Engineer</strong> dedicated to building robust, intelligent systems. Currently pursuing a <strong>Dual Master’s in AI and Robotics</strong> at the <strong>University of Michigan</strong>, I specialize in bridging the gap between theoretical research and production deployment. My technical capabilities span optimizing <strong>edge-AI models</strong> on high-performance <strong>Qualcomm</strong> hardware, deploying <strong>multimodal LLM pipelines</strong> on <strong>GCP</strong>, and engineering autonomous navigation stacks using <strong>ROS</strong> and <strong>SLAM</strong>. I am seeking full-time AI/ML roles for 2026 where I can leverage my expertise in <strong>Deep Learning</strong> and <strong>Computer Vision</strong> to drive innovation in autonomous systems.
           </p>
 
           {/* Centered Resume Button */}

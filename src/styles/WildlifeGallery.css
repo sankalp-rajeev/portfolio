@@ -5,8 +5,8 @@
   background: linear-gradient(135deg, #f9f9f9, #e8e8e8);
   padding: 20px;
   display: flex;
-  flex-direction: column; 
-  min-height: 100vh; 
+  flex-direction: column;
+  min-height: 100vh;
   box-sizing: border-box;
 }
 
@@ -30,10 +30,10 @@
 /* Wildlife Gallery Grid */
 .wildlife-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 20px; 
-  flex: 1; 
-  justify-content: center; 
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  flex: 1;
+  justify-content: center;
 }
 
 /* Gallery Item */
@@ -45,12 +45,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
 }
 
 .gallery-item img {
   display: block;
-  width: 100%; 
-  height: auto; 
+  width: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 16px;
 }
@@ -100,8 +106,8 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .wildlife-gallery {
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 15px; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
 }
 
@@ -115,7 +121,7 @@
   }
 
   .wildlife-gallery {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
 
