@@ -4,6 +4,20 @@ import '../styles/Projects.css';
 const projectCategories = {
   "AI & Machine Learning": [
     {
+      title: "CodeMind",
+      intro: "Agentic AI codebase intelligence system featuring autonomous crews for deep analysis and evolution.",
+      highlights: [
+        "Architected a multi-agent system (CrewAI) where specialized agents audit and refactor code, routed by a fine-tuned Qwen2.5 (QLoRA) intent classifier",
+        "Optimized Hybrid RAG pipeline fusing ChromaDB and BM25 via Reciprocal Rank Fusion (RRF) to achieve low retrieval latency",
+        "Developed iterative self-correction loops that autonomously execute tests, interpret failure logs, and refine code in 3-cycle agentic loops",
+        "Designed Anti-Hallucination guardrails using Chain-of-Verification (CoVe) prompts and code-inventory checklists for evidence-based reporting"
+      ],
+      tools: [
+        "Python", "FastAPI", "React", "TypeScript", "CrewAI", "LangChain", "Ollama", "ChromaDB", "MLflow"
+      ],
+      link: "https://github.com/sankalp-rajeev/CodeMind",
+    },
+    {
       title: "MeetingMind AI",
       intro: "End-to-end meeting intelligence system deployed on Google Cloud Run.",
       highlights: [
