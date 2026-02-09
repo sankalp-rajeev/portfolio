@@ -9,6 +9,14 @@ const educationDetails = [
     gpa: "3.71/4.0",
     transcriptLink: "transcripts/ASU_FinalTranscript.pdf",
     description: "Certified in Mathematical Concepts of Engineering.",
+    courses: [
+      "Foundations of Machine Learning",
+      "Applied Linear Algebra",
+      "Data Visualization",
+      "Exploring Data in R & Python",
+      "Probability & Stats for Engr",
+      "Intro to Theoretical CS",
+    ],
   },
   {
     degree: "M.SC in AI - Computer Vision | M.SE in Robotics Engineering",
@@ -20,6 +28,14 @@ const educationDetails = [
     descriptionJsx: true,
     description:
       "Focusing on advanced AI models, robotics engineering, and computer vision.",
+    courses: [
+      "Deep Learning",
+      "Robot Vision",
+      "Mobile Robots",
+      "Embedded Systems",
+      "Pat. Rec. & Neural Networks",
+      "Advanced AI",
+    ],
   },
 ];
 
@@ -68,6 +84,19 @@ const About = () => {
               <p className="education-gpa">
                 <strong>GPA:</strong> {edu.gpa}
               </p>
+
+              {/* Key Coursework */}
+              {edu.courses && (
+                <div className="education-courses">
+                  <h5 className="courses-title">Key Coursework:</h5>
+                  <ul className="courses-list">
+                    {edu.courses.map((course, i) => (
+                      <li key={i}>{course}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               <p className="education-description">{edu.description}</p>
               <a
                 href={edu.transcriptLink}

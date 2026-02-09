@@ -76,11 +76,26 @@
   transition: opacity 0.3s ease;
 }
 
+/* Font Icon Styling */
 .skill-icon {
   position: absolute;
   font-size: 1.3rem;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+/* Image Icon Styling */
+.skill-icon-img {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  /* Centering */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .skill-tag:hover {
@@ -92,11 +107,32 @@
 
 .skill-tag:hover .skill-text {
   opacity: 0;
+  width: auto;
+  visibility: hidden;
 }
 
 .skill-tag:hover .skill-icon {
   opacity: 1;
   color: white;
+}
+
+.skill-tag:hover .skill-icon-img {
+  opacity: 1;
+}
+
+/* Static Text-Only Styling for No-Icon Skills */
+.skill-tag.no-icon:hover {
+  transform: none;
+  box-shadow: none;
+  background-color: #f5f5f7;
+  color: #555;
+  cursor: default;
+}
+
+.skill-tag.no-icon:hover .skill-text {
+  opacity: 1;
+  visibility: visible;
+  width: auto;
 }
 
 /* Responsive */

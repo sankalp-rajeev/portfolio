@@ -177,3 +177,71 @@
 .highlight {
   color: #0071e3;
 }
+
+/* Education Coursework Styling */
+.education-courses {
+  margin: 15px 0;
+  text-align: left;
+}
+
+.courses-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.courses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.courses-list li {
+  background-color: #f1f3f4;
+  color: #444;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.courses-list li:hover {
+  background-color: #e8f0fe;
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .about-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+
+  .about-content h3,
+  .section-title {
+    text-align: center;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .education-card {
+    padding: 20px;
+  }
+}

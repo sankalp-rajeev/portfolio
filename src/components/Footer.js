@@ -10,8 +10,8 @@ const Footer = () => {
 
     emailjs
       .sendForm(
-        "service_mf7kx1g", 
-        "template_tdo27e9", 
+        "service_mf7kx1g",
+        "template_tdo27e9",
         form.current,
         "wIV7shGRkzZTPSkGq"
       )
@@ -20,12 +20,12 @@ const Footer = () => {
           alert("Message sent successfully!");
         },
         (error) => {
+          console.error("EmailJS Error:", error);
           alert("An error occurred. Please try again.");
-          console.error(error);
         }
       );
 
-    e.target.reset(); 
+    e.target.reset();
   };
 
   return (

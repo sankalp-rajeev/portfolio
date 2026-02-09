@@ -7,10 +7,10 @@ const projectCategories = {
       title: "CodeMind",
       intro: "Agentic AI codebase intelligence system featuring autonomous crews for deep analysis and evolution.",
       highlights: [
-        "Architected a multi-agent system (CrewAI) where specialized agents audit and refactor code, routed by a fine-tuned Qwen2.5 (QLoRA) intent classifier",
-        "Optimized Hybrid RAG pipeline fusing ChromaDB and BM25 via Reciprocal Rank Fusion (RRF) to achieve low retrieval latency",
-        "Developed iterative self-correction loops that autonomously execute tests, interpret failure logs, and refine code in 3-cycle agentic loops",
-        "Designed Anti-Hallucination guardrails using Chain-of-Verification (CoVe) prompts and code-inventory checklists for evidence-based reporting"
+        "Built a full-stack CrewAI multi-agent system for automated code exploration, security auditing, test generation, and refactoring.",
+        "Engineered a Hybrid RAG pipeline (Vector + BM25 + RRF) achieving 15.4ms median retrieval latency across 42k+ chunks.",
+        "Fine-tuned Gemma 3 (12B) via QLoRA for autonomous test generation, achieving 74% CodeBLEU improvement and 3.3x speedup.",
+        "Designed Anti-Hallucination guardrails using Chain-of-Verification (CoVe) prompts for strict, evidence-based reporting."
       ],
       tools: [
         "Python", "FastAPI", "React", "TypeScript", "CrewAI", "LangChain", "Ollama", "ChromaDB", "MLflow"

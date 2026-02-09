@@ -12,46 +12,15 @@ import WildlifeGallery from "./components/WildlifeGallery";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 
-// Scroll Animation Observer
-const useScrollAnimation = () => {
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                });
-            },
-            { threshold: 0.15 }
-        );
-
-        const animateElements = document.querySelectorAll('.scroll-animate');
-        animateElements.forEach((el) => observer.observe(el));
-
-        return () => observer.disconnect();
-    }, []);
-};
-
-// Home Page with Smooth Scroll Animations
+// Home Page
 const HomePage = () => {
-    useScrollAnimation();
-
     return (
         <>
             <Home />
-            <div className="scroll-animate">
-                <About />
-            </div>
-            <div className="scroll-animate">
-                <JourneyTimeline />
-            </div>
-            <div className="scroll-animate">
-                <Skills />
-            </div>
-            <div className="scroll-animate">
-                <Contact />
-            </div>
+            <About />
+            <JourneyTimeline />
+            <Skills />
+            <Contact />
         </>
     );
 };
