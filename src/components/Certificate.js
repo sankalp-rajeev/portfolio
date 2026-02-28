@@ -8,6 +8,11 @@ const certifications = [
     type: "pdf",
   },
   {
+    title: "TIP Certificate",
+    pdf: "/assets/certificates/TIP.pdf",
+    type: "pdf",
+  },
+  {
     title: "Computer Vision",
     pdf: "/assets/certificates/computervisionCertificate.pdf",
     type: "pdf",
