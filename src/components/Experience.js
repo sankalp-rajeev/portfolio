@@ -3,7 +3,7 @@ import "../styles/Experience.css";
 
 const experienceDetails = [
     {
-        title: "AI Micro Tools Developer Intern",
+        title: "AI Engineering Intern",
         company: "Zoetis",
         location: "Kalamazoo, MI",
         duration: "05/2025 – 11/2025",

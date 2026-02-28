@@ -44,13 +44,30 @@ const skillIcons = {
   "Unsloth": "/logos/unsloth.png",
   "Vertex AI (Gemini)": "devicon-googlecloud-plain",
   "HuggingFace": "/logos/hf.png",
+  "Transformers": "/logos/hf.png",
 
   "ROS": "/logos/ros.png",
   "YOLO": "/logos/yolo.png",
+  "SLAM": "fas fa-map-marked-alt",
+  "InsightFace": "fas fa-id-badge",
+  "EasyOCR": "fas fa-font",
 
   "Whisper": "/logos/whsiper.png",
+  "Pyannote": "fas fa-waveform",
 
   "Vector DBs (ChromaDB)": "fas fa-database",
+
+  // Data Engineering & Backend for Kairos
+  "PySpark": "/logos/pyspark.png",
+  "Apache Kafka": "/logos/kafka.png",
+  "Apache Airflow": "/logos/airflow.png",
+  "TimescaleDB": "/logos/timescaledb.png",
+  "Redis": "/logos/redis.png",
+  "Polars": "/logos/polars.png",
+  "XGBoost": "/logos/xgboost.png",
+  "Prometheus": "/logos/prometheus.png",
+  "Grafana": "/logos/grafana.png",
+  "GitHub Actions": "/logos/github.png",
 };
 
 const skillsData = [
@@ -66,10 +83,50 @@ const skillsData = [
       "CrewAI",
       "LangChain",
       "RAG (Hybrid Search/RRF)",
+      "Vector DBs (ChromaDB)",
       "QLoRA",
       "Unsloth",
       "Vertex AI (Gemini)",
       "HuggingFace",
+    ],
+  },
+  {
+    category: "Machine Learning Engineering",
+    icon: "fas fa-cogs",
+    skills: [
+      "PyTorch",
+      "TensorFlow",
+      "XGBoost",
+      "scikit-learn",
+      "Transformers",
+      "Whisper",
+      "Pyannote",
+    ],
+  },
+  {
+    category: "Data Engineering",
+    icon: "fas fa-database",
+    skills: [
+      "PySpark",
+      "Apache Kafka",
+      "Apache Airflow",
+      "TimescaleDB",
+      "Redis",
+      "Polars",
+    ],
+  },
+  {
+    category: "Cloud, DevOps & Backend",
+    icon: "fas fa-cloud",
+    skills: [
+      "Docker",
+      "Azure (AKS)",
+      "GCP (Cloud Run, Vertex AI)",
+      "FastAPI",
+      "Prometheus",
+      "Grafana",
+      "GitHub Actions",
+      "Kubernetes",
     ],
   },
   {
@@ -82,30 +139,6 @@ const skillsData = [
       "OpenCV",
       "InsightFace",
       "EasyOCR",
-    ],
-  },
-  {
-    category: "Machine Learning Engineering",
-    icon: "fas fa-cogs",
-    skills: [
-      "PyTorch",
-      "TensorFlow",
-      "scikit-learn",
-      "Transformers",
-      "Whisper",
-      "Pyannote",
-    ],
-  },
-  {
-    category: "Cloud, DevOps & Backend",
-    icon: "fas fa-cloud",
-    skills: [
-      "Docker",
-      "Azure (AKS)",
-      "GCP (Cloud Run, Vertex AI)",
-      "FastAPI",
-      "Vector DBs (ChromaDB)",
-      "Git",
     ],
   },
 ];

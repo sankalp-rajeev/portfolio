@@ -4,13 +4,28 @@ import '../styles/Projects.css';
 const projectCategories = {
   "AI & Machine Learning": [
     {
+      title: "Kairos -- Demand Intelligence Platform",
+      intro: "End-to-end production ML platform processing 411M+ e-commerce interactions for real-time recommendations and forecasting.",
+      highlights: [
+        "Ingested 411M+ events via PySpark ETL orchestrated by Apache Airflow DAGs and Kafka Structured Streaming (5-min tumbling windows) to TimescaleDB with AQE and skew-join optimization.",
+        "Built three-stage inference: SASRec Transformer candidate retrieval (NDCG@10 ≈ 0.90) → Two-Tower re-scoring → XGBoost ranking (AUC 0.9883).",
+        "XGBoost demand forecaster with lag/rolling features achieving 9.44% WMAPE.",
+        "FastAPI serving layer with Redis and PgBouncer for sub-10ms end-to-end latency.",
+        "17-service Docker Compose stack with GitHub Actions CI/CD (83 Pytest tests, Ruff zero-warning policy)."
+      ],
+      tools: [
+        "PySpark", "Kafka", "Airflow", "TimescaleDB", "Redis", "PyTorch", "XGBoost", "FastAPI", "Docker", "Prometheus", "Grafana", "GitHub Actions"
+      ],
+      link: "https://github.com/sankalp-rajeev/kairos",
+    },
+    {
       title: "CodeMind",
       intro: "Agentic AI codebase intelligence system featuring autonomous crews for deep analysis and evolution.",
       highlights: [
         "Built a full-stack CrewAI multi-agent system for automated code exploration, security auditing, test generation, and refactoring.",
         "Engineered a Hybrid RAG pipeline (Vector + BM25 + RRF) achieving 15.4ms median retrieval latency across 42k+ chunks.",
-        "Fine-tuned Gemma 3 (12B) via QLoRA for autonomous test generation, achieving 74% CodeBLEU improvement and 3.3x speedup.",
-        "Designed Anti-Hallucination guardrails using Chain-of-Verification (CoVe) prompts for strict, evidence-based reporting."
+        "Fine-tuned Gemma 3 (12B) on the KodCode dataset via QLoRA for autonomous test generation, achieving 73.5% CodeBLEU improvement and 3.3x speedup.",
+        "Designed Anti-Hallucination guardrails using Chain-of-Verification (CoVe) prompts, evaluated with DeepEval using Gemini-2.0-Flash as LLM-as-a-Judge for strict, evidence-based reporting."
       ],
       tools: [
         "Python", "FastAPI", "React", "TypeScript", "CrewAI", "LangChain", "Ollama", "ChromaDB", "MLflow"
@@ -21,10 +36,10 @@ const projectCategories = {
       title: "MeetingMind AI",
       intro: "End-to-end meeting intelligence system deployed on Google Cloud Run.",
       highlights: [
+        "Reduced VLM API costs by 85% using a multi-signal content pre-filter (SSIM scene change detection, EasyOCR text density gate) to restrict analysis to high-value semantic frames.",
         "5-phase ML pipeline: Pyannote diarization → Whisper ASR → YOLO face detection → ArcFace matching → Gemini summarization",
         "RAG Q&A system with LangChain, ChromaDB, and Vertex AI embeddings for conversational queries",
-        "Real-time React frontend with FastAPI backend featuring 23 REST endpoints",
-        "VLM visual intelligence with SSIM scene detection and EasyOCR for slide/chart extraction"
+        "Real-time React frontend with FastAPI backend featuring 23 REST endpoints"
       ],
       tools: [
         "Python", "FastAPI", "React", "Docker", "GCP Cloud Run", "Whisper", "Pyannote",
@@ -60,7 +75,6 @@ const projectCategories = {
         "Python", "XGBoost", "scikit-learn", "Gradio", "GitHub API", "Plotly", "Pandas", "NumPy"
       ],
       link: "https://github.com/sankalp-rajeev/repo_health_predictor",
-      demoLink: "https://repo-health-predictor.onrender.com/",
     },
   ],
   "Computer Vision": [
@@ -108,70 +122,7 @@ const projectCategories = {
         "Python", "TensorFlow/Keras", "Flask", "GloVe", "InceptionV3", "LSTM"
       ],
       link: "https://github.com/srajeev234/ece5831-2024-final-project",
-      paperLink: "/Final Report.pdf",
-    },
-    {
-      title: "Camera Calibration & 3D Reconstruction",
-      intro: "3D scene reconstruction from stereo image pairs.",
-      highlights: [
-        "Intrinsic/extrinsic camera calibration using checkerboard patterns",
-        "Epipolar geometry and fundamental matrix estimation",
-        "Dense 3D point cloud generation from disparity maps"
-      ],
-      tools: [
-        "Python", "OpenCV", "NumPy", "Matplotlib", "Scipy"
-      ],
-      link: "https://github.com/sankalp-rajeev/Camera-Calibration-and-3D-Reconstruction",
-    },
-    {
-      title: "Panorama Auto-Stitching",
-      intro: "Automatic panoramic image creation from overlapping photos.",
-      highlights: [
-        "SIFT/ORB keypoint detection and feature matching",
-        "RANSAC-based homography estimation for robust alignment",
-        "Multi-band blending for seamless transitions"
-      ],
-      tools: [
-        "Python", "OpenCV", "NumPy", "RANSAC", "Image Blending"
-      ],
-      link: "https://github.com/sankalp-rajeev/Panorama-Auto-Stitching",
-    },
-    {
-      title: "Scene Analyzer",
-      intro: "AI-powered photography improvement suggestions.",
-      highlights: [
-        "MobileNetV2 for scene classification and content recognition",
-        "GPT-3.5 integration for personalized photography tips",
-        "Flask web app with real-time image upload and analysis"
-      ],
-      tools: [
-        "Python", "Flask", "TensorFlow", "MobileNetV2", "OpenAI API"
-      ],
-      link: "https://github.com/sankalp-rajeev/scene-analyzer",
-    },
-    {
-      title: "Image Blending",
-      intro: "Advanced multi-band blending for seamless image compositing.",
-      highlights: [
-        "Gaussian and Laplacian pyramid construction for frequency decomposition",
-        "Multi-resolution blending with weighted masks",
-        "Seamless object insertion and gradient-domain composition"
-      ],
-      tools: [
-        "Python", "OpenCV", "NumPy", "Gaussian Pyramids", "Laplacian Pyramids"
-      ],
-      link: "https://github.com/sankalp-rajeev/Image-Blending",
-    },
-    {
-      title: "Hand-Written Digit Classification",
-      intro: "Neural network from scratch for digit recognition.",
-      highlights: [
-        "Implemented forward/backprop with manual gradient computation",
-        "Enhanced with PyTorch for improved training efficiency",
-        "Achieved 78% accuracy on NIST36 dataset"
-      ],
-      tools: ["Python", "PyTorch", "NumPy", "NIST36 Dataset"],
-      link: "https://github.com/sankalp-rajeev/hand-written-digit-classification",
+      paperLink: "/FinalReport.pdf",
     },
   ],
   "App Development": [
@@ -188,7 +139,7 @@ const projectCategories = {
         "Android Studio", "Java", "Kotlin", "SQLite", "Material Design", "RecyclerView"
       ],
       link: "https://github.com/sankalp-rajeev/ConversionsApp",
-      paperLink: "/reports/Final Report UnitGenie.pdf",
+      paperLink: "/reports/UnitGenie.pdf",
     },
     {
       title: "Social Media Photo Share App",

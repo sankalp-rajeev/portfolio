@@ -20,14 +20,11 @@ const educationDetails = [
   },
   {
     degree: "M.SC in AI - Computer Vision | M.SE in Robotics Engineering",
-    institutionJsx: true,
     institution: "University of Michigan - Dearborn",
     years: "09/2024 - 12/2026",
     gpa: "3.90/4.0",
     transcriptLink: "/transcripts/umich_transcript.pdf",
-    descriptionJsx: true,
-    description:
-      "Focusing on advanced AI models, robotics engineering, and computer vision.",
+    description: "Focusing on advanced AI, ML Engineering, and Data Engineering.",
     courses: [
       "Deep Learning",
       "Robot Vision",
@@ -55,7 +52,7 @@ const About = () => {
             Here’s a <span className="highlight">little</span> about me
           </h3>
           <p>
-            I am a <strong>Machine Learning and Robotics Engineer</strong> dedicated to building robust, intelligent systems. Currently pursuing a <strong>Dual Master’s in AI and Robotics</strong> at the <strong>University of Michigan</strong>, I specialize in bridging the gap between theoretical research and production deployment. My technical capabilities span optimizing <strong>edge-AI models</strong> on high-performance <strong>Qualcomm</strong> hardware, deploying <strong>multimodal LLM pipelines</strong> on <strong>GCP</strong>, and engineering autonomous navigation stacks using <strong>ROS</strong> and <strong>SLAM</strong>. I am seeking full-time AI/ML roles for 2026 where I can leverage my expertise in <strong>Deep Learning</strong> and <strong>Computer Vision</strong> to drive innovation in autonomous systems.
+            I am an <strong>AI and ML Engineer</strong> pursuing a <strong>Dual Master's in Artificial Intelligence and Robotics Engineering</strong> at the <strong>University of Michigan – Dearborn</strong> (GPA 3.90). I specialize in building production-grade systems across <strong>ML Engineering</strong>, <strong>Agentic AI</strong>, and <strong>Data Engineering</strong> — from 411M-row data pipelines and transformer-based recommendation systems to fine-tuned LLMs evaluated with LLM-as-a-Judge and multimodal ML pipelines deployed on GCP. I'm currently seeking <strong> Summer 2026 internships</strong> in ML Engineering, AI Engineering, and Data Science.
           </p>
 
           {/* Centered Resume Button */}

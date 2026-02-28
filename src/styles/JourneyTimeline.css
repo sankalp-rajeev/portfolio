@@ -143,10 +143,15 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
-.timeline-content i {
-    font-size: 1.5rem;
+.timeline-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 8px;
     margin-bottom: 8px;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .timeline-item.education .timeline-content i {
