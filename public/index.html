@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/logo.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO Meta Tags -->
   <title>Sankalp Rajeev | AI & Machine Learning Engineer | Portfolio</title>
@@ -14,23 +14,23 @@
     content="Sankalp Rajeev, AI Engineer, Machine Learning Engineer, ML Engineer, Computer Vision Engineer, Deep Learning Engineer, Robotics Engineer, Python Developer, AI Developer, University of Michigan, Arizona State University, PyTorch, TensorFlow, NLP, Computer Vision, Full Stack AI, AI Portfolio" />
   <meta name="author" content="Sankalp Rajeev" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://sankalp-rajeev.onrender.com/" />
+  <link rel="canonical" href="https://sankalprajeev.dev/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sankalp-rajeev.onrender.com/" />
+  <meta property="og:url" content="https://sankalprajeev.dev/" />
   <meta property="og:title" content="Sankalp Rajeev | AI & Machine Learning Engineer" />
   <meta property="og:description"
     content="AI/Machine Learning Engineer specializing in Computer Vision, Deep Learning, NLP, and Robotics. View my projects, experience, and skills." />
-  <meta property="og:image" content="https://sankalp-rajeev.onrender.com/logo.png" />
+  <meta property="og:image" content="https://sankalprajeev.dev/logo.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://sankalp-rajeev.onrender.com/" />
+  <meta property="twitter:url" content="https://sankalprajeev.dev/" />
   <meta property="twitter:title" content="Sankalp Rajeev | AI & Machine Learning Engineer" />
   <meta property="twitter:description"
     content="AI/Machine Learning Engineer specializing in Computer Vision, Deep Learning, NLP, and Robotics." />
-  <meta property="twitter:image" content="https://sankalp-rajeev.onrender.com/logo.png" />
+  <meta property="twitter:image" content="https://sankalprajeev.dev/logo.png" />
 
   <!-- Structured Data for Google -->
   <script type="application/ld+json">
@@ -39,7 +39,7 @@
     "@type": "Person",
     "name": "Sankalp Rajeev",
     "jobTitle": "AI/Machine Learning Engineer",
-    "url": "https://sankalp-rajeev.onrender.com/",
+    "url": "https://sankalprajeev.dev/",
     "sameAs": [
       "https://github.com/sankalp-rajeev",
       "https://linkedin.com/in/sankalp-rajeev"
@@ -58,28 +58,33 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <meta name="theme-color" content="#007aff" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!-- Typefaces: IBM Plex Mono for metadata, Newsreader for prose -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+    rel="stylesheet" />
+
+  <meta name="theme-color" content="#0d0d0c" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <script>
+    // Apply the stored theme before first paint to avoid a flash of the wrong palette.
+    (function () {
+      try {
+        var stored = window.localStorage.getItem('theme');
+        document.documentElement.dataset.theme = stored === 'light' ? 'light' : 'dark';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    })();
+  </script>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <!--
-      This HTML file is a template for your React app.
-      If you open it directly in the browser, you will see an empty page.
-
-      Customizations include:
-      - Branding for Sankalp's Portfolio
-      - Updated theme color (#007aff) and description
-      - Fonts and FontAwesome icons for consistent styling
-    -->
 </body>
 
 </html>

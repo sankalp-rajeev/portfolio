@@ -1,109 +1,97 @@
 import React from "react";
+import SectionHead from "./SectionHead";
+import useReveal from "../hooks/useReveal";
+import education from "../data/education";
 import "../styles/About.css";
 
-const educationDetails = [
-  {
-    degree: "B.SC in Computer Science",
-    institution: "Arizona State University",
-    years: "08/2020 - 05/2024",
-    gpa: "3.71/4.0",
-    transcriptLink: "transcripts/ASU_FinalTranscript.pdf",
-    description: "Certified in Mathematical Concepts of Engineering.",
-    courses: [
-      "Foundations of Machine Learning",
-      "Applied Linear Algebra",
-      "Data Visualization",
-      "Exploring Data in R & Python",
-      "Probability & Stats for Engr",
-      "Intro to Theoretical CS",
-    ],
-  },
-  {
-    degree: "M.SC in AI - Computer Vision | M.SE in Robotics Engineering",
-    institution: "University of Michigan - Dearborn",
-    years: "09/2024 - 12/2026",
-    gpa: "3.90/4.0",
-    transcriptLink: "/transcripts/umich_transcript.pdf",
-    description: "Focusing on advanced AI, ML Engineering, and Data Engineering.",
-    courses: [
-      "Deep Learning",
-      "Robot Vision",
-      "Mobile Robots",
-      "Embedded Systems",
-      "Pat. Rec. & Neural Networks",
-      "Advanced AI",
-    ],
-  },
-];
-
 const About = () => {
+  useReveal();
+
   return (
-    <section id="about" className="about-section">
-      <div className="about-container">
-        {/* Image Section */}
-        <div className="about-image">
-          <img src="/img.jpg" alt="Sankalp" />
-        </div>
+    <section id="about" className="about">
+      <div className="shell">
+        <SectionHead index="01" title="About" note="Who / What / Why" />
 
-        {/* Content Section */}
-        <div className="about-content">
-          <h2 className="section-title">About</h2>
-          <h3>
-            Here’s a <span className="highlight">little</span> about me
-          </h3>
-          <p>
-            I am an <strong>AI and ML Engineer</strong> pursuing a <strong>Dual Master's in Artificial Intelligence and Robotics Engineering</strong> at the <strong>University of Michigan – Dearborn</strong> (GPA 3.90). I specialize in building production-grade systems across <strong>ML Engineering</strong>, <strong>Agentic AI</strong>, and <strong>Data Engineering</strong> — from 411M-row data pipelines and transformer-based recommendation systems to fine-tuned LLMs evaluated with LLM-as-a-Judge and multimodal ML pipelines deployed on GCP. I'm currently seeking <strong> Summer 2026 internships</strong> in ML Engineering, AI Engineering, and Data Science.
-          </p>
+        <div className="about-grid" data-reveal>
+          <figure className="about-portrait">
+            <img src="/img.jpg" alt="Sankalp Rajeev" />
+            <figcaption className="mono">Sankalp Rajeev</figcaption>
+          </figure>
 
-          {/* Centered Resume Button */}
-          <div className="resume-button-container">
-            <a
-              href="/Sankalp_Rajeev-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="resume-button"
-            >
-              View Resume
-            </a>
+          <div className="about-body">
+            <h3 className="about-lead">
+              Here&rsquo;s a <span className="emph">little</span> about me
+            </h3>
+            <p className="prose about-text">
+              I am an <strong>AI and ML Engineer</strong> pursuing a{" "}
+              <strong>Dual Master&rsquo;s in Artificial Intelligence and Robotics Engineering</strong> at the{" "}
+              <strong>University of Michigan – Dearborn</strong> (GPA 3.90). I specialize in building
+              production-grade systems across <strong>ML Engineering</strong>, <strong>Agentic AI</strong>, and{" "}
+              <strong>Data Engineering</strong> — from 411M-row data pipelines and transformer-based
+              recommendation systems to fine-tuned LLMs evaluated with LLM-as-a-Judge and multimodal ML
+              pipelines deployed on GCP. I&rsquo;m currently seeking <strong>Summer 2026 internships</strong> in
+              ML Engineering, AI Engineering, and Data Science.
+            </p>
+
+            <div className="actions">
+              <a
+                className="action action-solid"
+                href="/Sankalp_Rajeev-Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View resume
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Education Section */}
-      <div id="education" className="education-section">
-        <h3 className="education-title">Education</h3>
-        <div className="education-grid">
-          {educationDetails.map((edu, index) => (
-            <div key={index} className="education-card">
-              <h4 className="education-degree">{edu.degree}</h4>
-              <p className="education-institution">{edu.institution}</p>
-              <p className="education-years">{edu.years}</p>
-              <p className="education-gpa">
-                <strong>GPA:</strong> {edu.gpa}
-              </p>
+      <div id="education" className="shell education">
+        <SectionHead index="02" title="Education" note={`${education.length} degrees`} />
 
-              {/* Key Coursework */}
-              {edu.courses && (
+        <div className="education-grid">
+          {education.map((entry) => (
+            <article key={entry.degree} className="education-card" data-reveal>
+              <header className="education-head">
+                <span className="label">{entry.years}</span>
+                <h3 className="education-degree">{entry.degree}</h3>
+                <p className="education-institution mono">{entry.institution}</p>
+              </header>
+
+              <dl className="education-facts">
+                <div>
+                  <dt className="label">GPA</dt>
+                  <dd className="mono">{entry.gpa}</dd>
+                </div>
+                <div>
+                  <dt className="label">Note</dt>
+                  <dd className="mono">{entry.description}</dd>
+                </div>
+              </dl>
+
+              {entry.courses && (
                 <div className="education-courses">
-                  <h5 className="courses-title">Key Coursework:</h5>
-                  <ul className="courses-list">
-                    {edu.courses.map((course, i) => (
-                      <li key={i}>{course}</li>
+                  <span className="label">Key coursework</span>
+                  <ul className="tags">
+                    {entry.courses.map((course) => (
+                      <li key={course} className="tag">
+                        {course}
+                      </li>
                     ))}
                   </ul>
                 </div>
               )}
 
-              <p className="education-description">{edu.description}</p>
               <a
-                href={edu.transcriptLink}
+                className="link education-transcript"
+                href={entry.transcriptLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transcript-link"
               >
-                View Transcript
+                View transcript
               </a>
-            </div>
+            </article>
           ))}
         </div>
       </div>

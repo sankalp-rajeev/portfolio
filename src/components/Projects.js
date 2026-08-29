@@ -1,274 +1,120 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import PageHead from './PageHead';
+import useReveal from '../hooks/useReveal';
+import projectCategories from '../data/projects';
 import '../styles/Projects.css';
 
-const projectCategories = {
-  "AI & Machine Learning": [
-    {
-      title: "Kairos -- Demand Intelligence Platform",
-      intro: "End-to-end production ML platform processing 411M+ e-commerce interactions for real-time recommendations and forecasting.",
-      highlights: [
-        "Ingested 411M+ events via PySpark ETL orchestrated by Apache Airflow DAGs and Kafka Structured Streaming (5-min tumbling windows) to TimescaleDB with AQE and skew-join optimization.",
-        "Built three-stage inference: SASRec Transformer candidate retrieval (NDCG@10 ≈ 0.90) → Two-Tower re-scoring → XGBoost ranking (AUC 0.9883).",
-        "XGBoost demand forecaster with lag/rolling features achieving 9.44% WMAPE.",
-        "FastAPI serving layer with Redis and PgBouncer for sub-10ms end-to-end latency.",
-        "17-service Docker Compose stack with GitHub Actions CI/CD (83 Pytest tests, Ruff zero-warning policy)."
-      ],
-      tools: [
-        "PySpark", "Kafka", "Airflow", "TimescaleDB", "Redis", "PyTorch", "XGBoost", "FastAPI", "Docker", "Prometheus", "Grafana", "GitHub Actions"
-      ],
-      link: "https://github.com/sankalp-rajeev/kairos",
-    },
-    {
-      title: "CodeMind",
-      intro: "Agentic AI codebase intelligence system featuring autonomous crews for deep analysis and evolution.",
-      highlights: [
-        "Built a full-stack CrewAI multi-agent system for automated code exploration, security auditing, test generation, and refactoring.",
-        "Engineered a Hybrid RAG pipeline (Vector + BM25 + RRF) achieving 15.4ms median retrieval latency across 42k+ chunks.",
-        "Fine-tuned Gemma 3 (12B) on the KodCode dataset via QLoRA for autonomous test generation, achieving 73.5% CodeBLEU improvement and 3.3x speedup.",
-        "Designed Anti-Hallucination guardrails using Chain-of-Verification (CoVe) prompts, evaluated with DeepEval using Gemini-2.0-Flash as LLM-as-a-Judge for strict, evidence-based reporting."
-      ],
-      tools: [
-        "Python", "FastAPI", "React", "TypeScript", "CrewAI", "LangChain", "Ollama", "ChromaDB", "MLflow"
-      ],
-      link: "https://github.com/sankalp-rajeev/CodeMind",
-    },
-    {
-      title: "MeetingMind AI",
-      intro: "End-to-end meeting intelligence system deployed on Google Cloud Run.",
-      highlights: [
-        "Reduced VLM API costs by 85% using a multi-signal content pre-filter (SSIM scene change detection, EasyOCR text density gate) to restrict analysis to high-value semantic frames.",
-        "5-phase ML pipeline: Pyannote diarization → Whisper ASR → YOLO face detection → ArcFace matching → Gemini summarization",
-        "RAG Q&A system with LangChain, ChromaDB, and Vertex AI embeddings for conversational queries",
-        "Real-time React frontend with FastAPI backend featuring 23 REST endpoints"
-      ],
-      tools: [
-        "Python", "FastAPI", "React", "Docker", "GCP Cloud Run", "Whisper", "Pyannote",
-        "YOLOv8", "InsightFace", "Gemini 2.0", "LangChain", "ChromaDB", "Vertex AI"
-      ],
-      link: "https://github.com/sankalp-rajeev/meetingsmindAI",
-    },
-    {
-      title: "Multimodal Document Q&A",
-      intro: "Systematic ablation study on document understanding with LayoutLMv3.",
-      highlights: [
-        "Demonstrated 92% relative F1 improvement from 2D layout embeddings over text-only BERT",
-        "Multi-task learning with shared encoder for joint span extraction and BIO entity tagging (68.88% F1)",
-        "Discovered vision features add <1% gain for grayscale forms—layout coordinates capture spatial semantics",
-        "Identified and corrected 18% data contamination in standard FUNSD benchmark"
-      ],
-      tools: [
-        "Python", "PyTorch", "LayoutLMv3", "BERT", "Transformers", "FUNSD", "Multi-Task Learning", "Streamlit"
-      ],
-      link: "https://github.com/sankalp-rajeev/multimodal-doc-qa",
-      paperLink: "/reports/Sankalp_Rajeev_CIS583_Project-report.docx",
-    },
-    {
-      title: "Repository Health Predictor",
-      intro: "ML-powered risk assessment for open-source repositories.",
-      highlights: [
-        "Dual XGBoost models: regression for risk score, classification for risk category with label encoding",
-        "Analyzes 52-week commit trends, contributor activity slopes, and repository metrics",
-        "Live GitHub API integration with rate-limit handling and offline dataset predictions",
-        "Interactive Plotly diagnostics: predicted vs actual, residuals, feature importance charts"
-      ],
-      tools: [
-        "Python", "XGBoost", "scikit-learn", "Gradio", "GitHub API", "Plotly", "Pandas", "NumPy"
-      ],
-      link: "https://github.com/sankalp-rajeev/repo_health_predictor",
-    },
-  ],
-  "Computer Vision": [
-    {
-      title: "AI-Powered Adaptive Cruise Control",
-      intro: "Full ACC system in CARLA simulator using reinforcement learning.",
-      highlights: [
-        "PPO-based RL agent with CNN-encoded semantic perception for lane adherence",
-        "YOLOv8 object detection + Ultra-Fast Lane Detection (UFLD) for real-time perception",
-        "Custom reward shaping and safe agent evaluation metrics",
-        "Integrated steering, throttle, and brake control in simulated traffic"
-      ],
-      tools: [
-        "Python", "CARLA Simulator", "YOLOv8", "UFLD", "TensorFlow/Keras", "Stable-Baselines3 (PPO)"
-      ],
-      link: "https://github.com/sankalp-rajeev/Carla-Autonomous-Vehicle",
-      paperLink: "/reports/ECE-544-Visual-Slam-Final.pdf",
-      additionalPaperLink: "/reports/Final_Project_ECE532.pdf"
-    },
-    {
-      title: "Stereo Visual SLAM in CARLA",
-      intro: "Real-time 3D trajectory mapping with stereo vision.",
-      highlights: [
-        "Stereo depth estimation using SGBM (Semi-Global Block Matching)",
-        "Visual odometry with PnP + RANSAC for robust pose estimation",
-        "Loop closure detection and 9D Kalman Filter pose fusion",
-        "Real-time 3D map and trajectory visualization with Open3D"
-      ],
-      tools: [
-        "Python", "CARLA Simulator", "OpenCV", "Open3D", "Matplotlib", "Kalman Filters"
-      ],
-      link: "https://github.com/sankalp-rajeev/Stereo-Visual-SLAM",
-      paperLink: "/reports/ECE-544-Visual-Slam-Final.pdf",
-    },
-    {
-      title: "Image Caption Generation",
-      intro: "CNN-LSTM architecture for generating image descriptions.",
-      highlights: [
-        "InceptionV3 for visual feature extraction, LSTM for sequence generation",
-        "Beam Search optimization for higher-quality captions",
-        "GloVe embeddings for semantic word representations",
-        "Flask web interface for real-time caption prediction"
-      ],
-      tools: [
-        "Python", "TensorFlow/Keras", "Flask", "GloVe", "InceptionV3", "LSTM"
-      ],
-      link: "https://github.com/srajeev234/ece5831-2024-final-project",
-      paperLink: "/FinalReport.pdf",
-    },
-  ],
-  "App Development": [
-    {
-      title: "Unit Genie",
-      intro: "Mobile unit conversion app with admin dashboard.",
-      highlights: [
-        "Conversions for Length, Weight, Temperature, and Volume with step-by-step transparency",
-        "User registration/login with SQLite-backed session management",
-        "Conversion history tracking and admin dashboard for usage analytics",
-        "Material Design UI with RecyclerView for smooth scrolling"
-      ],
-      tools: [
-        "Android Studio", "Java", "Kotlin", "SQLite", "Material Design", "RecyclerView"
-      ],
-      link: "https://github.com/sankalp-rajeev/ConversionsApp",
-      paperLink: "/reports/UnitGenie.pdf",
-    },
-    {
-      title: "Social Media Photo Share App",
-      intro: "Full-stack social platform for multimedia sharing.",
-      highlights: [
-        "User profiles, posts, likes, and comments functionality",
-        "React frontend with Node.js/Express backend",
-        "MySQL database for persistent data storage"
-      ],
-      tools: ["JavaScript", "React", "Node.js", "MySQL"],
-      link: "https://github.com/sankalp-rajeev/social-media-2023",
-    },
-  ],
-  "Data Visualization": [
-    {
-      title: "NASA Exoplanet Visualization",
-      intro: "Interactive exploration of NASA exoplanet data.",
-      highlights: [
-        "Dynamic filtering by planet characteristics (mass, radius, distance)",
-        "D3.js-powered scatter plots and comparative visualizations",
-        "Responsive design with hover tooltips and zoom functionality"
-      ],
-      tools: ["JavaScript", "D3.js", "HTML", "CSS"],
-      link: "https://github.com/sankalp-rajeev/Nasa-Data-Viz",
-    },
-    {
-      title: "Car Performance Dashboard",
-      intro: "Multi-dimensional automotive data exploration.",
-      highlights: [
-        "Interactive charts for MPG, horsepower, weight correlations",
-        "Filter by manufacturer, year, and vehicle type",
-        "Parallel coordinates plot for multi-attribute comparison"
-      ],
-      tools: ["JavaScript", "D3.js", "HTML", "CSS"],
-      link: "https://github.com/sankalp-rajeev/Car-Data-Viz",
-    },
-  ],
-};
-
 const Projects = () => {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+  useReveal();
 
-    const elements = document.querySelectorAll(
-      ".projects-title, .category-title, .project-card"
-    );
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const categories = Object.entries(projectCategories);
+  const total = categories.reduce((count, [, items]) => count + items.length, 0);
 
   return (
-    <div className="projects-container">
-      <h1 className="projects-title">My Projects</h1>
-      {Object.entries(projectCategories).map(([category, projects], index) => (
-        <div key={index} className="project-category">
-          <h2 className="project-category-title">{category}</h2>
-          <div className="projects-grid">
-            {projects.map((project, projectIndex) => (
-              <div key={projectIndex} className="project-card">
-                <div className="project-content">
-                  <h2 className="project-title">{project.title}</h2>
+    <div className="page shell projects">
+      <PageHead
+        path="~/projects"
+        title="Projects"
+        note={`${total} projects across production ML platforms, computer vision research, applications, and data visualization.`}
+      />
+
+      {categories.map(([category, items], categoryIndex) => (
+        <section key={category} className="project-category">
+          <header className="section-head" data-reveal>
+            <span className="section-index">{String(categoryIndex + 1).padStart(2, '0')}</span>
+            <h2 className="section-name">{category}</h2>
+            <span className="section-note">{items.length} entries</span>
+          </header>
+
+          <div className="project-grid">
+            {items.map((project, projectIndex) => (
+              <article key={project.title} className="project-card" data-reveal>
+                <div className="project-media">
+                  {project.image ? (
+                    <img src={project.image} alt={`${project.title} preview`} loading="lazy" />
+                  ) : (
+                    <span className="project-plate">{project.title}</span>
+                  )}
+                  <span className="project-number">
+                    {String(projectIndex + 1).padStart(2, '0')}
+                  </span>
+                </div>
+
+                <div className="project-body">
+                  <h3 className="project-title">{project.title}</h3>
                   <p className="project-intro">{project.intro}</p>
-                  <ul className="project-highlights">
-                    {project.highlights.map((highlight, hIndex) => (
-                      <li key={hIndex}>{highlight}</li>
+
+                  <ul className="bullets project-bullets">
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
                     ))}
                   </ul>
-                  <div className="project-tools">
-                    {project.tools.map((tool, toolIndex) => (
-                      <span key={toolIndex} className="tool-tag">
+
+                  <ul className="tags project-tools">
+                    {project.tools.map((tool) => (
+                      <li key={tool} className="tag">
                         {tool}
-                      </span>
+                      </li>
                     ))}
-                  </div>
-                  <div className="project-links">
-                    {project.paperLink && (
+                  </ul>
+
+                  <div className="actions project-actions">
+                    {project.link && (
                       <a
-                        href={project.paperLink}
+                        className="action"
+                        href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="button button-paper"
                       >
-                        View Report
-                      </a>
-                    )}
-                    {project.additionalPaperLink && (
-                      <a
-                        href={project.additionalPaperLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="button button-literature"
-                      >
-                        Literature Survey
+                        GitHub
                       </a>
                     )}
                     {project.demoLink && (
                       <a
+                        className="action"
                         href={project.demoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="button button-demo"
                       >
-                        Live Demo
+                        Live demo
                       </a>
                     )}
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="button"
-                    >
-                      GitHub
-                    </a>
+                    {project.videoLink && (
+                      <a
+                        className="action"
+                        href={project.videoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Demo video
+                      </a>
+                    )}
+                    {project.paperLink && (
+                      <a
+                        className="action"
+                        href={project.paperLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Report
+                      </a>
+                    )}
+                    {project.additionalPaperLink && (
+                      <a
+                        className="action"
+                        href={project.additionalPaperLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Literature survey
+                      </a>
+                    )}
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
-        </div>
+        </section>
       ))}
     </div>
   );

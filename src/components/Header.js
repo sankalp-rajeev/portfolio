@@ -1,228 +1,168 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Header.css";
 
-const Header = () => {
+const homeSections = [
+  { label: "About", hash: "#about" },
+  { label: "Education", hash: "#education" },
+  { label: "Journey", hash: "#journey" },
+  { label: "Skills", hash: "#skills" },
+  { label: "Contact", hash: "#footer" },
+];
+
+const pages = [
+  { label: "Experience", path: "/experience" },
+  { label: "Projects", path: "/projects" },
+  { label: "Certificates", path: "/certificates" },
+  { label: "Gallery", path: "/wildlife-gallery" },
+];
+
+const Header = ({ theme, toggleTheme }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSectionsOpen, setIsSectionsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
 
-  // Detect if the device is in mobile view
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 768);
-    };
-    handleResize(); // Set initial state
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const onResize = () => setIsCompact(window.innerWidth <= 900);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Detect scroll to change navbar background
   useEffect(() => {
-    const handleScroll = () => {
-      const navbar = document.querySelector(".navbar");
-      if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNavigation = (path) => {
-    setIsMobileMenuOpen(false);
-    setIsDropdownOpen(false);
+  const closeMenus = useCallback(() => {
+    setIsMenuOpen(false);
+    setIsSectionsOpen(false);
+  }, []);
 
-    if (path === "/") {
+  const scrollToSection = useCallback((hash) => {
+    const target = document.getElementById(hash.slice(1));
+    if (!target) return;
+    const offset = target.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top: offset, behavior: "smooth" });
+  }, []);
+
+  const goToSection = useCallback(
+    (hash) => {
+      closeMenus();
       if (location.pathname !== "/") {
         navigate("/");
-        setTimeout(() => {
-          const homeSection = document.getElementById("home");
-          if (homeSection) {
-            const navbarHeight = document.querySelector(".navbar").offsetHeight;
-            const scrollPosition = homeSection.offsetTop - navbarHeight;
-            window.scrollTo({ top: scrollPosition, behavior: "smooth" });
-          }
-        }, 500);
-      } else {
-        const homeSection = document.getElementById("home");
-        if (homeSection) {
-          const navbarHeight = document.querySelector(".navbar").offsetHeight;
-          const scrollPosition = homeSection.offsetTop - navbarHeight;
-          window.scrollTo({ top: scrollPosition, behavior: "smooth" });
-        }
+        // Wait for the home route to mount before measuring the target.
+        setTimeout(() => scrollToSection(hash), 400);
+        return;
       }
-    } else if (path.startsWith("#")) {
-      if (location.pathname !== "/") {
-        navigate("/");
-        setTimeout(() => {
-          const sectionId = path.slice(1);
-          const section = document.getElementById(sectionId);
-          if (section) {
-            const navbarHeight = document.querySelector(".navbar").offsetHeight;
-            const scrollPosition = section.offsetTop - navbarHeight;
-            window.scrollTo({ top: scrollPosition, behavior: "smooth" });
-          }
-        }, 500);
-      } else {
-        const sectionId = path.slice(1);
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const navbarHeight = document.querySelector(".navbar").offsetHeight;
-          const scrollPosition = section.offsetTop - navbarHeight;
-          window.scrollTo({ top: scrollPosition, behavior: "smooth" });
-        }
-      }
-    } else {
-      if (location.pathname !== path) {
-        navigate(path);
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }, 100);
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    }
-  };
+      scrollToSection(hash);
+    },
+    [closeMenus, location.pathname, navigate, scrollToSection]
+  );
 
-  const toggleDropdown = () => {
-    if (isMobileView) {
-      setIsDropdownOpen((prev) => !prev);
-    }
-  };
+  const goToPage = useCallback(
+    (path) => {
+      closeMenus();
+      if (location.pathname !== path) navigate(path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    [closeMenus, location.pathname, navigate]
+  );
 
   return (
-    <nav className="navbar navbar-expand-lg fixed-top">
-      <div className="container-fluid">
+    <header className={`nav ${isScrolled ? "is-scrolled" : ""}`}>
+      <div className="nav-inner">
+        <a
+          className="nav-mark"
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            goToPage("/");
+          }}
+        >
+          <span className="nav-mark-name">Sankalp Rajeev</span>
+          <span className="nav-mark-role">AI / ML Engineer</span>
+        </a>
+
         <button
-          className="navbar-toggler"
           type="button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="nav-burger"
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle navigation"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
         >
-          <span className="navbar-toggler-icon"></span>
+          <span />
+          <span />
         </button>
-        <div
-          className={`collapse navbar-collapse ${isMobileMenuOpen ? "show" : ""}`}
-          id="navbarNav"
-        >
-          <ul className="navbar-nav ms-auto">
-            <li
-              className={`nav-item dropdown ${isDropdownOpen ? "show" : ""}`}
-              onMouseEnter={() => !isMobileView && setIsDropdownOpen(true)}
-              onMouseLeave={() => !isMobileView && setIsDropdownOpen(false)}
+
+        <nav className={`nav-links ${isMenuOpen ? "is-open" : ""}`}>
+          <div
+            className={`nav-group ${isSectionsOpen ? "is-open" : ""}`}
+            onMouseEnter={() => !isCompact && setIsSectionsOpen(true)}
+            onMouseLeave={() => !isCompact && setIsSectionsOpen(false)}
+          >
+            <a
+              className={`nav-link ${location.pathname === "/" ? "is-active" : ""}`}
+              href="/"
+              aria-expanded={isSectionsOpen}
+              onClick={(e) => {
+                e.preventDefault();
+                if (isCompact) {
+                  setIsSectionsOpen((prev) => !prev);
+                  return;
+                }
+                goToPage("/");
+              }}
             >
-              <a
-                className="nav-link"
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (isMobileView) {
-                    toggleDropdown();
-                  } else {
-                    handleNavigation("/");
-                  }
-                }}
-              >
-                Home
-              </a>
-              <div className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}>
+              Home
+            </a>
+            <div className="nav-panel">
+              {homeSections.map((section) => (
                 <a
-                  className="dropdown-item"
-                  href="#about"
+                  key={section.hash}
+                  className="nav-panel-item"
+                  href={`/${section.hash}`}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavigation("#about");
+                    goToSection(section.hash);
                   }}
                 >
-                  About Me
+                  {section.label}
                 </a>
-                <a
-                  className="dropdown-item"
-                  href="#education"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigation("#education");
-                  }}
-                >
-                  Education
-                </a>
-                <a
-                  className="dropdown-item"
-                  href="#journey"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigation("#journey");
-                  }}
-                >
-                  My Journey
-                </a>
-                <a
-                  className="dropdown-item"
-                  href="#skills"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigation("#skills");
-                  }}
-                >
-                  Skills
-                </a>
-                <a
-                  className="dropdown-item"
-                  href="#footer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigation("#footer");
-                  }}
-                >
-                  Contact
-                </a>
-              </div>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${location.pathname === "/experience" ? "active" : ""}`}
-                href="#"
-                onClick={() => handleNavigation("/experience")}
-              >
-                Experience
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${location.pathname === "/projects" ? "active" : ""}`}
-                href="#"
-                onClick={() => handleNavigation("/projects")}
-              >
-                Projects
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${location.pathname === "/certificates" ? "active" : ""}`}
-                href="#"
-                onClick={() => handleNavigation("/certificates")}
-              >
-                Certificates
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${location.pathname === "/wildlife-gallery" ? "active" : ""}`}
-                href="#"
-                onClick={() => handleNavigation("/wildlife-gallery")}
-              >
-                Gallery
-              </a>
-            </li>
-          </ul>
-        </div>
+              ))}
+            </div>
+          </div>
+
+          {pages.map((page) => (
+            <a
+              key={page.path}
+              className={`nav-link ${location.pathname === page.path ? "is-active" : ""}`}
+              href={page.path}
+              onClick={(e) => {
+                e.preventDefault();
+                goToPage(page.path);
+              }}
+            >
+              {page.label}
+            </a>
+          ))}
+
+          <button
+            type="button"
+            className="nav-theme"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          >
+            {theme === "dark" ? "Light" : "Dark"}
+          </button>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 };
 

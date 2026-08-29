@@ -1,12 +1,24 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import SectionHead from "./SectionHead";
+import useReveal from "../hooks/useReveal";
 import "../styles/Footer.css";
+
+const contactDetails = [
+  { label: "Email", value: "rajeevsankalp@gmail.com", href: "mailto:rajeevsankalp@gmail.com" },
+  { label: "Phone", value: "+1 (480) 208-2139", href: "tel:+14802082139" },
+  { label: "Location", value: "Dearborn, Michigan" },
+];
 
 const Footer = () => {
   const form = useRef();
+  const [status, setStatus] = useState("idle");
+  useReveal();
 
   const sendEmail = (e) => {
     e.preventDefault();
+    const formEl = e.target;
+    setStatus("sending");
 
     emailjs
       .sendForm(
@@ -16,52 +28,91 @@ const Footer = () => {
         "wIV7shGRkzZTPSkGq"
       )
       .then(
-        (result) => {
-          alert("Message sent successfully!");
+        () => {
+          setStatus("sent");
+          formEl.reset();
         },
         (error) => {
           console.error("EmailJS Error:", error);
-          alert("An error occurred. Please try again.");
+          setStatus("error");
         }
       );
-
-    e.target.reset();
   };
 
-  return (
-    <footer className="footer" id="footer">
-      <div className="footer-container">
-        <h2>Contact Me</h2>
-        <p>Feel free to reach out! I'd love to hear from you.</p>
+  const statusMessage = {
+    sending: "Sending…",
+    sent: "Message sent. Thanks for reaching out.",
+    error: "Something went wrong. Please email me directly.",
+  }[status];
 
-        {/* Contact Information */}
-        <div className="contact-info">
-          <div className="contact-item">
-            <i className="fas fa-phone-alt"></i>
-            <span>+1 (480)-208-2139</span>
+  return (
+    <footer id="footer" className="contact">
+      <div className="shell">
+        <SectionHead index="05" title="Contact" note="Open to conversations" />
+
+        <div className="contact-grid">
+          <div className="contact-side" data-reveal>
+            <p className="prose contact-lead">
+              Feel free to reach out! I&rsquo;d love to hear from you.
+            </p>
+
+            <dl className="contact-details">
+              {contactDetails.map((detail) => (
+                <div key={detail.label} className="contact-detail">
+                  <dt className="label">{detail.label}</dt>
+                  <dd>
+                    {detail.href ? (
+                      <a className="link" href={detail.href}>
+                        {detail.value}
+                      </a>
+                    ) : (
+                      <span className="mono">{detail.value}</span>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <div className="contact-item">
-            <i className="fas fa-envelope"></i>
-            <span>rajeevsankalp@gmail.com</span>
-          </div>
-          <div className="contact-item">
-            <i className="fas fa-map-marker-alt"></i>
-            <span>Dearborn, Michigan</span>
-          </div>
+
+          <form ref={form} onSubmit={sendEmail} className="contact-form" data-reveal>
+            <div className="contact-row">
+              <label className="field">
+                <span className="label">Name</span>
+                <input type="text" name="from_name" required />
+              </label>
+              <label className="field">
+                <span className="label">Email</span>
+                <input type="email" name="from_email" required />
+              </label>
+            </div>
+
+            <label className="field">
+              <span className="label">Subject</span>
+              <input type="text" name="subject" required />
+            </label>
+
+            <label className="field">
+              <span className="label">Message</span>
+              <textarea name="message" rows="6" required />
+            </label>
+
+            <div className="contact-submit">
+              <button type="submit" className="action action-solid" disabled={status === "sending"}>
+                Send message
+              </button>
+              {statusMessage && (
+                <p className="contact-status mono" role="status">
+                  {statusMessage}
+                </p>
+              )}
+            </div>
+          </form>
         </div>
 
-        {/* Contact Form */}
-        <form ref={form} onSubmit={sendEmail} className="contact-form">
-          <div className="form-row">
-            <input type="text" name="from_name" placeholder="Name" required />
-            <input type="email" name="from_email" placeholder="Email" required />
-          </div>
-          <input type="text" name="subject" placeholder="Subject" required />
-          <textarea name="message" placeholder="Message" rows="5" required></textarea>
-          <button type="submit" className="submit-button">
-            Submit
-          </button>
-        </form>
+        <div className="contact-foot">
+          <span className="mono">© {new Date().getFullYear()} Sankalp Rajeev</span>
+          <span className="mono">Dearborn, Michigan</span>
+        </div>
       </div>
     </footer>
   );

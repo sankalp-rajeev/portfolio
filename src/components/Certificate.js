@@ -1,67 +1,46 @@
 import React, { useState } from "react";
+import PageHead from "./PageHead";
+import certificates from "../data/certificates";
 import "../styles/Certificate.css";
 
-const certifications = [
-  {
-    title: "Bsc Computer Science Diploma",
-    pdf: "/assets/certificates/eDiploma.pdf",
-    type: "pdf",
-  },
-  {
-    title: "TIP Certificate",
-    pdf: "/assets/certificates/TIP.pdf",
-    type: "pdf",
-  },
-  {
-    title: "Computer Vision",
-    pdf: "/assets/certificates/computervisionCertificate.pdf",
-    type: "pdf",
-  },
-  {
-    title: "Intro to Applied Data Analytics",
-    pdf: "https://www.credential.net/b8c8897b-7a62-4358-997d-1b7addd0e239#acc.kfhEQs3g",
-    type: "external",
-  },
-  {
-    title: "Tableau Certification",
-    pdf: "https://www.credential.net/fd1fa7b0-7775-4048-b5cc-2ce6c43954b2#acc.2W7pwUl5",
-    type: "external",
-  },
-];
-
 const Certificate = () => {
-  const [selectedCertificate, setSelectedCertificate] = useState(certifications[0]);
+  const [selected, setSelected] = useState(certificates[0]);
 
   return (
-    <div className="certification-container">
-      <h1 className="certification-title">My Certifications</h1>
-      <div className="certification-grid">
-        {certifications.map((cert, index) => (
-          <div
-            key={index}
-            className={`cert-card ${selectedCertificate.title === cert.title ? "active" : ""}`}
-            onClick={() => setSelectedCertificate(cert)}
-          >
-            <h2 className="cert-title">{cert.title}</h2>
+    <div className="page shell certificates">
+      <PageHead
+        path="~/certificates"
+        title="Certificates"
+        note="Degrees and coursework credentials. Select an entry to view the document."
+      />
+
+      <div className="certificates-layout">
+        <ul className="certificates-list">
+          {certificates.map((cert) => (
+            <li key={cert.title}>
+              <button
+                type="button"
+                className={`certificates-item ${selected.title === cert.title ? "is-active" : ""}`}
+                onClick={() => setSelected(cert)}
+              >
+                <span className="certificates-item-title">{cert.title}</span>
+                <span className="certificates-item-type">
+                  {cert.type === "pdf" ? "PDF" : "Link"}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div className="certificates-viewer">
+          <div className="certificates-viewer-bar">
+            <span className="mono">{selected.title}</span>
+            <a className="link" href={selected.pdf} target="_blank" rel="noopener noreferrer">
+              Open
+            </a>
           </div>
-        ))}
-      </div>
-      <div className="viewer-container">
-        {selectedCertificate.type === "pdf" ? (
-          <iframe
-            src={selectedCertificate.pdf}
-            title="Certificate Viewer"
-            frameBorder="0"
-            className="pdf-iframe"
-          ></iframe>
-        ) : selectedCertificate.type === "external" ? (
-          <iframe
-            src={selectedCertificate.pdf}
-            title="External Certificate Viewer"
-            frameBorder="0"
-            className="external-iframe"
-          ></iframe>
-        ) : null}
+          <iframe src={selected.pdf} title={selected.title} className="certificates-frame" />
+        </div>
       </div>
     </div>
   );

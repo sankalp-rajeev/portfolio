@@ -1,129 +1,119 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import experience from "../data/experience";
 import "../styles/Home.css";
+
+const phrases = [
+  "teaching machines to think",
+  "crafting computer vision models",
+  "debugging lines of chaos into harmony",
+  "exploring the depths of AI and ML",
+];
+
+const socialLinks = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/sankalp-rajeev/" },
+  { label: "GitHub", href: "https://github.com/sankalp-rajeev" },
+  { label: "Instagram", href: "https://www.instagram.com/sankalp_rajeev/" },
+];
 
 const Home = () => {
   const [text, setText] = useState("");
-  const phrases = [
-    "teaching machines to think",
-    "crafting computer vision models",
-    "debugging lines of chaos into harmony",
-    "exploring the depths of AI and ML"
-  ];
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopIndex, setLoopIndex] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(100);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const contentRef = useRef(null);
+  const latestRole = experience[0];
 
   useEffect(() => {
-    const handleTyping = () => {
-      const currentPhrase = phrases[loopIndex % phrases.length];
+    const currentPhrase = phrases[loopIndex % phrases.length];
+
+    const step = () => {
       if (!isDeleting) {
         setText(currentPhrase.substring(0, text.length + 1));
-        if (text === currentPhrase) {
-          setTimeout(() => setIsDeleting(true), 1000);
-        }
-      } else {
-        setText(currentPhrase.substring(0, text.length - 1));
-        if (text === "") {
-          setIsDeleting(false);
-          setLoopIndex(loopIndex + 1);
-        }
+        if (text === currentPhrase) setIsDeleting(true);
+        return;
+      }
+      setText(currentPhrase.substring(0, text.length - 1));
+      if (text === "") {
+        setIsDeleting(false);
+        setLoopIndex((prev) => prev + 1);
       }
     };
 
-    const timer = setTimeout(handleTyping, isDeleting ? 50 : typingSpeed);
+    const hold = !isDeleting && text === currentPhrase ? 1600 : isDeleting ? 40 : 70;
+    const timer = setTimeout(step, hold);
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopIndex, typingSpeed]);
+  }, [text, isDeleting, loopIndex]);
 
-  // Parallax effect for circles
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    setMousePos({
-      x: (clientX - centerX) / 25,
-      y: (clientY - centerY) / 25
-    });
-  };
-
-  // 3D Tilt effect for content
-  const handleContentMouseMove = (e) => {
-    if (!contentRef.current) return;
-    const rect = contentRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-    contentRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  };
-
-  const handleContentMouseLeave = () => {
-    if (contentRef.current) {
-      contentRef.current.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-    }
-  };
-
-  const socialLinks = [
-    { href: "https://www.linkedin.com/in/sankalp-rajeev/", icon: "fab fa-linkedin" },
-    { href: "https://github.com/sankalp-rajeev", icon: "fab fa-github" },
-    { href: "https://www.instagram.com/sankalp_rajeev/", icon: "fab fa-instagram" },
-  ];
-
-  const handleLearnMoreClick = () => {
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
+  const scrollToAbout = () => {
+    const about = document.getElementById("about");
+    if (about) about.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="home" className="home-section" onMouseMove={handleMouseMove}>
-      {/* Social Icons */}
-      <div className="social-icons">
-        {socialLinks.map((link, index) => (
-          <a key={index} href={link.href} target="_blank" rel="noopener noreferrer">
-            <i className={link.icon}></i>
-          </a>
-        ))}
-      </div>
+    <section id="home" className="hero">
+      <div className="shell hero-inner">
+        <div className="hero-body">
+          <p className="hero-greeting label">Hi, the name&rsquo;s Sankalp</p>
+          <h1 className="hero-title">
+            AI / Machine Learning
+            <br />
+            Engineer
+          </h1>
 
-      {/* Breathing Circles with Parallax */}
-      <div
-        className="circle-container"
-        style={{
-          transform: `translate(calc(-50% + ${mousePos.x}px), calc(-50% + ${mousePos.y}px))`
-        }}
-      ></div>
+          <p className="hero-line">
+            I like <span className="hero-typed">{text}</span>
+            <span className="hero-caret" aria-hidden="true" />
+          </p>
 
-      {/* Main Content with 3D Tilt */}
-      <div
-        className="main-content"
-        ref={contentRef}
-        onMouseMove={handleContentMouseMove}
-        onMouseLeave={handleContentMouseLeave}
-      >
-        <h2>
-          Hi, The name's <span className="highlight">Sankalp</span>
-        </h2>
-        <h3 className="role-title fade-in">AI/Machine Learning Engineer</h3>
-        <h1>
-          I like <span className="dynamic-text">{text}</span>.
-        </h1>
-        <button className="nav-button" onClick={handleLearnMoreClick}>
-          Learn More
-        </button>
-      </div>
+          <div className="hero-actions">
+            <button type="button" className="action" onClick={scrollToAbout}>
+              Learn more
+            </button>
+            <a
+              className="action"
+              href="/Sankalp_Rajeev-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resume
+            </a>
+          </div>
 
-      {/* Scroll Indicator */}
-      <div className="scroll-indicator" onClick={handleLearnMoreClick}>
-        <span className="scroll-text">Scroll</span>
-        <div className="scroll-arrow">
-          <i className="fas fa-chevron-down"></i>
+          <ul className="hero-social">
+            {socialLinks.map((social) => (
+              <li key={social.label}>
+                <a className="link" href={social.href} target="_blank" rel="noopener noreferrer">
+                  {social.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
+
+        <dl className="hero-meta">
+          <div className="hero-meta-row">
+            <dt className="label">Focus</dt>
+            <dd>ML Engineering, Agentic AI, Data Engineering</dd>
+          </div>
+          <div className="hero-meta-row">
+            <dt className="label">Based</dt>
+            <dd>Dearborn, Michigan</dd>
+          </div>
+          <div className="hero-meta-row">
+            <dt className="label">Studying</dt>
+            <dd>M.S. AI + M.S.E. Robotics, U-M Dearborn</dd>
+          </div>
+          <div className="hero-meta-row">
+            <dt className="label">Latest</dt>
+            <dd>
+              {latestRole.title}, {latestRole.company}
+            </dd>
+          </div>
+        </dl>
       </div>
+
+      <button type="button" className="hero-scroll" onClick={scrollToAbout}>
+        <span className="label">Scroll</span>
+        <span className="hero-scroll-rule" aria-hidden="true" />
+      </button>
     </section>
   );
 };
