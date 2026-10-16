@@ -2,7 +2,7 @@ const journey = [
     {
         year: "2020",
         education: {
-            title: "Started B.SC in Computer Science",
+            title: "Started B.S. in Computer Science",
             institution: "Arizona State University",
             logo: "/assets/experience/asu.png",
             dates: "Aug 2020 - May 2024",
@@ -32,8 +32,8 @@ const journey = [
     {
         year: "2024",
         education: {
-            title: "Completed B.SC, Started M.SC/M.SE",
-            institution: "University of Michigan - Dearborn",
+            title: "Completed B.S.; started M.S. in Artificial Intelligence | M.S.E. in Robotics Engineering",
+            institution: "University of Michigan-Dearborn",
             logo: "/assets/experience/umdearborn.png",
             dates: "Sep 2024 - Dec 2026",
         },
@@ -57,8 +57,8 @@ const journey = [
     {
         year: "2026",
         education: {
-            title: "Graduate with Dual Master's",
-            institution: "University of Michigan - Dearborn",
+            title: "Expected graduation: M.S. in Artificial Intelligence | M.S.E. in Robotics Engineering",
+            institution: "University of Michigan-Dearborn",
             logo: "/assets/experience/umdearborn.png",
             dates: "December 2026",
         },
@@ -67,6 +67,16 @@ const journey = [
             company: "Magna International",
             logo: "/assets/experience/magna.png",
             dates: "May - Aug 2026",
+        },
+    },
+    {
+        year: "Present",
+        education: null,
+        experience: {
+            title: "Graduate Researcher",
+            company: "University of Michigan-Dearborn",
+            logo: "/assets/experience/umdearborn.png",
+            dates: "Sep 2026 – Present",
         },
     },
 ];

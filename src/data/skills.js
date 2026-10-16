@@ -30,6 +30,9 @@ const skills = [
             "OpenVINO",
             "ClearML",
             "MLflow",
+            "Docker",
+            "GitHub Actions",
+            "Pytest",
         ],
     },
     {

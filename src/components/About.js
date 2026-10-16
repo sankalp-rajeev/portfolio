@@ -23,14 +23,17 @@ const About = () => {
               Here&rsquo;s a <span className="emph">little</span> about me
             </h3>
             <p className="prose about-text">
-              I am an <strong>AI and ML Engineer</strong> pursuing a{" "}
-              <strong>Dual Master&rsquo;s in Artificial Intelligence and Robotics Engineering</strong> at the{" "}
-              <strong>University of Michigan – Dearborn</strong> (GPA 3.90). I specialize in building
-              production-grade systems across <strong>ML Engineering</strong>, <strong>Agentic AI</strong>, and{" "}
-              <strong>Data Engineering</strong> — from 411M-row data pipelines and transformer-based
-              recommendation systems to fine-tuned LLMs evaluated with LLM-as-a-Judge and multimodal ML
-              pipelines deployed on GCP. I&rsquo;m currently seeking <strong>Summer 2026 internships</strong> in
-              ML Engineering, AI Engineering, and Data Science.
+              I&rsquo;m an <strong>AI/ML engineer</strong> pursuing{" "}
+              <strong>dual master&rsquo;s degrees in Artificial Intelligence and Robotics Engineering</strong> at the{" "}
+              <strong>University of Michigan-Dearborn</strong>. I build <strong>machine learning systems</strong>{" "}
+              that have to work outside a notebook, spanning industrial computer vision,{" "}
+              <strong>production LLM applications</strong>, edge inference, recommendation systems, and{" "}
+              <strong>AI reliability</strong>.
+              At Magna, I developed and deployed computer-vision systems for manufacturing environments.
+              At Zoetis, I shipped production LLM tools on Azure Kubernetes, and my current research focuses
+              on the reliability of LLM-generated software repairs. I graduate in December 2026
+              and am seeking <strong>full-time AI/ML engineering roles</strong> starting January 2027, with
+              interest in the SF Bay Area, NYC, and Seattle.
             </p>
 
             <div className="actions">

@@ -2,13 +2,12 @@ const projects = {
   "AI & Machine Learning": [
     {
       title: "Kairos — Demand Intelligence Platform",
-      intro: "End-to-end production ML platform processing 411M+ e-commerce interactions for real-time recommendations and forecasting.",
+      intro: "Large-scale recommendation and demand intelligence platform processing 411M+ e-commerce events through batch and streaming ML pipelines.",
       highlights: [
-        "Ingested 411M+ events via PySpark ETL orchestrated by Apache Airflow DAGs and Kafka Structured Streaming (5-min tumbling windows) to TimescaleDB with AQE and skew-join optimization.",
-        "Built three-stage inference: SASRec Transformer candidate retrieval (NDCG@10 ≈ 0.90) → Two-Tower re-scoring → XGBoost ranking (AUC 0.9883).",
-        "XGBoost demand forecaster with lag/rolling features achieving 9.44% WMAPE.",
-        "FastAPI serving layer with Redis and PgBouncer for sub-10ms end-to-end latency.",
-        "17-service Docker Compose stack with GitHub Actions CI/CD (83 Pytest tests, Ruff zero-warning policy)."
+        "Processed 411M+ behavioral events with PySpark, Kafka, and Airflow.",
+        "Built SASRec → Two-Tower → XGBoost recommendation pipelines, reaching NDCG@10 ≈ 0.90 and ranking AUC 0.9883.",
+        "Built demand forecasting with 9.44% WMAPE.",
+        "Validated the platform with 83 automated Pytest tests and GitHub Actions CI."
       ],
       tools: [
         "PySpark", "Kafka", "Airflow", "TimescaleDB", "Redis", "PyTorch", "XGBoost", "FastAPI", "Docker", "Prometheus", "Grafana", "GitHub Actions"
@@ -18,11 +17,12 @@ const projects = {
     },
     {
       title: "Nexus — LLMOps Observability & Self-Healing Platform",
-      intro: "11-service agent reliability platform that detects, diagnoses, and repairs LLM failures in under 90 seconds.",
+      intro: "LLMOps reliability platform that detects agent failures, diagnoses root causes, proposes structured repairs, and re-evaluates fixes in a closed feedback loop.",
       highlights: [
-        "Streams agent traces through Kafka and classifies hallucination, context-bleed, and plan-drift failure modes.",
-        "Performs LangGraph-based root-cause diagnosis and automated prompt/config repair.",
-        "Re-evaluates every proposed fix with DeepEval and MLflow, closing the detect-repair-verify loop in under 90s."
+        "Streams execution traces through Kafka across an 11-service architecture.",
+        "Detects hallucination, context bleed, plan drift, tool misfires, and repetitive-loop failures.",
+        "Uses LangGraph for root-cause diagnosis and prompt/configuration repair.",
+        "Re-evaluates repaired runs with DeepEval and MLflow in under 90 seconds."
       ],
       tools: [
         "LangGraph", "Kafka", "FastAPI", "MLflow", "DeepEval", "Docker"
@@ -31,12 +31,12 @@ const projects = {
     },
     {
       title: "CodeMind",
-      intro: "Agentic AI codebase intelligence system featuring autonomous crews for deep analysis and evolution.",
+      intro: "Code intelligence platform combining hybrid retrieval, multi-agent analysis, and QLoRA-based automated test generation.",
       highlights: [
-        "Built a full-stack CrewAI multi-agent system for automated code exploration, security auditing, test generation, and refactoring.",
-        "Engineered a Hybrid RAG pipeline (Vector + BM25 + RRF) achieving 15.4ms median retrieval latency across 42k+ chunks.",
-        "Fine-tuned Gemma 3 (12B) on the KodCode dataset via QLoRA for autonomous test generation, achieving 73.5% CodeBLEU improvement and 3.3x speedup.",
-        "Designed Anti-Hallucination guardrails using Chain-of-Verification (CoVe) prompts, evaluated with DeepEval using Gemini-2.0-Flash as LLM-as-a-Judge for strict, evidence-based reporting."
+        "Built hybrid vector + BM25 retrieval with Reciprocal Rank Fusion across 42K+ code chunks, reaching 15.4 ms median retrieval latency.",
+        "Orchestrated specialized agents for code exploration, security, testing, performance, and documentation.",
+        "Fine-tuned Gemma 3 12B with QLoRA/Unsloth for automated test generation, reaching 34.7 CodeBLEU (+73.5% relative vs. baseline).",
+        "Achieved a 3.3× inference speedup over the baseline setup."
       ],
       tools: [
         "Python", "FastAPI", "React", "TypeScript", "CrewAI", "LangChain", "Ollama", "ChromaDB", "MLflow"
@@ -45,28 +45,29 @@ const projects = {
       link: "https://github.com/sankalp-rajeev/CodeMind",
     },
     {
-      title: "MeetingMind AI",
-      intro: "End-to-end meeting intelligence system deployed on Google Cloud Run.",
+      title: "Smriti — Offline Maternal-Health Visit Copilot",
+      intro: "Offline maternal-health visit copilot using an on-device LLM and local retrieval to generate reviewed, cited visit records without cloud connectivity.",
       highlights: [
-        "Reduced VLM API costs by 85% using a multi-signal content pre-filter (SSIM scene change detection, EasyOCR text density gate) to restrict analysis to high-value semantic frames.",
-        "5-phase ML pipeline: Pyannote diarization → Whisper ASR → YOLO face detection → ArcFace matching → Gemini summarization",
-        "RAG Q&A system with LangChain, ChromaDB, and Vertex AI embeddings for conversational queries",
-        "Real-time React frontend with FastAPI backend featuring 23 REST endpoints"
+        "Runs fully offline in the field using Gemma and LiteRT-LM.",
+        "Generates structured visit notes with local RAG and persistent Room/SQLite storage.",
+        "Requires human review of generated notes, with citation validation before saving.",
+        "15–22 s CPU latency per structured note."
       ],
       tools: [
-        "Python", "FastAPI", "React", "Docker", "GCP Cloud Run", "Whisper", "Pyannote",
-        "YOLOv8", "InsightFace", "Gemini 2.0", "LangChain", "ChromaDB", "Vertex AI"
+        "Kotlin", "Jetpack Compose", "Room/SQLite", "Gemma 4", "LiteRT-LM", "Android", "RAG"
       ],
-      link: "https://github.com/sankalp-rajeev/meetingsmindAI",
+      image: "/assets/projects/smriti.png",
+      link: "https://github.com/sankalp-rajeev/Smriti",
+      videoLink: "https://www.youtube.com/watch?v=s5zeFpfrVQo",
     },
     {
       title: "Multimodal Document Q&A",
-      intro: "Systematic ablation study on document understanding with LayoutLMv3.",
+      intro: "Ablation study of text, layout, and visual signals for document understanding using BERT and LayoutLMv3.",
       highlights: [
-        "Demonstrated 92% relative F1 improvement from 2D layout embeddings over text-only BERT",
-        "Multi-task learning with shared encoder for joint span extraction and BIO entity tagging (68.88% F1)",
-        "Discovered vision features add <1% gain for grayscale forms—layout coordinates capture spatial semantics",
-        "Identified and corrected 18% data contamination in standard FUNSD benchmark"
+        "Improved question-answering F1 from 25.62 with text-only BERT to 49.34 with layout-aware modeling.",
+        "Adding visual features improved question-answering F1 only marginally to 49.77.",
+        "Multi-task modeling reached 68.88 entity-recognition micro-F1 and 43.85 question-answering F1.",
+        "Identified and corrected an 18% benchmark contamination issue during evaluation."
       ],
       tools: [
         "Python", "PyTorch", "LayoutLMv3", "BERT", "Transformers", "FUNSD", "Multi-Task Learning", "Streamlit"
@@ -76,8 +77,22 @@ const projects = {
       paperLink: "/reports/Sankalp_Rajeev_CIS583_Project-report.docx",
     },
     {
+      title: "MeetingMind AI",
+      intro: "Multimodal meeting-intelligence system combining speech, speaker, face, OCR, and LLM pipelines behind a FastAPI backend deployed on Google Cloud Run.",
+      highlights: [
+        "Built a five-stage multimodal ML pipeline using Whisper, Pyannote, YOLOv11m-face, InsightFace, OCR, and Gemini.",
+        "Exposed the system through 23 REST endpoints with FastAPI.",
+        "Reduced VLM API cost by 85%."
+      ],
+      tools: [
+        "Python", "FastAPI", "React", "Docker", "GCP Cloud Run", "Whisper", "Pyannote",
+        "YOLOv11m-face", "InsightFace", "Gemini 2.0", "LangChain", "ChromaDB", "Vertex AI"
+      ],
+      link: "https://github.com/sankalp-rajeev/meetingsmindAI",
+    },
+    {
       title: "Repository Health Predictor",
-      intro: "ML-powered risk assessment for open-source repositories.",
+      intro: "ML-based risk assessment tool for open-source repositories using repository activity, contributor behavior, and commit trends.",
       highlights: [
         "Dual XGBoost models: regression for risk score, classification for risk category with label encoding",
         "Analyzes 52-week commit trends, contributor activity slopes, and repository metrics",
@@ -94,14 +109,12 @@ const projects = {
   "Computer Vision": [
     {
       title: "ApertureAI — Industrial Surface Defect Inspection",
-      intro: "End-to-end machine vision system for industrial surface inspection, from defect-focused preprocessing through runtime optimization to process drift monitoring.",
+      intro: "Industrial visual-inspection platform combining defect classification, explainability, inference optimization, and process-drift monitoring.",
       highlights: [
-        "EfficientNet-B0 defect classifier reaching 99.54% test top-1 accuracy across 6 classes, with Grad-CAM heatmaps confirming model attention aligns with actual defect regions.",
-        "CPU inference path benchmarked over 1000 timed runs per runtime: OpenVINO cut median latency from PyTorch's 33.21ms to 12.05ms, a 2.76x speedup.",
-        "OpenCV preprocessing chain (CLAHE, adaptive Gaussian thresholding, morphological closing/opening, contour-guided ROI extraction) to isolate defects under non-uniform lighting.",
-        "Physics-inspired optical degradation simulator driving a full-factorial 27-configuration DOE across PSF blur, SNR, and vignetting; OLS analysis identified blur as the dominant factor, with macro F1 dropping below 0.90 past sigma = 3px.",
-        "SPC monitoring implementing four Western Electric rules on X-bar/R control charts, achieving 100% drift detection with 0% false alarms and 0% false escapes.",
-        "FastAPI backend and tabbed dashboard exposing prediction, SPC behavior, DOE effects, and runtime metrics."
+        "Achieved 99.54% top-1 test accuracy across six defect classes.",
+        "Reduced median CPU inference latency from 33.21 ms to 12.05 ms with ONNX Runtime/OpenVINO, a 2.76× speedup measured across 1,000 runs.",
+        "Evaluated robustness across 27 DOE configurations and identified degradation beyond blur sigma = 3 px.",
+        "Implemented SPC monitoring using four Western Electric rules, achieving 100% drift detection with 0% false alarms/escapes in the tested scenarios."
       ],
       tools: [
         "Python", "PyTorch", "EfficientNet", "OpenCV", "Grad-CAM", "ONNX Runtime", "OpenVINO", "FastAPI", "SPC", "DOE"
@@ -123,8 +136,7 @@ const projects = {
       ],
       image: "/assets/projects/acc.jpg",
       link: "https://github.com/sankalp-rajeev/Carla-Autonomous-Vehicle",
-      paperLink: "/reports/ECE-544-Visual-Slam-Final.pdf",
-      additionalPaperLink: "/reports/Final_Project_ECE532.pdf"
+      paperLink: "/reports/AI-Powered Adaptive Cruise Control.pdf",
     },
     {
       title: "Stereo Visual SLAM in CARLA",
@@ -155,7 +167,7 @@ const projects = {
         "Python", "TensorFlow/Keras", "Flask", "GloVe", "InceptionV3", "LSTM"
       ],
       link: "https://github.com/srajeev234/ece5831-2024-final-project",
-      paperLink: "/FinalReport.pdf",
+      paperLink: "/reports/FinalReport.pdf",
     },
   ],
   "Embedded Systems": [
@@ -205,23 +217,6 @@ const projects = {
     },
   ],
   "App Development": [
-    {
-      title: "Smriti — Offline Maternal-Health Visit Copilot",
-      intro: "Android copilot that turns a community health worker's home-visit observation into a reviewed, cited visit record with no cloud dependency in the field.",
-      highlights: [
-        "On-device Gemma 4 E2B inference through LiteRT-LM 0.11.0 producing strict structured visit notes, with no cloud API calls in the core runtime after setup.",
-        "Local-first data layer in Room/SQLite covering patient roster, visit history, referrals, and follow-ups, with protocol retrieval over country/region-aware bundled JSON assets.",
-        "Safety pipeline gating every generation through a strict JSON parser, citation validator, and safety post-processor, requiring CHW review before anything saves — invalid or uncited output surfaces retry messaging instead of falling back to mock clinical text.",
-        "Jetpack Compose workflow spanning roster, review screen, follow-up tasks, editable patient leave-behind messages, a Community Panel, and an end-of-day supervisor summary.",
-        "Deterministic JVM test suite over retrieval, pipeline behavior, model gates, safety checks, and Room-backed state; CPU benchmarks measured 15–22s per structured note."
-      ],
-      tools: [
-        "Kotlin", "Jetpack Compose", "Room/SQLite", "Gemma 4", "LiteRT-LM", "Android", "RAG"
-      ],
-      image: "/assets/projects/smriti.png",
-      link: "https://github.com/sankalp-rajeev/Smriti",
-      videoLink: "https://www.youtube.com/watch?v=s5zeFpfrVQo",
-    },
     {
       title: "Unit Genie",
       intro: "Mobile unit conversion app with admin dashboard.",

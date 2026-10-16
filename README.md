@@ -30,5 +30,5 @@ Check out the live portfolio: [PortfolioLink](https://sankalprajeev.dev/)
 
 Connect with me:
 
-- **LinkedIn**: [Sankalp Rajeev]([linkedin.com/in/sankalp-rajeev/])
-- **Email**: [Email](rajeevsankalp@gmail.com)
+- **LinkedIn**: [Sankalp Rajeev](https://www.linkedin.com/in/sankalp-rajeev/)
+- **Email**: [Email](mailto:srajeev@umich.edu)

@@ -1,16 +1,16 @@
 const certificates = [
     {
-        title: "Bsc Computer Science Diploma",
+        title: "B.S. Computer Science Diploma",
         pdf: "/assets/certificates/eDiploma.pdf",
         type: "pdf",
     },
     {
-        title: "TIP Certificate",
+        title: "CodePath Intermediate Technical Interview Prep",
         pdf: "/assets/certificates/TIP.pdf",
         type: "pdf",
     },
     {
-        title: "Computer Vision",
+        title: "CMU Computer Vision",
         pdf: "/assets/certificates/computervisionCertificate.pdf",
         type: "pdf",
     },

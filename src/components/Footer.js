@@ -5,7 +5,7 @@ import useReveal from "../hooks/useReveal";
 import "../styles/Footer.css";
 
 const contactDetails = [
-  { label: "Email", value: "rajeevsankalp@gmail.com", href: "mailto:rajeevsankalp@gmail.com" },
+  { label: "Email", value: "srajeev@umich.edu", href: "mailto:srajeev@umich.edu" },
   { label: "Phone", value: "+1 (480) 208-2139", href: "tel:+14802082139" },
   { label: "Location", value: "Dearborn, Michigan" },
 ];
@@ -48,12 +48,13 @@ const Footer = () => {
   return (
     <footer id="footer" className="contact">
       <div className="shell">
-        <SectionHead index="05" title="Contact" note="Open to conversations" />
+        <SectionHead index="05" title="Contact" note="Available January 2027" />
 
         <div className="contact-grid">
           <div className="contact-side" data-reveal>
             <p className="prose contact-lead">
-              Feel free to reach out! I&rsquo;d love to hear from you.
+              I&rsquo;m graduating in December 2026 and looking for full-time AI/ML engineering
+              opportunities starting January 2027, with interest in the SF Bay Area, NYC, and Seattle.
             </p>
 
             <dl className="contact-details">

@@ -3,10 +3,10 @@ import experience from "../data/experience";
 import "../styles/Home.css";
 
 const phrases = [
-  "teaching machines to think",
-  "crafting computer vision models",
-  "debugging lines of chaos into harmony",
-  "exploring the depths of AI and ML",
+  "production ML systems",
+  "reliable LLM systems",
+  "computer vision at the edge",
+  "AI evaluation and reliability",
 ];
 
 const socialLinks = [
@@ -51,7 +51,7 @@ const Home = () => {
     <section id="home" className="hero">
       <div className="shell hero-inner">
         <div className="hero-body">
-          <p className="hero-greeting label">Hi, the name&rsquo;s Sankalp</p>
+          <p className="hero-greeting label">Hi, I&rsquo;m Sankalp</p>
           <h1 className="hero-title">
             AI / Machine Learning
             <br />
@@ -59,7 +59,7 @@ const Home = () => {
           </h1>
 
           <p className="hero-line">
-            I like <span className="hero-typed">{text}</span>
+            I work on <span className="hero-typed">{text}</span>
             <span className="hero-caret" aria-hidden="true" />
           </p>
 
@@ -91,7 +91,7 @@ const Home = () => {
         <dl className="hero-meta">
           <div className="hero-meta-row">
             <dt className="label">Focus</dt>
-            <dd>ML Engineering, Agentic AI, Data Engineering</dd>
+            <dd>Production ML, AI Reliability, ML Systems</dd>
           </div>
           <div className="hero-meta-row">
             <dt className="label">Based</dt>
@@ -99,10 +99,10 @@ const Home = () => {
           </div>
           <div className="hero-meta-row">
             <dt className="label">Studying</dt>
-            <dd>M.S. AI + M.S.E. Robotics, U-M Dearborn</dd>
+            <dd>M.S. in Artificial Intelligence | M.S.E. in Robotics Engineering, U-M Dearborn</dd>
           </div>
           <div className="hero-meta-row">
-            <dt className="label">Latest</dt>
+            <dt className="label">Current</dt>
             <dd>
               {latestRole.title}, {latestRole.company}
             </dd>

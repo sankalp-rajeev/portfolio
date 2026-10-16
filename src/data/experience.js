@@ -1,14 +1,26 @@
 const experience = [
     {
+        title: "Graduate Researcher",
+        company: "University of Michigan-Dearborn",
+        location: "Dearborn, MI",
+        duration: "Sep 2026 – Present",
+        contributions: [
+            "Building a Docker-isolated evaluation pipeline for LLM-generated software repairs on SWE-bench Verified, combining integrity checks, regression tests, static analysis, and issue-derived reproduction tests with 840+ automated tests.",
+            "A pre-registered audit halted an early study run after detecting environment leakage in 8 of 50 audited tasks; added container masking and integrity checks before restarting the experiment.",
+        ],
+        technologies: ["Python", "SWE-bench", "Docker", "Pytest", "Static Analysis", "LLM Evaluation"],
+        image: "/assets/experience/umdearborn.png",
+    },
+    {
         title: "Data Science Intern",
         company: "Magna International",
         team: "Advanced Manufacturing Innovation R&D",
         location: "Troy, MI",
         duration: "05/2026 – 08/2026",
         contributions: [
-            "Validated a multi-camera stamped-part PoC with up to $7M/year in projected labor savings at full production scale, proving feature registration and cross-camera deduplication on 2- and 4-camera rigs (~20% overlap) and establishing the path to 6- and 24-camera systems using SIFT/RANSAC calibration and geometric/Hungarian matching.",
-            "Delivered a lens-debris inspection pipeline projected to save ~$700K/year in labor, achieving 100% recall and 96% precision with high-pass filtering + CLAHE preprocessing and PatchCore; handed the validated system off to the manufacturing plant.",
-            "Delivered an unsupervised visual-inspection pipeline to a Magna Seating plant in Spain, achieving 100% defect recall, 95.2% precision, and ~300ms end-to-end latency on NVIDIA Jetson AGX Orin after benchmarking 6+ approaches and productionizing YOLOX + NanoSAM + PatchCore via ONNX, TensorRT FP16, Docker, and NVIDIA Triton.",
+            "Validated a multi-camera stamped-part inspection PoC with up to $7M/year in projected labor savings, proving feature registration and cross-camera deduplication on 2- and 4-camera rigs using SIFT/RANSAC calibration and geometric/Hungarian matching.",
+            "Delivered a lens-debris inspection pipeline projected to save ~$700K/year in labor, achieving 100% recall and 96% precision with high-pass filtering, CLAHE preprocessing, and PatchCore; handed the validated system off to the manufacturing plant.",
+            "Productionized an unsupervised visual-inspection pipeline for a Magna Seating plant in Spain, achieving 100% defect recall, 95.2% precision, and ~300 ms end-to-end latency on NVIDIA Jetson AGX Orin using YOLOX, NanoSAM, PatchCore, ONNX, TensorRT FP16, Docker, and NVIDIA Triton.",
         ],
         technologies: [
             "Python",
@@ -31,11 +43,8 @@ const experience = [
         location: "Kalamazoo, MI",
         duration: "05/2025 – 11/2025",
         contributions: [
-            "Architected modular Python/Streamlit microservices with Factory and Pipeline design patterns, implementing multi-stage ETL pipelines for automated document processing in a regulated GxP environment.",
-            "Integrated enterprise LLM APIs with async batch processing, token-aware batching, semaphore-controlled concurrency, and exponential backoff for rate-limit resilience.",
-            "Engineered bidirectional matching algorithms using token-based similarity with configurable thresholds and greedy assignment optimization for change request pairing.",
-            "Built real-time analytics dashboards with Plotly visualization and openpyxl-powered Excel exports, logging productivity metrics to MySQL with session-based state management.",
-            "Accelerated documentation workflows and automated SDLC compliance, saving an estimated ~1,000 engineer-hours annually while ensuring audit-ready traceability across enterprise systems.",
+            "Deployed 4 production LLM tools on Azure Kubernetes using asynchronous ETL and semantic matching, reducing regulated documentation effort by 1,000+ engineer-hours annually.",
+            "Reduced incident misclassification by ~40% by building a real-time SQL-backed analytics workflow with Plotly dashboards and automated openpyxl Excel exports.",
         ],
         technologies: ["Python", "Streamlit", "MySQL", "LLM APIs", "Plotly", "AKS", "Posit Connect"],
         image: "/assets/experience/zoetis.png",
@@ -46,14 +55,12 @@ const experience = [
         location: "Bangalore, KA",
         duration: "06/2024 – 08/2024",
         contributions: [
-            "Engineered and deployed transfer-learned AI models (VGG16, YOLOv8, and ByteTrack) on the Mistral Eagle Kit using Qualcomm SNPE SDK, achieving 96% real-time object detection and tracking accuracy.",
-            "Integrated DS1820 temperature sensors and Lightware LW20/C Lidar via Arduino to enable real-time telemetry and basic obstacle avoidance functionalities.",
-            "Configured and optimized the Cube Orange Plus flight controller for seamless hardware-software integration, utilizing I2C protocols and Mission Planner for autonomous operations.",
-            "Implemented obstacle detection and response mechanisms using Lightware LW20/C Lidar, enhancing operational safety during autonomous missions.",
+            "Reduced UAV inference latency by 25% by quantizing YOLOv8 and ByteTrack with the Qualcomm SNPE SDK on a QRB5165 edge platform; built and deployed a VGG16-based vehicle classification model through the same SNPE pipeline.",
+            "Enabled real-time range and thermal telemetry by integrating Lightware LW20/C LiDAR and DS1820 sensors through Arduino and I2C-based hardware-software interfaces.",
         ],
         technologies: ["Python", "TensorFlow", "YOLOv8", "Arduino", "Lua", "Qualcomm SNPE SDK"],
         image: "/assets/experience/mistral1.png",
-        report: "reports/Internship Report.pdf",
+        report: "/reports/Internship Report.pdf",
     },
     {
         title: "Software Developer",
@@ -61,14 +68,12 @@ const experience = [
         location: "Tempe, AZ",
         duration: "08/2023 – 05/2024",
         contributions: [
-            "Designed and implemented advanced robotic control software using ROS, enabling autonomous plant care tasks such as pruning and harvesting within the Terra Pod environment.",
-            "Integrated a 3D depth camera with OpenNI Kinect for enhanced spatial perception, utilizing Canny Edge Detection and YOLO for real-time object detection and classification.",
-            "Developed a custom script for accurate distance and size calculations, leveraging depth camera parameters to improve robotic arm precision during interactions.",
-            "Optimized autonomous navigation through 2D SLAM, achieving reliable path planning and obstacle avoidance for seamless operations within confined spaces.",
+            "Built ROS-based autonomous plant-care software for the Terra Pod, integrating depth-camera perception, YOLO/Canny-based vision, and robotic control for pruning and harvesting tasks.",
+            "Improved autonomous navigation and manipulation by combining 2D SLAM with depth-based distance and size estimation for robotic-arm interactions.",
         ],
         technologies: ["YOLOv5", "SLAM", "Python", "ROS", "Gazebo"],
         image: "/assets/experience/astroseed.png",
-        report: "reports/Final Report_astroseed.pdf",
+        report: "/reports/Final Report_astroseed.pdf",
     },
     {
         title: "Teaching Assistant",
@@ -76,7 +81,7 @@ const experience = [
         location: "Tempe, AZ",
         duration: "08/2022 – 05/2024",
         contributions: [
-            "Mentored 100+ freshmen, boosting academic performance with customized guidance programs.",
+            "Mentored 100+ first-year students through individualized academic guidance and course support.",
         ],
         technologies: ["Mentoring", "Academic Guidance"],
         image: "/assets/experience/asu.png",
@@ -87,14 +92,12 @@ const experience = [
         location: "Bangalore, KA",
         duration: "06/2022 – 08/2022",
         contributions: [
-            "Developed motion control systems for a 6-DOF robotic arm using ROS and MoveIt, enabling autonomous pick-and-place operations with inverse kinematics for precise object handling.",
-            "Integrated an Intel RealSense D435i camera for object detection, extracting feature points and implementing real-time object tracking for robotic arm coordination.",
-            "Achieved image-to-coordinate conversion for robotic arm drawing tasks by utilizing OpenCV and Canny Edge Detection, enabling trajectory generation for complex patterns.",
-            "Configured CAN communication protocols to control RMD motors, ensuring synchronized movement across multiple actuators and enhancing operational reliability.",
+            "Built ROS/MoveIt control software for a 6-DOF robotic arm, integrating Intel RealSense D435i perception and inverse-kinematics-based pick-and-place workflows.",
+            "Implemented image-to-coordinate trajectory generation with OpenCV and Canny edge detection, while synchronizing RMD motors over CAN for robotic drawing and motion-control tasks.",
         ],
         technologies: ["Python", "ROS", "C++", "CAN Communication", "3D Depth Cameras"],
         image: "/assets/experience/machani-robotics.png",
-        report: "reports/PROJECT REPORT_machanirobotics.pdf",
+        report: "/reports/PROJECT REPORT_machanirobotics.pdf",
     },
 ];
 

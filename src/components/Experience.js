@@ -12,7 +12,7 @@ const Experience = () => {
             <PageHead
                 path="~/experience"
                 title="Experience"
-                note="Applied computer vision, ML engineering, and robotics roles across automotive, pharmaceutical, and research settings."
+                note="Experience building and deploying AI/ML systems across manufacturing, regulated enterprise software, edge computing, robotics, and research."
             />
 
             <div className="experience-list">
