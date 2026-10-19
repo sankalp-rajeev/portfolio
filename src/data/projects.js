@@ -1,6 +1,25 @@
 const projects = {
   "AI & Machine Learning": [
     {
+      title: "ContractRelay",
+      subtitle: "Evidence-Gated Compatibility Runtime for Evolving AI Agent Tools",
+      intro: "Built a TypeScript/MCP runtime that keeps an agent’s existing tool interface working when backend tools change. ContractRelay synthesizes bounded adapters, independently verifies them, and only promotes them when behavioral evidence passes; promoted adapters execute deterministically without recurring model calls.",
+      highlights: [
+        "Frozen 15-case / 195-record controlled evaluation with 33/33 compatible-trial recovery, 12/12 safe rejections, and zero hidden false successes.",
+        "Evaluated 6 distinct historical MCP migrations across 8 versioned evaluations, preserving failures and post-fix regressions separately.",
+        "Real-world failures drove generic DSL extensions for structural transformations; Mapbox subsequently recovered 2/3 and Fabric 3/3 in post-fix regression.",
+        "Built a usable migrate → verify → serve CLI and a read-only Next.js + React + GraphQL evidence inspector.",
+        "169 core/CLI tests, Docker-isolated evaluation, SQLite state/side-effect verification, reproducible API-free replay."
+      ],
+      tools: [
+        "TypeScript", "MCP", "Node.js", "Docker", "SQLite", "Gemini", "Next.js", "React", "GraphQL"
+      ],
+      image: "/assets/projects/contractrelay.png",
+      demoLink: "https://contract-relay.vercel.app",
+      link: "https://github.com/sankalp-rajeev/ContractRelay",
+      evaluationReportLink: "https://github.com/sankalp-rajeev/ContractRelay/blob/main/benchmarks/realworld-v3/REPORT.md",
+    },
+    {
       title: "Kairos — Demand Intelligence Platform",
       intro: "Large-scale recommendation and demand intelligence platform processing 411M+ e-commerce events through batch and streaming ML pipelines.",
       highlights: [

@@ -82,6 +82,13 @@
   margin-bottom: var(--s-2);
 }
 
+.project-subtitle {
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: var(--s-2);
+}
+
 .project-intro {
   font-size: var(--fs-body-s);
   color: var(--muted);

@@ -42,6 +42,7 @@ const Projects = () => {
 
                 <div className="project-body">
                   <h3 className="project-title">{project.title}</h3>
+                  {project.subtitle && <p className="project-subtitle">{project.subtitle}</p>}
                   <p className="project-intro">{project.intro}</p>
 
                   <ul className="bullets project-bullets">
@@ -59,6 +60,16 @@ const Projects = () => {
                   </ul>
 
                   <div className="actions project-actions">
+                    {project.demoLink && (
+                      <a
+                        className="action"
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Live Demo
+                      </a>
+                    )}
                     {project.link && (
                       <a
                         className="action"
@@ -69,14 +80,14 @@ const Projects = () => {
                         GitHub
                       </a>
                     )}
-                    {project.demoLink && (
+                    {project.evaluationReportLink && (
                       <a
                         className="action"
-                        href={project.demoLink}
+                        href={project.evaluationReportLink}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Live demo
+                        Evaluation Report
                       </a>
                     )}
                     {project.videoLink && (
