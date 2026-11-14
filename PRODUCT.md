@@ -42,7 +42,7 @@ Evaluated on desktop and phone, often from a resume link or LinkedIn. Visitors s
 
 ## Brand Commitments
 
-Name: Sankalp Rajeev. Single accent: a deep vermilion ink (#C2410C light / #F2784A dark). Terminology: "Graduate Research Assistant" (never "Graduate Researcher").
+Name: Sankalp Rajeev. Single accent: a deep vermilion ink (#B83E0B light / #F2784A dark). Terminology: "Graduate Research Assistant" (never "Graduate Researcher").
 
 ## Evidence on Hand
 

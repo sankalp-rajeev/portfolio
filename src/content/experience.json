@@ -11,7 +11,6 @@
     "end": "present",
     "dates": "Sep 2026 – Present",
     "logo": "umdearborn",
-    "verified": true,
     "bullets": [
       "Built a Docker-isolated pipeline that verifies LLM-generated SWE-bench Verified patches with regression, static and pre-frozen reproduction tests in network-disabled containers; over 100 tasks, accepted patches were correct 87% of the time (47/54).",
       "Halted the study when a pre-registered audit caught environment leakage in 8 of 50 tasks from package copies baked into prebuilt images; added container masking and integrity checks, then reran all 100 tasks.",
@@ -23,7 +22,8 @@
       "Docker",
       "pytest",
       "Static analysis"
-    ]
+    ],
+    "current": true
   },
   {
     "id": "magna",

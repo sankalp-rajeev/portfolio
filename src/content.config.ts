@@ -15,7 +15,7 @@ const experience = defineCollection({
     end: z.string(), // YYYY-MM or 'present'
     dates: z.string(),
     logo: z.string(),
-    verified: z.boolean().optional(),
+    current: z.boolean().optional(),
     bullets: z.array(z.string()),
     tags: z.array(z.string()),
   }),
