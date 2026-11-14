@@ -1,0 +1,32 @@
+---
+// Dev-only (break-ui): renders cards with demo vs worst-case data. Emits no routes in production builds.
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+export function getStaticPaths() {
+  return import.meta.env.DEV ? [{ params: { mode: 'demo' } }, { params: { mode: 'worst' } }] : [];
+}
+const { mode } = Astro.params;
+const base = { order: 0, category: 'x', subtitle: '', intro: '', highlights: [], tools: [] };
+const demo = [
+  { id: 'a', data: { ...base, title: 'Nexus', tagline: 'Agent observability and self-healing platform.', figure: { value: '0.29 → 0.96', label: 'macro recall on a 716-trace benchmark' }, stack: ['FastAPI', 'Kafka'], image: '/assets/projects/nexus.png', github: 'https://example.com', demoLink: 'https://example.com', pypi: 'nexus-llmops' } },
+  { id: 'b', data: { ...base, title: 'Kairos', tagline: 'Demand intelligence platform.', figure: { value: '411M+', label: 'e-commerce events' }, stack: ['PySpark'], image: '/assets/projects/kairos.png', github: 'https://example.com' } },
+];
+const worst = [
+  { id: 'a', data: { ...base, title: 'Multimodal Retrieval-Augmented Generation Evaluation Harness for Regulated-Document Workflows', tagline: 'Evidence-gated compatibility runtime for evolving AI agent tools, with verifier-in-the-loop promotion across heterogeneous model providers.', figure: { value: '1,284,000,000+ verified', label: 'end-to-end repair attempts replayed across twelve benchmark suites and four model families' }, stack: ['TypeScript', 'MCP', 'Docker', 'SQLite', 'Gemini', 'Next.js', 'React', 'GraphQL', 'OpenTelemetry', 'LangGraph', 'FastAPI', 'Kafka'], image: '/assets/projects/contractrelay.png', github: 'https://example.com', demoLink: 'https://example.com', pypi: 'multimodal-retrieval-evaluation-harness-llmops' } },
+  { id: 'b', data: { ...base, title: 'Antidisestablishmentarianism-Detector-v2', tagline: 'No image, no figure, no links.', stack: [] } },
+  { id: 'c', data: { ...base, title: 'X', tagline: '', figure: { value: '0', label: '' }, stack: ['C'], image: '/assets/projects/missing.png' } },
+  { id: 'd', data: { ...base, title: 'Résumé—Ünïcödé 日本語のタイトル', tagline: 'ÅÄÖ ẞ Việt Nam: tiếng Việt có dấu.', figure: { value: '99.54%', label: 'top-1 accuracy' }, stack: ['PyTorch'], image: '/assets/projects/kairos.png', github: 'https://example.com' } },
+];
+const items = mode === 'worst' ? worst : demo;
+---
+<Base title={`dev ${mode}`} path={`/dev/${mode}`}>
+  <section class="section"><div class="wrap">
+    <p class="eyebrow"><a class="link" href="/dev/demo">Demo data</a> / <a class="link" href="/dev/worst">Worst case</a></p>
+    <div class="g">{items.map((p, i) => <ProjectCard project={p as any} index={i} />)}</div>
+  </div></section>
+</Base>
+<style>
+  .g { display: grid; grid-template-columns: 1fr; gap: 64px 32px; margin-top: 40px; }
+  @media (min-width: 768px) { .g { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

@@ -80,6 +80,8 @@ function updateScrollState() {
   const line = innerHeight * 0.4;
   let id: string | null = null;
   for (const s of sections) if (s.el.getBoundingClientRect().top <= line) id = s.id;
+  // Short last section can never reach the line: at the bottom of the page it is the active one.
+  if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) id = sections[sections.length - 1].id;
   if (id !== activeId) {
     activeId = id;
     links.forEach((l) => (l.dataset.section === id ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current')));

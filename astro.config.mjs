@@ -9,6 +9,6 @@ export default defineConfig({
   output: 'static',
   outDir: 'build',
   trailingSlash: 'never',
-  build: { format: 'file' },
+  build: { format: 'file', inlineStylesheets: 'always' },
   vite: { plugins: [tailwindcss()] },
 });

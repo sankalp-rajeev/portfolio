@@ -41,7 +41,7 @@ const href = `/work/${project.id}`;
       <a href={href}>{p.title}</a>
       <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
     </h3>
-    <p class="desc">{p.tagline}</p>
+    {p.tagline && <p class="desc">{p.tagline}</p>}
 
     {p.figure && (
       <p class="figure">
@@ -81,7 +81,7 @@ const href = `/work/${project.id}`;
     width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block;
     transform: scale(1); transition: transform var(--dur-image) var(--ease);
   }
-  .missing { height: 100%; display: grid; place-items: center; font-size: 0.8125rem; color: var(--text-3); }
+  .missing { height: 100%; display: grid; place-items: center; font-size: var(--fs-mono); color: var(--text-3); }
   /* Border lightening done with an overlay's opacity (transform/opacity only). */
   .edge {
     position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -90,26 +90,29 @@ const href = `/work/${project.id}`;
   }
 
   .body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-  .title { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 1.5rem; font-weight: 550; letter-spacing: -0.02em; line-height: 1.2; }
+  .title { margin: 0; display: flex; align-items: center; gap: 8px; font-size: var(--fs-title); font-weight: 550; letter-spacing: -0.02em; line-height: 1.2; }
   .title a { overflow-wrap: anywhere; min-width: 0; }
   .title a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
   .title a:focus-visible { outline: none; }
   .card:has(.title a:focus-visible) .frame { outline: 2px solid var(--accent); outline-offset: 4px; }
-  .arrow { flex: none; color: var(--text-3); transition: transform var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease); }
-  .desc { margin: 0; color: var(--text-2); font-size: 1rem; line-height: 1.55; max-width: 60ch; text-wrap: pretty; }
+  .arrow { flex: none; color: var(--text-3); transition: transform var(--dur-hover) var(--ease); }
+  .desc { margin: 0; color: var(--text-2); font-size: var(--fs-base); line-height: 1.55; max-width: 60ch; text-wrap: pretty; }
 
   .figure {
     margin: 4px 0 0; padding-top: 16px; border-top: 1px solid var(--line);
     display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px;
   }
-  .value { font-size: 1.25rem; font-weight: 500; color: var(--text); letter-spacing: -0.01em; overflow-wrap: anywhere; }
-  .label { font-size: 0.9375rem; color: var(--text-2); }
-  .stack { margin: 0; font-size: 0.8125rem; line-height: 1.6; color: var(--text-3); overflow-wrap: anywhere; }
+  .value { font-size: var(--fs-figure); font-weight: 500; color: var(--text); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+  .label { font-size: var(--fs-label); color: var(--text-2); }
+  .stack { margin: 0; font-size: var(--fs-mono); line-height: 1.6; color: var(--text-3); overflow-wrap: anywhere; }
 
-  .links { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; margin: 4px 0 0; padding: 0; font-size: 0.9375rem; }
+  .links { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; margin: 4px 0 0; padding: 0; font-size: var(--fs-label); }
   .links .link { display: inline-block; padding-block: 4px; }
-  .links .mono { font-size: 0.8125rem; }
+  .links .mono { font-size: var(--fs-mono); }
 
+  /* Press feedback on the whole card (subtle: it is navigation, used often). */
+  .frame { transition: transform var(--dur-press) var(--ease); }
+  .card:active .frame { transform: scale(0.99); }
   @media (hover: hover) {
     .card:hover .shot :global(img) { transform: scale(1.03); }
     .card:hover .edge { opacity: 1; }

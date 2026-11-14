@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import geistUrl from '../assets/fonts/Geist-Variable.woff2?url';
 
 interface Props {
   title?: string;
@@ -38,6 +39,7 @@ const ld = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="preload" href={geistUrl} as="font" type="font/woff2" crossorigin />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#0c0c0b" />
 
@@ -88,13 +90,13 @@ const ld = {
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Nav><ThemeToggle slot="toggle" /></Nav>
+    <Nav><ThemeToggle /></Nav>
     <main id="main">
       <slot />
     </main>
     <footer class="wrap" style="padding-block: 48px;">
       <hr class="hairline" />
-      <p class="mono" style="margin: 24px 0 0; font-size: 0.8125rem; color: var(--text-3);">
+      <p class="mono" style="margin: 24px 0 0; font-size: var(--fs-mono); color: var(--text-3);">
         Sankalp Rajeev · srajeev@umich.edu
       </p>
     </footer>

@@ -45,15 +45,14 @@ const onWork = Astro.url.pathname.startsWith('/work');
   }
   .nav[data-scrolled='true'] .nav-bg { opacity: 1; }
   .nav-inner { position: relative; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .brand { font-weight: 550; font-size: 0.9375rem; letter-spacing: -0.01em; white-space: nowrap; }
+  .brand { font-weight: 550; font-size: var(--fs-label); letter-spacing: -0.01em; white-space: nowrap; }
   .nav-right { display: flex; align-items: center; gap: 4px; }
   .links { position: relative; display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
   .links a {
     display: block;
     padding: 8px 10px;
-    font-size: 0.875rem;
+    font-size: var(--fs-ui);
     color: var(--text-2);
-    transition: color var(--dur-hover) var(--ease);
   }
   .links a:hover,
   .links a[aria-current] { color: var(--text); }
@@ -71,6 +70,12 @@ const onWork = Astro.url.pathname.startsWith('/work');
   }
   @media (max-width: 520px) {
     .brand-last { display: none; }
-    .links a { padding-inline: 7px; font-size: 0.8125rem; }
+    .links a { padding-inline: 7px; font-size: var(--fs-mono); }
+  }
+  @media (max-width: 375px) {
+    .nav-inner { gap: 8px; }
+    .links { gap: 0; }
+    .links a { padding-inline: 5px; font-size: 0.75rem; }
+    .brand { font-size: var(--fs-ui); }
   }
 </style>

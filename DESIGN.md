@@ -39,13 +39,35 @@ typography:
     fontSize: "0.75rem"
     fontWeight: 500
     letterSpacing: "0.12em"
+  lead:
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "clamp(1.0625rem, 1.6vw, 1.25rem)"
+    lineHeight: 1.55
+  figure:
+    fontFamily: "Geist Mono, ui-monospace, monospace"
+    fontSize: "1.25rem"
+    fontWeight: 500
+  label:
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 500
+  ui:
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "0.875rem"
+  base:
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "1rem"
+    lineHeight: 1.55
   mono:
     fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "0.8125rem"
     fontWeight: 400
 rounded:
+  sm: "4px"
+  md: "8px"
   surface: "12px"
   control: "10px"
+  hairline: "1px"
 spacing:
   s1: "8px"
   s2: "16px"

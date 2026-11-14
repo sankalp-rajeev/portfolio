@@ -30,6 +30,18 @@
   --s-12: 96px;
   --s-16: 128px;
 
+  /* Type roles (rem). Display is fluid; see DESIGN.md */
+  --fs-eyebrow: 0.75rem;
+  --fs-mono: 0.8125rem;
+  --fs-ui: 0.875rem;
+  --fs-label: 0.9375rem;
+  --fs-base: 1rem;
+  --fs-body: 1.0625rem;
+  --fs-lead: clamp(1.0625rem, 1.6vw, 1.25rem);
+  --fs-figure: 1.25rem;
+  --fs-title: 1.5rem;
+  --fs-display: clamp(44px, 7vw, 96px);
+
   --radius: 12px;
   --max: 1200px;
   --gutter: 24px;
@@ -109,10 +121,9 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 1.0625rem; /* 17px */
+  font-size: var(--fs-body);
   line-height: 1.6;
-  font-feature-settings: 'ss01', 'cv11';
-  -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 ::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); }
@@ -127,7 +138,7 @@ body {
 
 .mono { font-family: var(--font-mono); font-feature-settings: normal; font-variant-numeric: tabular-nums; }
 .eyebrow {
-  font-size: 0.75rem;
+  font-size: var(--fs-eyebrow);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -143,7 +154,6 @@ a { color: inherit; text-decoration: none; }
   text-decoration-color: var(--line-strong);
   text-underline-offset: 0.25em;
   text-decoration-thickness: 1px;
-  transition: color var(--dur-hover) var(--ease), text-decoration-color var(--dur-hover) var(--ease);
 }
 .link:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
@@ -175,7 +185,7 @@ a { color: inherit; text-decoration: none; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   height: 44px; padding-inline: 20px; border-radius: 10px;
-  font-size: 0.9375rem; font-weight: 500; line-height: 1;
+  font-size: var(--fs-label); font-weight: 500; line-height: 1;
   border: 1px solid var(--line-strong);
   color: var(--text);
   transition: transform var(--dur-press) var(--ease), opacity var(--dur-hover) var(--ease);
@@ -205,9 +215,9 @@ a { color: inherit; text-decoration: none; }
 .entrance .rise-line > span { animation: rise 700ms var(--ease) both; }
 .entrance .rise-line:nth-child(1) > span { animation-delay: 80ms; }
 .entrance .rise-line:nth-child(2) > span { animation-delay: 150ms; }
-.entrance .enter-sub { animation: fade-up 500ms var(--ease) 480ms both; }
-.entrance .enter-actions { animation: fade-up 500ms var(--ease) 560ms both; }
-.entrance .enter-facts { animation: fade-up 500ms var(--ease) 680ms both; }
+.entrance .enter-sub { animation: fade-up 500ms var(--ease) 380ms both; }
+.entrance .enter-actions { animation: fade-up 500ms var(--ease) 450ms both; }
+.entrance .enter-facts { animation: fade-up 500ms var(--ease) 560ms both; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
