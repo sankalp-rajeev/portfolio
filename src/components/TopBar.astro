@@ -1,0 +1,64 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const items = [
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'work', label: 'Work' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'education', label: 'Education' },
+];
+const onWork = Astro.url.pathname.startsWith('/work');
+---
+
+<header class="topbar topbar-enter" data-topbar>
+  <div class="bar-bg" aria-hidden="true"></div>
+  <div class="col bar-inner">
+    <nav aria-label="Sections" class="secnav" data-secnav>
+      <div class="pills" data-pills>
+        <ul class="row">
+          {items.map((i) => (
+            <li><a href={`/#${i.id}`} data-section={i.id} aria-current={onWork && i.id === 'work' ? 'page' : undefined}>{i.label}</a></li>
+          ))}
+        </ul>
+        <!-- Shared pill: an inverted copy clipped to the active item; the clip slides between items. -->
+        <ul class="row overlay" data-pill-overlay aria-hidden="true">
+          {items.map((i) => (
+            <li><a href={`/#${i.id}`} tabindex="-1">{i.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .topbar { position: sticky; top: 0; z-index: 30; height: var(--topbar-h); }
+  .bar-bg {
+    position: absolute; inset: 0; opacity: 0; pointer-events: none;
+    background: var(--topbar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    transition: opacity var(--dur-hover) var(--ease);
+  }
+  .topbar[data-scrolled='true'] .bar-bg { opacity: 1; }
+  .bar-inner { position: relative; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--s-1); }
+  .secnav { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .secnav::-webkit-scrollbar { display: none; }
+  .pills { position: relative; width: max-content; }
+  .row { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
+  .row a { display: block; padding: 10px 14px; font-size: var(--fs-ui); font-weight: 500; color: var(--text-2); border-radius: 999px; white-space: nowrap; }
+  .row:not(.overlay) a:hover,
+  .row:not(.overlay) a[aria-current] { color: var(--text); }
+  .overlay { position: absolute; inset: 0; pointer-events: none; background: var(--solid); border-radius: 999px; clip-path: inset(0 100% 0 0 round 999px); }
+  .overlay a { color: var(--on-solid); }
+
+  @media (max-width: 520px) {
+    .row a { padding: 10px 9px; font-size: var(--fs-mono); }
+  }
+  @media (max-width: 360px) {
+    .row a { padding: 10px 6px; }
+  }
+</style>

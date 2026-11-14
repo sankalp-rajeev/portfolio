@@ -1,0 +1,84 @@
+[
+  {
+    "id": "computer-vision",
+    "order": 0,
+    "category": "Computer Vision",
+    "skills": [
+      "Anomaly Detection",
+      "PatchCore",
+      "YOLOX",
+      "SAM2/NanoSAM",
+      "OpenCV",
+      "Object Detection"
+    ]
+  },
+  {
+    "id": "ml-statistics",
+    "order": 1,
+    "category": "ML & Statistics",
+    "skills": [
+      "PyTorch",
+      "Transformers",
+      "XGBoost",
+      "scikit-learn",
+      "Unsupervised Learning"
+    ]
+  },
+  {
+    "id": "edge-mlops",
+    "order": 2,
+    "category": "Edge & MLOps",
+    "skills": [
+      "NVIDIA Triton",
+      "Jetson AGX Orin",
+      "TensorRT",
+      "ONNX",
+      "OpenVINO",
+      "ClearML",
+      "MLflow",
+      "Docker",
+      "GitHub Actions",
+      "Pytest"
+    ]
+  },
+  {
+    "id": "data-cloud",
+    "order": 3,
+    "category": "Data & Cloud",
+    "skills": [
+      "PySpark",
+      "Kafka",
+      "Airflow",
+      "Databricks",
+      "GCP (Vertex AI, Cloud Run, Artifact Registry)",
+      "Azure Kubernetes Service",
+      "PostgreSQL",
+      "Redis"
+    ]
+  },
+  {
+    "id": "llms-backend",
+    "order": 4,
+    "category": "LLMs & Backend",
+    "skills": [
+      "LangGraph",
+      "LangChain",
+      "RAG",
+      "LLM Evaluation",
+      "Hugging Face",
+      "FastAPI"
+    ]
+  },
+  {
+    "id": "languages",
+    "order": 5,
+    "category": "Languages",
+    "skills": [
+      "Python",
+      "C/C++",
+      "SQL",
+      "TypeScript",
+      "Java"
+    ]
+  }
+]

@@ -1,0 +1,96 @@
+[
+  {
+    "id": "y-2020",
+    "order": 0,
+    "year": "2020",
+    "education": {
+      "title": "Started B.S. in Computer Science",
+      "institution": "Arizona State University",
+      "logo": "/assets/experience/asu.png",
+      "dates": "Aug 2020 - May 2024"
+    },
+    "experience": null
+  },
+  {
+    "id": "y-2022",
+    "order": 1,
+    "year": "2022",
+    "education": null,
+    "experience": {
+      "title": "SDE Intern",
+      "company": "Machani Robotics",
+      "logo": "/assets/experience/machani-robotics.png",
+      "dates": "Jun - Aug 2022"
+    }
+  },
+  {
+    "id": "y-2023",
+    "order": 2,
+    "year": "2023",
+    "education": null,
+    "experience": {
+      "title": "Software Developer",
+      "company": "Astroseed",
+      "logo": "/assets/experience/astroseed.png",
+      "dates": "Aug 2023 - May 2024"
+    }
+  },
+  {
+    "id": "y-2024",
+    "order": 3,
+    "year": "2024",
+    "education": {
+      "title": "Completed B.S.; started M.S. in Artificial Intelligence | M.S.E. in Robotics Engineering",
+      "institution": "University of Michigan-Dearborn",
+      "logo": "/assets/experience/umdearborn.png",
+      "dates": "Sep 2024 - Dec 2026"
+    },
+    "experience": {
+      "title": "AI/ML Engineer Intern",
+      "company": "Mistral Solutions",
+      "logo": "/assets/experience/mistral1.png",
+      "dates": "Jun - Aug 2024"
+    }
+  },
+  {
+    "id": "y-2025",
+    "order": 4,
+    "year": "2025",
+    "education": null,
+    "experience": {
+      "title": "AI Engineering Intern",
+      "company": "Zoetis",
+      "logo": "/assets/experience/zoetis.png",
+      "dates": "May - Nov 2025"
+    }
+  },
+  {
+    "id": "y-2026",
+    "order": 5,
+    "year": "2026",
+    "education": {
+      "title": "Expected graduation: M.S. in Artificial Intelligence | M.S.E. in Robotics Engineering",
+      "institution": "University of Michigan-Dearborn",
+      "logo": "/assets/experience/umdearborn.png",
+      "dates": "December 2026"
+    },
+    "experience": {
+      "title": "Data Science Intern",
+      "company": "Magna International",
+      "logo": "/assets/experience/magna.png",
+      "dates": "May - Aug 2026"
+    }
+  },
+  {
+    "id": "y-present",
+    "order": 6,
+    "year": "Present",
+    "education": null,
+    "experience": {
+      "title": "Graduate Research Assistant",
+      "company": "University of Michigan-Dearborn",
+      "logo": "/assets/experience/umdearborn.png",
+      "dates": "Sep 2026 – Present"
+    }
+  }
+]

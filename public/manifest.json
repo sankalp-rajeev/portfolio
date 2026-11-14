@@ -1,16 +1,21 @@
 {
-  "short_name": "Sankalp's Portfolio",
-  "name": "Sankalp Rajeev's Portfolio",
-  "description": "A professional portfolio showcasing Sankalp Rajeev's projects, skills, and achievements.",
+  "short_name": "Sankalp Rajeev",
+  "name": "Sankalp Rajeev | AI & Machine Learning Engineer",
+  "description": "Portfolio of Sankalp Rajeev: AI/ML engineer focused on reliable LLM systems, verifiers and production ML.",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "/icon-192.png",
       "type": "image/png",
-      "sizes": "752x536"
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": "/",
-  "display": "standalone",
-  "theme_color": "#007aff",
-  "background_color": "#f5f5f7"
+  "display": "browser",
+  "theme_color": "#f4f1ea",
+  "background_color": "#f4f1ea"
 }

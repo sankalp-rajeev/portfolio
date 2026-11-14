@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Ink from './Ink.astro';
+import PipelineDiagram from './PipelineDiagram.astro';
+import { nb } from '../lib/text';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  index: number;
+}
+const { project, index } = Astro.props;
+const p = project.data;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{png,jpg,webp}', { eager: true });
+const key = p.image ? `/src/assets/projects/${p.image.split('/').pop()}` : '';
+const shot = images[key]?.default;
+const href = `/work/${project.id}`;
+const isNexus = project.id === 'nexus';
+---
+
+<article class="card" data-reveal data-index={index}>
+  <div class="frame" transition:name={`shot-${project.id}`}>
+    <div class="shot">
+      {shot ? (
+        <Image
+          src={shot}
+          alt={`${p.title} interface`}
+          widths={[420, 640, 860]}
+          sizes="(min-width: 1024px) 400px, (min-width: 768px) 45vw, 92vw"
+          format="webp"
+          quality={82}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : project.id === 'trust-but-verify' ? (
+        <div class="diagram"><PipelineDiagram variant="card" /></div>
+      ) : (
+        <div class="missing"><span class="mono">{p.placeholder ?? 'Screenshot coming'}</span></div>
+      )}
+    </div>
+    <span class="edge" aria-hidden="true"></span>
+  </div>
+
+  <div class="body">
+    <h3 class="title">
+      <a href={href}>{p.title}</a>
+      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      {isNexus && (
+        <Ink
+          class="ink-desk"
+          vb="0 0 24 24"
+          par="xMidYMid meet"
+          d="M4 20 C 9 14, 14 9, 20 4 M20 4 L 12 5 M20 4 L 19 12"
+          width={2.6}
+          style="position:relative;display:block;flex:none;width:20px;height:20px;margin-left:6px;"
+          note="live"
+          noteStyle="left:26px;top:2px;--r:-5deg;"
+        />
+      )}
+    </h3>
+    {p.tagline && <p class="desc" set:html={nb(p.tagline)} />}
+
+    {p.figure && (
+      <p class="figure">
+        <span class="mono value">
+          {p.figure.value}
+          {isNexus && (
+            <Ink
+              vb="0 0 220 64"
+              d="M176 9 C 120 -2, 26 4, 10 30 C -3 54, 78 63, 140 58 C 197 54, 219 33, 206 18 C 198 8, 148 3, 94 6"
+              style="left:-14px;right:-14px;top:-10px;bottom:-9px;"
+              width={2.4}
+            />
+          )}
+        </span>
+        <span class="label">{p.figure.label}</span>
+      </p>
+    )}
+
+    {p.stack && p.stack.length > 0 && <ul class="stack mono" aria-label="Stack">{p.stack.map((s) => <li>{s}</li>)}</ul>}
+
+    {/* Smriti: links intentionally absent until provided (p.linksTodo). */}
+    <ul class="links">
+      {p.demoLink && <li><a class="link" href={p.demoLink} target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> for {p.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+      {p.videoLink && <li><a class="link" href={p.videoLink} target="_blank" rel="noopener noreferrer">Demo video<span class="sr-only"> for {p.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+      {p.github && <li><a class="link" href={p.github} target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> for {p.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+      {p.pypi && (
+        <li class="pypi">
+          <span class="pypi-link">
+          <a class="link mono" href={`https://pypi.org/project/${p.pypi}/`} target="_blank" rel="noopener noreferrer">pip install {p.pypi}</a>
+          {isNexus && (
+            <Ink
+              class="ink-desk"
+              vb="0 0 30 24"
+              par="xMidYMid meet"
+              d="M28 6 C 18 4, 10 8, 4 18 M4 18 L 6 11 M4 18 L 11 16"
+              style="left:calc(100% + 8px);top:-2px;width:22px;height:18px;"
+              note="on PyPI"
+              width={2.8}
+              noteStyle="left:28px;top:-4px;--r:-2deg;"
+            />
+          )}
+          </span>
+        </li>
+      )}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .card { position: relative; isolation: isolate; display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+
+  .frame {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform var(--dur-press) var(--ease);
+  }
+  .shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-2); }
+  .shot :global(img) {
+    width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block;
+    transform: scale(1); transition: transform var(--dur-image) var(--ease);
+  }
+  .diagram { height: 100%; padding: 12px 14px; }
+  .missing { height: 100%; display: grid; margin: 12px; height: calc(100% - 24px); border: 1px dashed var(--line-strong); border-radius: var(--radius-sm); place-items: center; padding: var(--s-2); text-align: center; font-size: var(--fs-mono); color: var(--text-3); }
+  /* Border lightening via an overlay's opacity (transform/opacity only). */
+  .edge {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    box-shadow: inset 0 0 0 1px var(--line-strong); opacity: 0;
+    transition: opacity var(--dur-hover) var(--ease);
+  }
+
+  .body { display: flex; flex-direction: column; gap: 10px; min-width: 0; flex: 1; }
+  .title { margin: 0; display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-title); font-weight: 500; line-height: 1.2; letter-spacing: -0.005em; }
+  .title a { overflow-wrap: anywhere; min-width: 0; }
+  .title a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  .title a:focus-visible { outline: none; }
+  .card:has(.title a:focus-visible) .frame { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .arrow { flex: none; color: var(--text-3); transition: transform var(--dur-hover) var(--ease); }
+  .desc { margin: 0;
+ color: var(--text-2); font-size: var(--fs-label); line-height: 1.55; max-width: 60ch; text-wrap: pretty; }
+
+  .figure {
+    margin: 4px 0 0; padding-top: 16px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 12px;
+  }
+  .value { position: relative; font-size: var(--fs-figure); font-weight: 500; color: var(--text); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+  .label { font-size: var(--fs-ui); color: var(--text-2); }
+  /* Separators are CSS, attached to the START of each item, so a dot can never end a line. */
+  .stack { display: flex; flex-wrap: wrap; column-gap: 0.6em; margin: 0; padding: 0; list-style: none; font-size: var(--fs-mono); line-height: 1.7; color: var(--text-3); }
+  .stack li { overflow-wrap: anywhere; min-width: 0; }
+  .stack li + li::before { content: '·'; margin-right: 0.6em; }
+
+  .links { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 2px 20px; list-style: none; margin: 2px 0 0; padding: 0; font-size: var(--fs-label); }
+  .links .link { display: inline-flex; align-items: center; min-height: 40px; }
+  .links .mono { font-size: var(--fs-mono); }
+  .pypi { flex-basis: 100%; }
+  .pypi-link { position: relative; display: inline-block; }
+
+  /* Two-line description slot keeps the figure rows of a card pair aligned. */
+  @media (min-width: 768px) { .desc { min-height: calc(1.55em * 2); } }
+  .card:active .frame { transform: scale(0.99); }
+  @media (hover: hover) {
+    .card:hover .shot :global(img) { transform: scale(1.03); }
+    .card:hover .edge { opacity: 1; }
+    .card:hover .arrow { transform: translateX(4px); color: var(--text); }
+  }
+  /* Keyboard focus: instant (no transition). Uses the separate `translate` property, which is not in the transition list. */
+  .card:has(.title a:focus-visible) .arrow { translate: 4px 0; color: var(--text); }
+</style>

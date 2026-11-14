@@ -1,0 +1,20 @@
+[
+  {
+    "id": "umd",
+    "order": 0,
+    "degree": "M.S. Artificial Intelligence & M.S.E. Robotics Engineering",
+    "institution": "University of Michigan–Dearborn",
+    "gpa": "3.90/4.00",
+    "date": "Dec 2026",
+    "transcriptLink": "/transcripts/umich_transcript.pdf"
+  },
+  {
+    "id": "asu",
+    "order": 1,
+    "degree": "B.S. Computer Science",
+    "institution": "Arizona State University",
+    "gpa": "3.71/4.00",
+    "date": "May 2024",
+    "transcriptLink": "/transcripts/ASU_FinalTranscript.pdf"
+  }
+]

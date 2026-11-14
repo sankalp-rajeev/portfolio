@@ -1,0 +1,92 @@
+[
+  {
+    "id": "photo-1",
+    "order": 0,
+    "src": "photo1.jpg",
+    "caption": "A majestic tiger quenches its thirst at a jungle stream."
+  },
+  {
+    "id": "photo-2",
+    "order": 1,
+    "src": "photo2.jpg",
+    "caption": "A tiger's quiet stride, blending seamlessly with its surroundings."
+  },
+  {
+    "id": "photo-3",
+    "order": 2,
+    "src": "photo3.jpg",
+    "caption": "A close-up of the tiger in its natural habitat, exuding power and grace."
+  },
+  {
+    "id": "photo-4",
+    "order": 3,
+    "src": "photo4.jpg",
+    "caption": "A lioness secures her prey in the wild savanna, a testament to her strength."
+  },
+  {
+    "id": "photo-5",
+    "order": 4,
+    "src": "photo5.jpg",
+    "caption": "A lion's intense stare, a window into the king of the jungle's soul."
+  },
+  {
+    "id": "photo-6",
+    "order": 5,
+    "src": "photo6.jpg",
+    "caption": "A lioness yawning in the golden savanna, showcasing the raw beauty of the wild."
+  },
+  {
+    "id": "photo-7",
+    "order": 6,
+    "src": "photo7.jpg",
+    "caption": "A rare black panther prowling through the dense jungle, embodying mystery."
+  },
+  {
+    "id": "photo-8",
+    "order": 7,
+    "src": "elephant2.jpg",
+    "caption": "An elephant shot in Maasai Mara, Kenya."
+  },
+  {
+    "id": "photo-9",
+    "order": 8,
+    "src": "photo9.jpg",
+    "caption": "A peacock flaunts its vibrant feathers, a dazzling display of nature's artistry."
+  },
+  {
+    "id": "photo-10",
+    "order": 9,
+    "src": "photo10.jpg",
+    "caption": "A leopard rests on a tree, blending perfectly with its surroundings."
+  },
+  {
+    "id": "photo-11",
+    "order": 10,
+    "src": "photo11.jpg",
+    "caption": "Leopard paws dangle from a branch, a picture of relaxation and stealth."
+  },
+  {
+    "id": "photo-12",
+    "order": 11,
+    "src": "photo12.jpg",
+    "caption": "A leopard sleeping peacefully on a tree, basking in the tranquility of the wild."
+  },
+  {
+    "id": "photo-13",
+    "order": 12,
+    "src": "photo15.jpg",
+    "caption": "A pair cheetah exploring the vast plains, their elegance unmatched."
+  },
+  {
+    "id": "photo-14",
+    "order": 13,
+    "src": "photo16.jpg",
+    "caption": "A solitary cheetah gazing across the savanna, a symbol of grace and speed."
+  },
+  {
+    "id": "photo-15",
+    "order": 14,
+    "src": "photo17.jpg",
+    "caption": "A cheetah enjoying a moment of rest in the golden grasslands."
+  }
+]

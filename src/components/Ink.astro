@@ -1,0 +1,24 @@
+---
+/** One hand-drawn mark: a pre-authored stroke (pathLength=1, drawn in once) and/or a Caveat note. Decorative. */
+interface Props {
+  d?: string;
+  vb?: string; // viewBox of the path
+  par?: string; // preserveAspectRatio
+  note?: string;
+  style?: string; // positions the mark (absolute)
+  class?: string;
+  noteStyle?: string;
+  width?: number; // stroke width (px)
+  load?: boolean; // draw on page load instead of on entering view
+}
+const { d, vb = '0 0 100 20', par = 'none', note, style, class: cls = '', noteStyle, width, load } = Astro.props;
+---
+
+<span class={`ink ${cls}`} style={style} data-ink data-ink-load={load ? "" : undefined} aria-hidden="true">
+  {d && (
+    <svg class="stroke" viewBox={vb} preserveAspectRatio={par} focusable="false">
+      <path d={d} pathLength="1" style={width ? `stroke-width:${width}` : undefined} />
+    </svg>
+  )}
+  {note && <span class="note" style={noteStyle}>{note}</span>}
+</span>

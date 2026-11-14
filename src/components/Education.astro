@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+
+const edu = (await getCollection('education')).sort((a, b) => a.data.order - b.data.order);
+interface Props { certs?: { id: string; data: { order: number; title: string; href: string; kind: string } }[] }
+const props = Astro.props;
+const certs = (props.certs ?? (await getCollection('certificates'))).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="education" class="section" aria-labelledby="education-title">
+  <div class="col">
+    <h2 id="education-title" class="h2" data-reveal>Education</h2>
+    <ul class="edu">
+      {edu.map((e) => (
+        <li class="entry" data-reveal>
+          <div class="head">
+            <h3 class="inst">{e.data.institution}</h3>
+            <p class="when mono">{e.data.date}</p>
+          </div>
+          <p class="deg">{e.data.degree}</p>
+          <p class="gpa mono">GPA {e.data.gpa} · <a class="link hit" href={e.data.transcriptLink} target="_blank" rel="noopener noreferrer">Transcript ↗</a></p>
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="sub" data-reveal>Certificates</h3>
+    <ul class="certs" data-reveal>
+      {certs.map((c) => (
+        <li>
+          <span class="ctitle">{c.data.title}</span>
+          <a class="link cl" href={c.data.href} target="_blank" rel="noopener noreferrer">{c.data.kind === 'pdf' ? 'PDF' : 'Credential'}<span class="sr-only"> for {c.data.title}</span><span aria-hidden="true">&nbsp;↗</span></a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .edu { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); }
+  .head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); flex-wrap: wrap; }
+  .inst { margin: 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-title); font-weight: 500; line-height: 1.25; }
+  .when { margin: 0; font-size: var(--fs-mono); color: var(--text-2); }
+  .deg { margin: 4px 0 0; font-size: var(--fs-label); color: var(--text); }
+  .gpa { margin: 6px 0 0; font-size: var(--fs-mono); color: var(--text-2); }
+  .sub { margin: var(--s-8) 0 var(--s-2); font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-title); font-weight: 500; }
+  .certs { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+  .certs li { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding-block: 2px; border-top: 1px solid var(--line); font-size: var(--fs-label); }
+  .ctitle { min-width: 0; overflow-wrap: anywhere; }
+  .cl { flex: none; font-size: var(--fs-ui); display: inline-flex; align-items: center; min-height: 40px; }
+</style>

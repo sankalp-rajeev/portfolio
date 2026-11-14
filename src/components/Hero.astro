@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import Ink from './Ink.astro';
+import { nb } from '../lib/text';
+import magna from '../assets/logos/magna.png';
+import zoetis from '../assets/logos/zoetis.png';
+import mistral from '../assets/logos/mistral1.png';
+
+const prev = [
+  { name: 'Magna', src: magna },
+  { name: 'Zoetis', src: zoetis },
+  { name: 'Mistral Solutions', src: mistral },
+];
+---
+
+<section id="home" class="col hero" aria-labelledby="hero-title">
+  <h1 id="hero-title" class="h1 rise">
+    <span>I build AI systems that <span class="hl">check their own work.<Ink
+        load
+        vb="0 0 300 14"
+        d="M3 9 C 38 4, 74 11, 121 7 S 203 4, 251 9 S 289 5, 297 8"
+        width={1.4}
+        style="left:-1%;right:-1%;bottom:-0.3em;height:0.3em;"
+      /></span></span>
+  </h1>
+  <p class="sub enter-sub" set:html={nb('ML engineer focused on reliability: verifiers for LLM code repairs, self-healing agent platforms, and production ML pipelines.')} />
+  <div class="prev enter-sub">
+    <span class="prev-label">Previously at</span>
+    <ul>
+      {prev.map((p) => (
+        <li><Image class="plogo" src={p.src} alt="" width={22} height={22} densities={[2, 3]} format="webp" loading="eager" /><span>{p.name}</span></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero { padding-top: var(--s-10); padding-bottom: var(--s-10); }
+  @media (min-width: 1024px) { .hero { padding-top: var(--s-12); padding-bottom: var(--s-12); } }
+  .h1 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    font-size: var(--fs-display);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .rise > span { display: block; }
+  .hl { position: relative; display: inline-block; max-width: 100%; }
+  .prev { margin-top: var(--s-6); display: flex; flex-wrap: wrap; align-items: center; gap: 10px var(--s-3); font-size: var(--fs-ui); color: var(--text-3); }
+  .prev ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px var(--s-3); }
+  .prev li { display: inline-flex; align-items: center; gap: 8px; color: var(--text-2); }
+  .plogo { width: 22px; height: 22px; object-fit: contain; background: #fff; border-radius: 5px; border: 1px solid var(--line); }
+  .sub {
+    margin: var(--s-4) 0 0;
+    max-width: 34em;
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--text-2);
+    text-wrap: pretty;
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found | Sankalp Rajeev" description="That page isn't here." path="/404" noindex>
+  <section class="section nf">
+    <div class="col">
+      <p class="code mono">404</p>
+      <h1 class="title">That page isn't here.</h1>
+      <p class="lede">It may have moved when the site was rebuilt. These will get you back on track.</p>
+      <ul class="go">
+        <li><a class="btn btn-primary" href="/">Home</a></li>
+        <li><a class="link" href="/#work">Selected work</a></li>
+        <li><a class="link" href="/#projects">Projects</a></li>
+        <li><a class="link" href="/gallery">Gallery</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { min-height: 60vh; }
+  .code { margin: 0; font-size: var(--fs-mono); color: var(--text-3); }
+  .title { margin: var(--s-2) 0 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.06; }
+  .lede { margin: var(--s-3) 0 0; max-width: 34em; color: var(--text-2); font-size: var(--fs-lead); line-height: 1.55; }
+  .go { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px var(--s-4); }
+  .go .link { display: inline-flex; align-items: center; min-height: 40px; }
+</style>
