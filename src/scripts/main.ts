@@ -2,6 +2,8 @@ import { animate, inView } from 'motion';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const root = document.documentElement;
+(window as any).__mainReady = true;
+let navigated = false;
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ───────── Theme (instant everywhere; circular reveal from the button when supported) ───────── */
@@ -42,12 +44,19 @@ document.addEventListener('click', (e) => {
   if (b) toggleTheme(b);
 });
 
+function e2meta(doc: Document) {
+  doc.querySelector('meta[name="theme-color"]')?.setAttribute('content', root.dataset.theme === 'dark' ? '#161513' : '#f4f1ea');
+}
+
 /* Keep theme and the JS flag across ClientRouter swaps (the incoming document carries static defaults). */
 document.addEventListener('astro:before-swap', (e) => {
   (window as any).__tgDestroy?.();
   const nd = (e as unknown as { newDocument: Document }).newDocument.documentElement;
   nd.dataset.theme = root.dataset.theme;
   nd.classList.add('js');
+  // The incoming head carries the static (light) theme-color; keep it in step with the current theme.
+  e2meta((e as unknown as { newDocument: Document }).newDocument);
+  navigated = true;
 });
 
 /* ───────── Top bar: scrolled state + shared sliding pill ───────── */
@@ -55,7 +64,9 @@ let bar: HTMLElement | null = null;
 let pills: HTMLElement | null = null;
 let overlay: HTMLElement | null = null;
 let links: HTMLAnchorElement[] = [];
-let sections: { id: string; el: HTMLElement }[] = [];
+let sections: { id: string; el: HTMLElement; top: number }[] = [];
+let ro: ResizeObserver | null = null;
+const measure = () => sections.forEach((s) => (s.top = s.el.getBoundingClientRect().top + scrollY));
 let activeId: string | null = null;
 let currentClip = '';
 
@@ -88,7 +99,8 @@ function updateScrollState() {
   if (!sections.length) return;
   const line = innerHeight * 0.4;
   let id: string | null = null;
-  for (const s of sections) if (s.el.getBoundingClientRect().top <= line) id = s.id;
+  const y = scrollY + line; // cached section tops: no layout reads while scrolling
+  for (const s of sections) if (s.top <= y) id = s.id;
   if (id !== activeId) {
     activeId = id;
     links.forEach((l) => (l.dataset.section === id ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current')));
@@ -147,6 +159,9 @@ async function mountTraceGate() {
   (window as any).__tgDestroy?.();
   const host = document.querySelector<HTMLElement>('[data-trace-gate]');
   if (!host) return;
+  // Wait for the page transition to finish and the main thread to go idle before starting the canvas.
+  await new Promise<void>((r) => setTimeout(() => ((window as any).requestIdleCallback ? (window as any).requestIdleCallback(() => r(), { timeout: 1200 }) : r()), 600));
+  if (!host.isConnected) return;
   const [{ mount }, { getEnv }] = await Promise.all([import('./hero-bg/trace-gate'), import('./hero-bg/common')]);
   if (!host.isConnected) return;
   const destroy = mount(host, getEnv());
@@ -162,8 +177,12 @@ function setup() {
   // Section element id -> nav pill it belongs to (Open source sits under Projects; Beyond work under Education).
   const NAV: Record<string, string> = { about: 'about', experience: 'experience', work: 'work', projects: 'projects', opensource: 'projects', education: 'education', beyond: 'education' };
   sections = Object.keys(NAV)
-    .map((id) => ({ id: NAV[id], el: document.getElementById(id) as HTMLElement | null }))
-    .filter((s): s is { id: string; el: HTMLElement } => !!s.el);
+    .map((id) => ({ id: NAV[id], el: document.getElementById(id) as HTMLElement | null, top: 0 }))
+    .filter((s): s is { id: string; el: HTMLElement; top: number } => !!s.el);
+  measure();
+  ro?.disconnect();
+  ro = new ResizeObserver(() => { measure(); updateScrollState(); });
+  ro.observe(document.body);
   activeId = null;
   currentClip = '';
   syncToggleLabel();
@@ -204,6 +223,12 @@ function setup() {
   }
 
   setupFilters();
+  // After a client-side navigation, move focus to the new page heading (WCAG 2.4.3).
+  if (navigated) {
+    navigated = false;
+    const h = document.querySelector<HTMLElement>('main h1');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  }
   mountTraceGate();
 
   // Entrance is CSS-driven; drop the flag after it ends so returning to Home shows the final state.

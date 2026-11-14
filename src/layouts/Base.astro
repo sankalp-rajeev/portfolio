@@ -92,6 +92,8 @@ const ld = {
         var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
         var seen = false;
         try { seen = sessionStorage.getItem('entered') === '1'; } catch (e) {}
+        // If the main script never runs, un-hide reveal content so nothing stays invisible.
+        setTimeout(function () { if (!window.__mainReady) d.classList.add('reveal-failsafe'); }, 4000);
         if (home && !reduced && !seen) {
           d.classList.add('entrance');
           try { sessionStorage.setItem('entered', '1'); } catch (e) {}
@@ -103,7 +105,6 @@ const ld = {
   <body>
     <div class="grain" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Skip to content</a>
-    <svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="mono" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0" /><feComponentTransfer><feFuncR type="discrete" tableValues="0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 1" /><feFuncG type="discrete" tableValues="0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 1" /><feFuncB type="discrete" tableValues="0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 1" /></feComponentTransfer></filter></svg>
     <Sidebar />
     <div class="content">
       <TopBar />

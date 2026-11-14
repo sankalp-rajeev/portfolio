@@ -5,7 +5,7 @@ export function initLightbox() {
   if (!dlg || !grid) return;
   const img = dlg.querySelector<HTMLImageElement>('[data-lb-img]')!;
   const cap = dlg.querySelector<HTMLElement>('[data-lb-caption]')!;
-  const tiles = Array.from(grid.querySelectorAll<HTMLButtonElement>('.tile'));
+  const tiles = Array.from(grid.querySelectorAll<HTMLAnchorElement>('.tile'));
   let i = 0;
   let opener: HTMLElement | null = null;
 
@@ -20,7 +20,7 @@ export function initLightbox() {
   };
   const open = (n: number, from: HTMLElement) => { opener = from; show(n); if (!dlg.open) dlg.showModal(); };
 
-  tiles.forEach((t, n) => t.addEventListener('click', () => open(n, t)));
+  tiles.forEach((t, n) => t.addEventListener('click', (e) => { e.preventDefault(); open(n, t); }));
   dlg.querySelector('[data-lb-close]')!.addEventListener('click', () => dlg.close());
   dlg.querySelector('[data-lb-prev]')!.addEventListener('click', () => show(i - 1));
   dlg.querySelector('[data-lb-next]')!.addEventListener('click', () => show(i + 1));

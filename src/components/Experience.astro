@@ -5,7 +5,7 @@ import Ink from './Ink.astro';
 import { duration } from '../lib/duration';
 
 const roles = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
-const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.png', { eager: true });
+const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/mono/*.png', { eager: true });
 ---
 
 <section id="experience" class="section" aria-labelledby="experience-title">
@@ -14,7 +14,7 @@ const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.
     <ol class="timeline">
       {roles.map((r, i) => {
         const d = r.data;
-        const logo = logos[`/src/assets/logos/${d.logo}.png`]?.default;
+        const logo = logos[`/src/assets/logos/mono/${d.logo}.png`]?.default;
         return (
           <li class="entry" data-reveal data-entry>
             <div class="rail">
@@ -67,7 +67,7 @@ const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.
     width: 44px; height: 44px; flex: none; display: grid; place-items: center; overflow: hidden;
     background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm);
   }
-  .logo :global(img) { width: 36px; height: 36px; object-fit: contain; filter: url(#mono); /* single-colour: every non-white pixel becomes ink */ }
+  .logo :global(img) { width: 36px; height: 36px; object-fit: contain; /* logos are pre-processed single-colour PNGs (src/assets/logos/mono): no runtime filter */ }
   /* The vertical hairline connecting roles. */
   .seg { position: absolute; top: 52px; bottom: calc(var(--s-6) * -1 + 8px); width: 1px; background: var(--line-strong); }
   .body { position: relative; min-width: 0; }
@@ -78,7 +78,7 @@ const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.
   .co { margin: 4px 0 0; font-size: var(--fs-ui); color: var(--text-2); }
   .when { margin: 3px 0 0; display: grid; justify-items: end; gap: 2px; flex: none; font-size: var(--fs-mono); color: var(--text-2); text-align: right; white-space: nowrap; }
   .dur { color: var(--text-3); }
-  .bullets { max-width: 68ch; margin: var(--s-2) 0 0; padding: 0 0 0 1.1em; display: grid; gap: 10px; font-size: var(--fs-label); line-height: 1.6; color: var(--text); }
+  .bullets { max-width: 60ch; margin: var(--s-2) 0 0; padding: 0 0 0 1.1em; display: grid; gap: 10px; font-size: var(--fs-label); line-height: 1.6; color: var(--text); }
   .bullets li::marker { color: var(--text-3); }
   .tags { list-style: none; margin: var(--s-2) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
   .tags li { padding: 2px 8px; font-size: var(--fs-eyebrow); color: var(--text-2); border: 1px solid var(--line-strong); border-radius: 6px; }

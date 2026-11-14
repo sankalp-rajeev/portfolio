@@ -25,9 +25,9 @@ const list = items.filter((x): x is NonNullable<typeof x> => !!x);
       <ul class="masonry" data-gallery>
         {list.map(({ g, img, full }, i) => (
           <li>
-            <button type="button" class="tile" data-index={i} data-full={full} data-caption={g.data.caption} aria-label={`View larger: ${g.data.caption}`}>
-              <Image src={img} alt={g.data.caption} widths={[360, 540, 720]} sizes="(min-width: 900px) 260px, (min-width: 500px) 45vw, 92vw" format="webp" quality={78} loading={i < 3 ? 'eager' : 'lazy'} decoding="async" />
-            </button>
+            <a href={full} class="tile" data-index={i} data-full={full} data-caption={g.data.caption} aria-label={`View larger: ${g.data.caption}`}>
+              <Image src={img} alt={g.data.caption} widths={[360, 540, 720]} sizes="(min-width: 900px) 260px, (min-width: 500px) 45vw, 92vw" format="webp" quality={78} loading={i < 6 ? 'eager' : 'lazy'} decoding="async" />
+            </a>
           </li>
         ))}
       </ul>
@@ -52,6 +52,7 @@ const list = items.filter((x): x is NonNullable<typeof x> => !!x);
 
 <style>
   .back { margin: 0; font-size: var(--fs-ui); }
+  .back .link { display: inline-flex; align-items: center; min-height: 40px; }
   .title { margin: var(--s-3) 0 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.06; }
   .lede { margin: var(--s-3) 0 var(--s-6); max-width: 38em; color: var(--text-2); }
   .masonry { list-style: none; margin: 0; padding: 0; column-count: 1; column-gap: var(--s-2); }

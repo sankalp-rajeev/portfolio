@@ -2,9 +2,11 @@
 // Dev-only (break-ui): renders cards with demo vs worst-case data. Emits no routes in production builds.
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import Projects from '../../components/Projects.astro';
+import Education from '../../components/Education.astro';
 
 export function getStaticPaths() {
-  return import.meta.env.DEV ? [{ params: { mode: 'demo' } }, { params: { mode: 'worst' } }] : [];
+  return import.meta.env.DEV ? [{ params: { mode: 'demo' } }, { params: { mode: 'worst' } }, { params: { mode: 'index' } }] : [];
 }
 const { mode } = Astro.params;
 const base = { order: 0, category: 'x', subtitle: '', intro: '', highlights: [], tools: [] };
@@ -18,13 +20,27 @@ const worst = [
   { id: 'c', data: { ...base, title: 'X', tagline: '', figure: { value: '0', label: '' }, stack: ['C'], image: '/assets/projects/missing.png' } },
   { id: 'd', data: { ...base, title: 'Résumé—Ünïcödé 日本語のタイトル', tagline: 'ÅÄÖ ẞ Việt Nam: tiếng Việt có dấu.', figure: { value: '99.54%', label: 'top-1 accuracy' }, stack: ['PyTorch'], image: '/assets/projects/kairos.png', github: 'https://example.com' } },
 ];
+const idxBase = { order: 0, category: 'AI & Machine Learning', intro: 'x', highlights: [], tools: [] };
+const idxProjects = [
+  { id: 'p1', data: { ...idxBase, title: 'Multimodal Retrieval-Augmented Generation Evaluation Harness for Regulated-Document Workflows', summary: 'Evidence-gated compatibility runtime for evolving AI agent tools, with verifier-in-the-loop promotion across heterogeneous model providers, replay-based side-effect checks, and a read-only inspector for auditing every promoted adapter end to end across twelve benchmark suites and four model families.', year: 2026, github: 'https://example.com', demoLink: 'https://example.com', paperLink: '/x.pdf' } },
+  { id: 'p2', data: { ...idxBase, title: 'Antidisestablishmentarianism-Detector-v2-final-FINAL-really', intro: 'No year, no links.' } },
+  { id: 'p3', data: { ...idxBase, title: '日本語のタイトル — Résumé Ünïcödé', year: 2025, intro: 'ÅÄÖ ẞ Việt Nam: tiếng Việt có dấu.', github: 'https://example.com' } },
+  { id: 'p4', data: { ...idxBase, title: 'X', year: 2024, intro: '', category: 'Embedded Systems' } },
+];
+const idxCerts = [
+  { id: 'c1', data: { order: 0, title: 'Professional Certificate in Machine Learning Engineering for Production (MLOps) Specialization: Deploying, Monitoring and Maintaining ML Systems at Scale', href: 'https://example.com', kind: 'external' } },
+  { id: 'c2', data: { order: 1, title: 'SupercalifragilisticexpialidociousCertificateOfCompletionWithoutAnyBreakOpportunitiesAtAllForTesting2026', href: 'https://example.com', kind: 'pdf' } },
+  { id: 'c3', data: { order: 2, title: 'Short', href: 'https://example.com', kind: 'pdf' } },
+];
 const items = mode === 'worst' ? worst : demo;
 ---
 <Base title={`dev ${mode}`} path={`/dev/${mode}`}>
+  {mode === 'index' ? (<><Projects items={idxProjects} /><Education certs={idxCerts} /></>) : (<>
   <section class="section"><div class="wrap">
     <p class="eyebrow"><a class="link" href="/dev/demo">Demo data</a> / <a class="link" href="/dev/worst">Worst case</a></p>
     <div class="g">{items.map((p, i) => <ProjectCard project={p as any} index={i} />)}</div>
   </div></section>
+  </>)}
 </Base>
 <style>
   .g { display: grid; grid-template-columns: 1fr; gap: 64px 32px; margin-top: 40px; }

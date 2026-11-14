@@ -18,7 +18,7 @@ const certs = (props.certs ?? (await getCollection('certificates'))).sort((a, b)
             <p class="when mono">{e.data.date}</p>
           </div>
           <p class="deg">{e.data.degree}</p>
-          <p class="gpa mono">GPA {e.data.gpa} · <a class="link" href={e.data.transcriptLink} target="_blank" rel="noopener noreferrer">Transcript ↗</a></p>
+          <p class="gpa mono">GPA {e.data.gpa} · <a class="link hit" href={e.data.transcriptLink} target="_blank" rel="noopener noreferrer">Transcript ↗</a></p>
         </li>
       ))}
     </ul>
@@ -44,7 +44,7 @@ const certs = (props.certs ?? (await getCollection('certificates'))).sort((a, b)
   .gpa { margin: 6px 0 0; font-size: var(--fs-mono); color: var(--text-2); }
   .sub { margin: var(--s-8) 0 var(--s-2); font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-title); font-weight: 500; }
   .certs { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
-  .certs li { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding-block: 12px; border-top: 1px solid var(--line); font-size: var(--fs-label); }
+  .certs li { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding-block: 2px; border-top: 1px solid var(--line); font-size: var(--fs-label); }
   .ctitle { min-width: 0; overflow-wrap: anywhere; }
-  .cl { flex: none; font-size: var(--fs-ui); display: inline-flex; align-items: center; min-height: 28px; }
+  .cl { flex: none; font-size: var(--fs-ui); display: inline-flex; align-items: center; min-height: 40px; }
 </style>

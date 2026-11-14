@@ -95,7 +95,7 @@
   --accent: #c2410c; /* ink: annotations, links, focus */
   --solid: #1d1b18;
   --on-solid: #f4f1ea;
-  --topbar-bg: rgb(244 241 234 / 0.94);
+  --topbar-bg: rgb(244 241 234 / 0.97);
   color-scheme: light;
 }
 
@@ -111,7 +111,7 @@
   --accent: #f2784a;
   --solid: #ece6da;
   --on-solid: #161513;
-  --topbar-bg: rgb(22 21 19 / 0.94);
+  --topbar-bg: rgb(22 21 19 / 0.97);
   color-scheme: dark;
 }
 
@@ -147,6 +147,12 @@ body {
 p, li { text-wrap: pretty; }
 h1, h2, h3, h4 { text-wrap: balance; }
 .nb { white-space: nowrap; }
+/* Larger tap area for inline text links without changing layout. */
+.hit { padding-block: 11px; margin-block: -11px; }
+html:not(.js) .theme-toggle { display: none; } /* the toggle needs JS */
+.reveal-failsafe [data-reveal] { opacity: 1 !important; transform: none !important; }
+/* Lightbox open: lock page scroll. */
+html:has(dialog[open]) { overflow: hidden; }
 .serif { font-family: var(--font-serif); font-optical-sizing: auto; }
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .hand { font-family: var(--font-hand); }
@@ -278,3 +284,4 @@ html.theme-vt::view-transition-new(root) { z-index: 2; }
 @media (max-width: 1023px) { .ink-desk { display: none !important; } }
 /* Margin notes need real margin. */
 @media (max-width: 1399px) { .ink-margin { display: none !important; } }
+[tabindex='-1']:focus { outline: none; }

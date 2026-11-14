@@ -17,8 +17,8 @@ export async function getStaticPaths() {
     props: {
       project,
       study: studies.find((s) => s.id === project.id)!,
-      prev: featured[(i + featured.length - 1) % featured.length],
-      next: featured[(i + 1) % featured.length],
+      prev: featured[i - 1] ?? null,
+      next: featured[i + 1] ?? null,
     },
   }));
 }
@@ -94,8 +94,8 @@ const isTbv = project.id === 'trust-but-verify';
       </section>
 
       <nav class="pager" aria-label="More projects">
-        <a class="pg prev" href={`/work/${prev.id}`}><span class="dir mono">← Previous</span><span class="pt">{prev.data.title}</span></a>
-        <a class="pg next" href={`/work/${next.id}`}><span class="dir mono">Next →</span><span class="pt">{next.data.title}</span></a>
+        {prev ? <a class="pg prev" href={`/work/${prev.id}`}><span class="dir mono">← Previous</span><span class="pt">{prev.data.title}</span></a> : <span></span>}
+        {next ? <a class="pg next" href={`/work/${next.id}`}><span class="dir mono">Next →</span><span class="pt">{next.data.title}</span></a> : <span></span>}
       </nav>
     </div>
   </article>
@@ -105,7 +105,7 @@ const isTbv = project.id === 'trust-but-verify';
   .case { padding-top: var(--s-6); }
   .head { position: relative; isolation: isolate; padding-bottom: var(--s-6); }
   .band {
-    position: absolute; z-index: -1; inset: calc(var(--s-6) * -1) 0 0 0; opacity: 0.45; pointer-events: none; overflow: hidden;
+    position: absolute; z-index: -1; inset: calc(var(--s-6) * -1) 0 auto 0; height: clamp(190px, 24vw, 270px); opacity: 0.45; pointer-events: none; overflow: hidden;
     -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%); mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
   .band :global(canvas) { position: absolute; inset: 0; width: 100%; height: 100%; }

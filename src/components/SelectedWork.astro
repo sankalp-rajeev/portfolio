@@ -13,7 +13,7 @@ const featured = (await getCollection('projects'))
     <div class="grid">
       {featured.map((p, i) => <ProjectCard project={p} index={i} />)}
     </div>
-    <p class="all" data-reveal><a class="link" href="/#all-projects">All projects <span aria-hidden="true">→</span></a></p>
+    <p class="all" data-reveal><a class="link" href="/#projects">All projects <span aria-hidden="true">→</span></a></p>
   </div>
 </section>
 

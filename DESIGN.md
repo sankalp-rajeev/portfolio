@@ -17,6 +17,8 @@ colors:
   paper-text-3: "#958d80"
   vermilion-dark: "#f2784a"
   logo-tile: "#ffffff"
+  lightbox-scrim: "rgb(14 13 12 / 0.92)"
+  lightbox-control: "rgb(0 0 0 / 0.4)"
 typography:
   display:
     fontFamily: "Newsreader, Georgia, serif"
@@ -65,6 +67,13 @@ typography:
   eyebrow:
     fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "0.75rem"
+  control-icon:
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "18px"
+  figure-large:
+    fontFamily: "Geist Mono, ui-monospace, monospace"
+    fontSize: "clamp(1.375rem, 3.4vw, 2.25rem)"
+    fontWeight: 500
   note:
     fontFamily: "Caveat, cursive"
     fontSize: "1.375rem"

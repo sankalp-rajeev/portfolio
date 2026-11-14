@@ -62,7 +62,7 @@ const all = (items ?? (await getCollection('projects')))
   .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 var(--s-4); }
   .filters[hidden] { display: none; }
   .filters button {
-    height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong);
+    height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong);
     background: none; color: var(--text-2); font: inherit; font-size: var(--fs-ui); font-weight: 500; cursor: pointer;
     transition: transform var(--dur-press) var(--ease); touch-action: manipulation;
   }
@@ -88,7 +88,7 @@ const all = (items ?? (await getCollection('projects')))
 
   @media (min-width: 768px) {
     .row-in { grid-template-columns: minmax(0, 1fr) auto auto; align-items: start; }
-    .meta { grid-column: 2; grid-row: 1; margin: 4px 0 0; min-width: 9.5em; white-space: nowrap; text-align: right; }
+    .meta { grid-column: 2; grid-row: 1; margin: 4px 0 0; min-width: 13em; white-space: nowrap; text-align: right; }
     .rlinks { grid-column: 3; grid-row: 1; margin: 0; justify-content: flex-end; flex-direction: column; align-items: flex-end; min-width: 84px; }
     .rlinks .link { min-height: 28px; }
   }
