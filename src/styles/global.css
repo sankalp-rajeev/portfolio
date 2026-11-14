@@ -68,8 +68,7 @@
   --radius: 12px;
   --radius-sm: 8px;
   --sidebar-w: 300px;
-  --col: 720px;
-  --col-wide: 800px;
+  --col: 800px;
   --gutter: 24px;
   --topbar-h: 64px;
 
@@ -145,6 +144,9 @@ body {
 }
 ::selection { background: color-mix(in srgb, var(--accent) 28%, transparent); }
 
+p, li { text-wrap: pretty; }
+h1, h2, h3, h4 { text-wrap: balance; }
+.nb { white-space: nowrap; }
 .serif { font-family: var(--font-serif); font-optical-sizing: auto; }
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .hand { font-family: var(--font-hand); }
@@ -186,7 +188,6 @@ a { color: inherit; text-decoration: none; }
   .content { margin-left: var(--sidebar-w); }
 }
 .col { width: 100%; max-width: calc(var(--col) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
-.col-wide { max-width: calc(var(--col-wide) + var(--gutter) * 2); }
 
 .section { padding-block: var(--s-10); }
 @media (min-width: 768px) { .section { padding-block: var(--s-12); } }
@@ -268,4 +269,4 @@ html.theme-vt::view-transition-new(root) { z-index: 2; }
 /* Mobile keeps only the hero underline and the Nexus circle. */
 @media (max-width: 1023px) { .ink-desk { display: none !important; } }
 /* Margin notes need real margin. */
-@media (max-width: 1279px) { .ink-margin { display: none !important; } }
+@media (max-width: 1399px) { .ink-margin { display: none !important; } }

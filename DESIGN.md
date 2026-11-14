@@ -106,6 +106,8 @@ components:
 
 **Creative north star: "a marked-up proof."** A quiet personal editorial portfolio on warm paper: a fixed profile sidebar, a single reading column, serif headings, and a thin layer of hand-drawn ink (vermilion strokes and Caveat notes) in the margins, as if a reviewer had checked the work. Mode: Experience. The content leads; the ink is sparse, exact and decorative only.
 
+**Accepted overrides.** The detector flags (1) Geist as an overused face and (2) the warm paper background as `cream-palette`. Both are deliberate owner decisions and are intentionally not acted on.
+
 Light is the default theme (warm paper, near-black ink). Dark is the alternative (warm charcoal, paper-toned text). A static film grain (~3%, no animation) sits over both. No gradients, glows, particle backgrounds, custom cursors, typewriter effects, emoji or chip soup.
 
 This replaces the earlier dark tech-brand direction and the hero background art. `src/scripts/hero-bg/trace-gate.ts` (+ `common.ts`) is kept unused for possible later use on the Nexus page.

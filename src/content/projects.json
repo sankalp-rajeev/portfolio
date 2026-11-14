@@ -178,8 +178,9 @@
       "Gemma 4",
       "LiteRT-LM"
     ],
-    "placeholder": "Screenshot coming",
-    "linksTodo": true
+    "image": "/assets/projects/smriti.png",
+    "github": "https://github.com/sankalp-rajeev/Smriti",
+    "videoLink": "https://www.youtube.com/watch?v=s5zeFpfrVQo"
   },
   {
     "id": "multimodal-document-q-a",

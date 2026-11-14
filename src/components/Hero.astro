@@ -1,5 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import Ink from './Ink.astro';
+import { nb } from '../lib/text';
+import magna from '../assets/logos/magna.png';
+import zoetis from '../assets/logos/zoetis.png';
+import mistral from '../assets/logos/mistral1.png';
+
+const prev = [
+  { name: 'Magna', src: magna },
+  { name: 'Zoetis', src: zoetis },
+  { name: 'Mistral Solutions', src: mistral },
+];
 ---
 
 <section id="home" class="col hero" aria-labelledby="hero-title">
@@ -12,9 +23,15 @@ import Ink from './Ink.astro';
         style="left:-1%;right:-1%;bottom:-0.3em;height:0.3em;"
       /></span></span>
   </h1>
-  <p class="sub enter-sub">
-    ML engineer focused on reliability: verifiers for LLM code repairs, self-healing agent platforms, and production ML pipelines.
-  </p>
+  <p class="sub enter-sub" set:html={nb('ML engineer focused on reliability: verifiers for LLM code repairs, self-healing agent platforms, and production ML pipelines.')} />
+  <div class="prev enter-sub">
+    <span class="prev-label">Previously at</span>
+    <ul>
+      {prev.map((p) => (
+        <li><Image class="plogo" src={p.src} alt="" width={20} height={20} densities={[2, 3]} format="webp" /><span>{p.name}</span></li>
+      ))}
+    </ul>
+  </div>
 </section>
 
 <style>
@@ -32,6 +49,10 @@ import Ink from './Ink.astro';
   }
   .rise > span { display: block; }
   .hl { position: relative; display: inline-block; max-width: 100%; }
+  .prev { margin-top: var(--s-6); display: flex; flex-wrap: wrap; align-items: center; gap: 10px var(--s-3); font-size: var(--fs-ui); color: var(--text-3); }
+  .prev ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px var(--s-3); }
+  .prev li { display: inline-flex; align-items: center; gap: 8px; color: var(--text-2); }
+  .plogo { width: 20px; height: 20px; object-fit: contain; filter: url(#mono); opacity: 0.75; border-radius: 3px; }
   .sub {
     margin: var(--s-4) 0 0;
     max-width: 34em;

@@ -8,7 +8,6 @@ const roles = (await getCollection('experience')).sort((a, b) => a.data.order - 
 const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.png', { eager: true });
 ---
 
-<svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="mono" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0" /><feComponentTransfer><feFuncR type="discrete" tableValues="0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 1" /><feFuncG type="discrete" tableValues="0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 1" /><feFuncB type="discrete" tableValues="0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 0.13 1" /></feComponentTransfer></filter></svg>
 <section id="experience" class="section" aria-labelledby="experience-title">
   <div class="col">
     <h2 id="experience-title" class="h2" data-reveal>Experience</h2>

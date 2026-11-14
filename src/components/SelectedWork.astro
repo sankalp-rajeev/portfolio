@@ -21,7 +21,6 @@ const featured = (await getCollection('projects'))
   .grid { display: grid; grid-template-columns: 1fr; gap: var(--s-8) var(--s-4); }
   /* The grid overhangs the 720px text column symmetrically; the heading keeps the column's left edge. */
   @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-10); align-items: stretch; } }
-  @media (min-width: 1100px) { .grid { margin-inline: -40px; } }
   .all { margin: var(--s-6) 0 0; font-size: var(--fs-base); }
   .all .link { display: inline-flex; align-items: center; min-height: 40px; }
 </style>
