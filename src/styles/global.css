@@ -1,24 +1,31 @@
 @import 'tailwindcss';
 
-/* Self-hosted Geist (variable). No off-host font requests. */
+/* Self-hosted type. No off-host font requests. */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../assets/fonts/Newsreader-opsz.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../assets/fonts/Newsreader-italic.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Caveat';
+  src: url('../assets/fonts/Caveat.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: 'Geist';
   src: url('../assets/fonts/Geist-Variable.woff2') format('woff2');
   font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Cabinet Grotesk';
-  src: url('../assets/fonts/CabinetGrotesk-500.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Cabinet Grotesk';
-  src: url('../assets/fonts/CabinetGrotesk-700.woff2') format('woff2');
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -44,27 +51,31 @@
   --s-12: 96px;
   --s-16: 128px;
 
-  /* Type roles (rem). Display is fluid; see DESIGN.md */
+  /* Type roles (rem) */
   --fs-eyebrow: 0.75rem;
   --fs-mono: 0.8125rem;
   --fs-ui: 0.875rem;
   --fs-label: 0.9375rem;
   --fs-base: 1rem;
   --fs-body: 1.0625rem;
-  --fs-lead: clamp(1.0625rem, 1.6vw, 1.25rem);
+  --fs-lead: clamp(1.0625rem, 1.5vw, 1.25rem);
   --fs-figure: 1.25rem;
-  --fs-title: 1.5rem;
-  --fs-display: clamp(40px, 5.5vw, 72px);
+  --fs-title: 1.375rem;
+  --fs-h2: clamp(1.75rem, 3vw, 2.125rem);
+  --fs-display: clamp(40px, 5vw, 64px);
+  --fs-note: 1.375rem;
 
   --radius: 12px;
-  --max: 1200px;
+  --radius-sm: 8px;
+  --sidebar-w: 300px;
+  --col: 720px;
+  --col-wide: 800px;
   --gutter: 24px;
-  --gate: 0.62; /* hero background gate position (share of width) */
-  --nav-h: 64px;
+  --topbar-h: 64px;
 
   --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  /* Display face for headings only (deliberate override of the overused-font finding; see DESIGN.md) */
-  --font-display: 'Cabinet Grotesk', 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-hand: 'Caveat', 'Bradley Hand', 'Segoe Print', cursive;
   --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 
   /* Motion */
@@ -72,69 +83,55 @@
   --dur-press: 120ms;
   --dur-hover: 200ms;
   --dur-image: 400ms;
-  --dur-enter: 600ms;
 
-  /* Dark (default) */
-  --bg: #0c0c0b;
-  --surface: #151514;
-  --surface-2: #1b1b1a;
-  --text: #ededea;
-  --text-2: #a8a8a2;
-  --text-3: #8b8b85;
-  --line: rgb(255 255 255 / 0.09);
-  --line-strong: rgb(255 255 255 / 0.2);
-  --accent: #e8794a;
-  --on-solid: #0c0c0b;
-  --solid: #ededea;
-  --solid-hover: #ffffff;
-  --nav-bg: rgb(12 12 11 / 0.8);
-  --shadow-frame: 0 1px 0 rgb(255 255 255 / 0.03) inset;
-  color-scheme: dark;
+  /* Light (default): warm paper, near-black ink */
+  --bg: #f4f1ea;
+  --surface: #faf8f3;
+  --surface-2: #ebe7dd;
+  --text: #1d1b18;
+  --text-2: #4a463f;
+  --text-3: #655f55;
+  --line: rgb(29 27 24 / 0.13);
+  --line-strong: rgb(29 27 24 / 0.32);
+  --accent: #c2410c; /* ink: annotations, links, focus */
+  --solid: #1d1b18;
+  --on-solid: #f4f1ea;
+  --topbar-bg: rgb(244 241 234 / 0.86);
+  color-scheme: light;
 }
 
-:root[data-theme='light'] {
-  --bg: #fafaf8;
-  --surface: #ffffff;
-  --surface-2: #f3f2ee;
-  --text: #141413;
-  --text-2: #53534d;
-  --text-3: #6a6a63;
-  --line: rgb(20 20 19 / 0.1);
-  --line-strong: rgb(20 20 19 / 0.28);
-  --accent: #b4451f;
-  --on-solid: #fafaf8;
-  --solid: #141413;
-  --solid-hover: #2b2b29;
-  --nav-bg: rgb(250 250 248 / 0.82);
-  --shadow-frame: 0 1px 2px rgb(20 20 19 / 0.04);
-  color-scheme: light;
+:root[data-theme='dark'] {
+  --bg: #161513;
+  --surface: #1c1a18;
+  --surface-2: #252320;
+  --text: #ece6da;
+  --text-2: #b5aea1;
+  --text-3: #958d80;
+  --line: rgb(236 230 218 / 0.12);
+  --line-strong: rgb(236 230 218 / 0.3);
+  --accent: #f2784a;
+  --solid: #ece6da;
+  --on-solid: #161513;
+  --topbar-bg: rgb(22 21 19 / 0.86);
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-surface: var(--surface);
   --color-text: var(--text);
-  --color-text-2: var(--text-2);
-  --color-text-3: var(--text-3);
-  --color-line: var(--line);
   --color-accent: var(--accent);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
-  --radius-surface: var(--radius);
 }
 
-@media (max-width: 340px) {
-  :root { --gutter: 16px; }
-}
-@media (min-width: 768px) {
-  :root { --gutter: 40px; }
-}
+@media (max-width: 340px) { :root { --gutter: 16px; } }
+@media (min-width: 768px) { :root { --gutter: 40px; } }
 
 /* ───────── Base ───────── */
 html {
   background: var(--bg);
   -webkit-text-size-adjust: 100%;
-  scroll-padding-top: calc(var(--nav-h) + 16px);
+  scroll-padding-top: calc(var(--topbar-h) - 1px); /* section dividers tuck under the bar border */
 }
 body {
   margin: 0;
@@ -143,30 +140,15 @@ body {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+::selection { background: color-mix(in srgb, var(--accent) 28%, transparent); }
 
-.wrap {
-  width: 100%;
-  max-width: calc(var(--max) + var(--gutter) * 2);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
-.grid12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-3); }
+.serif { font-family: var(--font-serif); font-optical-sizing: auto; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.hand { font-family: var(--font-hand); }
 
-.mono { font-family: var(--font-mono); font-feature-settings: normal; font-variant-numeric: tabular-nums; }
-.eyebrow {
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin: 0;
-}
-
-/* Links: neutral by default, accent on hover/focus-visible. */
 a { color: inherit; text-decoration: none; }
 .link {
   color: var(--text);
@@ -177,35 +159,46 @@ a { color: inherit; text-decoration: none; }
 }
 .link:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 .skip-link {
   position: fixed; left: 16px; top: 8px; z-index: 100;
-  padding: 8px 14px; border-radius: 8px;
-  background: var(--solid); color: var(--on-solid); font-size: 0.875rem;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  background: var(--solid); color: var(--on-solid); font-size: var(--fs-ui);
   transform: translateY(-200%);
 }
 .skip-link:focus { transform: none; }
-
 .sr-only {
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
-
-/* Section rhythm */
-.section { padding-block: var(--s-10); }
-@media (min-width: 768px) { .section { padding-block: var(--s-16); } }
-.hairline { border: 0; border-top: 1px solid var(--line); margin: 0; }
 
 /* Film grain: static SVG noise, ~3% opacity, no animation, never intercepts input. */
 .grain {
   position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0.03;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   background-size: 180px 180px;
+}
+
+/* ───────── Shell: fixed sidebar + content column ───────── */
+.content { min-width: 0; }
+@media (min-width: 1024px) {
+  .content { margin-left: var(--sidebar-w); }
+}
+.col { width: 100%; max-width: calc(var(--col) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+.col-wide { max-width: calc(var(--col-wide) + var(--gutter) * 2); }
+
+.section { padding-block: var(--s-10); }
+@media (min-width: 768px) { .section { padding-block: var(--s-12); } }
+.section + .section { border-top: 1px solid var(--line); }
+.h2 {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 /* ───────── Buttons ───────── */
@@ -215,11 +208,11 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--fs-label); font-weight: 500; line-height: 1;
   border: 1px solid var(--line-strong);
   color: var(--text);
-  transition: transform var(--dur-press) var(--ease), opacity var(--dur-hover) var(--ease);
+  transition: transform var(--dur-press) var(--ease);
   touch-action: manipulation;
   position: relative;
 }
-.btn::before { /* hover wash via opacity only */
+.btn::before {
   content: ''; position: absolute; inset: -1px; border-radius: inherit;
   background: var(--text); opacity: 0; transition: opacity var(--dur-hover) var(--ease); pointer-events: none;
 }
@@ -227,25 +220,23 @@ a { color: inherit; text-decoration: none; }
 .btn:active { transform: scale(0.97); }
 .btn-primary { background: var(--solid); color: var(--on-solid); border-color: var(--solid); }
 .btn-primary::before { background: var(--on-solid); }
-.btn-primary:hover::before { opacity: 0.12; }
+.btn-primary:hover::before { opacity: 0.14; }
 
 /* ───────── Reveal states (JS-gated: content is visible without JS) ───────── */
-.js [data-reveal] { opacity: 0; transform: translateY(16px); }
+.js [data-reveal] { opacity: 0; transform: translateY(12px); }
+.js [data-seg] { transform: scaleY(0); transform-origin: top; }
+/* Ink strokes: drawn fully by default; JS-gated hidden state so they draw in once. */
+.js [data-ink] .stroke path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.js [data-ink] .note { opacity: 0; }
 
-/* Hero entrance: CSS keyframes so nothing waits on JS. Class `entrance` is set by an
-   inline head script only on the first Home view of a session (and never under reduced motion). */
+/* Hero entrance: CSS keyframes (nothing waits on JS), headline/subhead only translate (LCP).
+   `entrance` is set by an inline head script once per session, never under reduced motion. */
 @keyframes settle { from { transform: translateY(0.3em); } to { transform: none; } }
 @keyframes settle-sm { from { transform: translateY(12px); } to { transform: none; } }
-@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-
-.entrance .nav-enter { animation: fade 300ms var(--ease) both; }
-/* Headline + subhead are visible from the first frame (LCP): they only translate. */
-.entrance .rise-line > span { animation: settle 700ms var(--ease) both; }
-.entrance .rise-line:nth-child(2) > span { animation-delay: 70ms; }
+.entrance .topbar-enter { animation: fade 300ms var(--ease) both; }
+.entrance .rise > span { animation: settle 700ms var(--ease) both; }
 .entrance .enter-sub { animation: settle-sm 600ms var(--ease) 140ms both; }
-.entrance .enter-actions { animation: fade-up 500ms var(--ease) 260ms both; }
-.entrance .enter-facts { animation: fade-up 500ms var(--ease) 380ms both; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -255,13 +246,26 @@ a { color: inherit; text-decoration: none; }
     scroll-behavior: auto !important;
   }
   .js [data-reveal] { opacity: 1; transform: none; }
+  .js [data-seg] { transform: none; }
+  .js [data-ink] .stroke path { stroke-dashoffset: 0; }
+  .js [data-ink] .note { opacity: 1; }
 }
 
 /* ───────── Theme reveal (View Transitions API) ───────── */
 html.theme-vt::view-transition-old(root),
-html.theme-vt::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
+html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 html.theme-vt::view-transition-old(root) { z-index: 1; }
 html.theme-vt::view-transition-new(root) { z-index: 2; }
+
+.foot { padding-block: var(--s-8) var(--s-10); }
+.foot p { margin: 0; font-size: var(--fs-mono); color: var(--text-3); }
+
+/* ───────── Reviewer's ink (decorative, aria-hidden) ───────── */
+.ink { position: absolute; pointer-events: none; color: var(--accent); }
+.ink .stroke { display: block; width: 100%; height: 100%; overflow: visible; }
+.ink .stroke path { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.ink .note { position: absolute; white-space: nowrap; font-family: var(--font-hand); font-size: var(--fs-note); font-weight: 500; line-height: 1; transform: rotate(var(--r, -3deg)); }
+/* Mobile keeps only the hero underline and the Nexus circle. */
+@media (max-width: 1023px) { .ink-desk { display: none !important; } }
+/* Margin notes need real margin. */
+@media (max-width: 1279px) { .ink-margin { display: none !important; } }

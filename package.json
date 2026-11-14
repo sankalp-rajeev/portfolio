@@ -9,7 +9,6 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@paper-design/shaders": "^0.0.82",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.12",
     "geist": "^1.9.2",

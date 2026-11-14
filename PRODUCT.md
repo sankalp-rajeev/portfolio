@@ -12,6 +12,10 @@ Astro (static output), TypeScript, Tailwind v4 with CSS-variable design tokens, 
 
 Note: product truth below was supplied in the owner's written brief rather than an interactive interview; all of it is owner-stated, none inferred.
 
+## Direction (step 1c)
+
+A personal editorial portfolio, not a tech-brand landing page: warm paper by default (dark as the alternative), a fixed profile sidebar plus a reading column, serif headings, and a restrained layer of hand-drawn "reviewer's ink" annotations that echo the work (systems that check their own work). Supersedes the earlier dark/instrument direction.
+
 ## Users
 
 Recruiters and hiring engineers evaluating Sankalp Rajeev for AI/ML Engineer and Forward Deployed Engineer roles. They give the site about 30 seconds. Their job: understand who this is, see real evidence of work, and open the resume, GitHub or LinkedIn.
@@ -38,17 +42,17 @@ Evaluated on desktop and phone, often from a resume link or LinkedIn. Visitors s
 
 ## Brand Commitments
 
-Name: Sankalp Rajeev. Single accent colour carried over from the current site (orange-red). Terminology: "Graduate Research Assistant" (never "Graduate Researcher").
+Name: Sankalp Rajeev. Single accent: a deep vermilion ink (#C2410C light / #F2784A dark). Terminology: "Graduate Research Assistant" (never "Graduate Researcher").
 
 ## Evidence on Hand
 
-Experience, projects, certificates, gallery, education, skills, journey in `src/content/*.json`; project screenshots in `public/assets/projects/` (Nexus, ContractRelay, Kairos exist; Trust but Verify has none yet and must not be faked); company logos in `public/assets/experience/`; resume PDF; reports and transcripts in `public/`.
+The AI/ML resume PDF (`public/Sankalp_Rajeev-Resume.pdf`) is the source of truth for experience bullets and project figures; experience is copied verbatim from it. Collections in `src/content/*.json` (experience, projects, certificates, gallery, education, skills, journey); project screenshots in `public/assets/projects/` (Nexus, ContractRelay, Kairos exist; Trust but Verify and Smriti show labelled placeholders until the owner supplies images; Smriti links are not provided yet and must not be invented); company logos in `public/assets/experience/`; resume PDF; reports and transcripts in `public/`.
 
 ## Product Principles
 
 1. Evidence over adjectives: every claim sits next to a real figure or artifact.
 2. Thirty seconds: the first screen answers who, what, and where to click.
-3. Quiet instrument: precision and restraint; the work is the loudest thing on the page.
+3. Quiet and personal: restraint and editorial calm; the work is the loudest thing on the page, and the hand-drawn ink is sparse and exact.
 4. Never fabricate: missing assets are shown as missing, not invented.
 
 ## Accessibility & Inclusion

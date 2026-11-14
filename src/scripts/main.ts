@@ -4,19 +4,19 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const root = document.documentElement;
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ───────── Theme (instant everywhere; circle reveal from the button when supported) ───────── */
+/* ───────── Theme (instant everywhere; circular reveal from the button when supported) ───────── */
 function applyTheme(next: 'light' | 'dark') {
   root.dataset.theme = next;
   try { localStorage.setItem('theme', next); } catch {}
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'light' ? '#fafaf8' : '#0c0c0b');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'dark' ? '#161513' : '#f4f1ea');
   syncToggleLabel();
 }
 function syncToggleLabel() {
-  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
   document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-label', `Switch to ${next} theme`));
 }
 async function toggleTheme(button: Element) {
-  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
   if (!('startViewTransition' in document) || reduced()) return applyTheme(next);
   const r = button.getBoundingClientRect();
   const x = r.left + r.width / 2;
@@ -49,43 +49,50 @@ document.addEventListener('astro:before-swap', (e) => {
   nd.classList.add('js');
 });
 
-/* ───────── Nav: scrolled state + sliding active indicator ───────── */
-let nav: HTMLElement | null = null;
-let indicator: HTMLElement | null = null;
+/* ───────── Top bar: scrolled state + shared sliding pill ───────── */
+let bar: HTMLElement | null = null;
+let pills: HTMLElement | null = null;
+let overlay: HTMLElement | null = null;
 let links: HTMLAnchorElement[] = [];
 let sections: { id: string; el: HTMLElement }[] = [];
 let activeId: string | null = null;
-let indicatorShown = false;
+let currentClip = '';
 
-function placeIndicator(id: string | null, immediate = false) {
-  if (!indicator) return;
-  const link = id ? links.find((l) => l.dataset.section === id) : undefined;
-  if (!link) {
-    if (indicatorShown) animate(indicator, { opacity: 0 }, { duration: 0.2, ease: EASE });
-    indicatorShown = false;
-    return;
+const HIDDEN = 'inset(0px 100% 0px 0px round 999px)';
+const clipFor = (id: string | null) => {
+  if (!pills || !id) return HIDDEN;
+  const link = links.find((l) => l.dataset.section === id);
+  if (!link) return HIDDEN;
+  const pr = pills.getBoundingClientRect();
+  const lr = link.getBoundingClientRect();
+  const left = lr.left - pr.left;
+  const right = pr.width - (lr.right - pr.left);
+  return `inset(0px ${right.toFixed(1)}px 0px ${left.toFixed(1)}px round 999px)`;
+};
+/** Only clip-path animates: the pill keeps a true rounded shape while it slides and resizes. */
+function movePill(id: string | null, immediate = false) {
+  if (!overlay) return;
+  const to = clipFor(id);
+  if (immediate || reduced() || !currentClip || currentClip === HIDDEN || to === HIDDEN) {
+    overlay.style.clipPath = to;
+  } else {
+    animate(overlay, { clipPath: [currentClip, to] }, { duration: 0.4, ease: EASE });
+    overlay.style.clipPath = to;
   }
-  const ul = link.closest('ul')!.getBoundingClientRect();
-  const r = link.getBoundingClientRect();
-  const pad = parseFloat(getComputedStyle(link).paddingLeft) || 0;
-  const to = { x: r.left - ul.left + pad, scaleX: Math.max(1, r.width - pad * 2), opacity: 1 };
-  const instant = immediate || !indicatorShown || reduced();
-  animate(indicator, to, instant ? { duration: 0 } : { duration: 0.4, ease: EASE });
-  indicatorShown = true;
+  currentClip = to;
 }
 
 function updateScrollState() {
-  nav?.setAttribute('data-scrolled', String(scrollY > 16));
+  bar?.setAttribute('data-scrolled', String(scrollY > 16));
   if (!sections.length) return;
   const line = innerHeight * 0.4;
   let id: string | null = null;
   for (const s of sections) if (s.el.getBoundingClientRect().top <= line) id = s.id;
-  // Short last section can never reach the line: at the bottom of the page it is the active one.
   if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) id = sections[sections.length - 1].id;
   if (id !== activeId) {
     activeId = id;
     links.forEach((l) => (l.dataset.section === id ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current')));
-    placeIndicator(id);
+    movePill(id);
   }
 }
 
@@ -95,39 +102,63 @@ addEventListener('scroll', () => {
   ticking = true;
   requestAnimationFrame(() => { ticking = false; updateScrollState(); });
 }, { passive: true });
-addEventListener('resize', () => placeIndicator(activeId, true));
+addEventListener('resize', () => { currentClip = ''; movePill(activeId, true); });
 
-/* ───────── Page setup (runs on first load and after every ClientRouter navigation) ───────── */
+/* ───────── Ink: stroke draws in (stroke-dashoffset), then its note fades in 150 ms later ───────── */
+function drawInk(el: HTMLElement) {
+  const paths = Array.from(el.querySelectorAll<SVGPathElement>('.stroke path'));
+  const note = el.querySelector<HTMLElement>('.note');
+  const dur = 0.75;
+  paths.forEach((p) => animate(p, { strokeDashoffset: [1, 0] }, { duration: dur, ease: EASE }));
+  if (note) animate(note, { opacity: [0, 1] }, { duration: 0.2, delay: (paths.length ? dur : 0) + 0.15, ease: 'easeOut' });
+}
+
+/* ───────── Page setup (first load and after every ClientRouter navigation) ───────── */
 function setup() {
-  nav = document.querySelector('[data-nav]');
-  indicator = document.querySelector('[data-indicator]');
-  links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-links] a[data-section]'));
-  sections = ['work', 'experience', 'about']
+  bar = document.querySelector('[data-topbar]');
+  pills = document.querySelector('[data-pills]');
+  overlay = document.querySelector('[data-pill-overlay]');
+  links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-pills] ul:not(.overlay) a[data-section]'));
+  sections = ['about', 'experience', 'work', 'education']
     .map((id) => ({ id, el: document.getElementById(id) as HTMLElement | null }))
     .filter((s): s is { id: string; el: HTMLElement } => !!s.el);
   activeId = null;
-  indicatorShown = false;
+  currentClip = '';
   syncToggleLabel();
 
-  if (sections.length) updateScrollState();
+  if (sections.length) { updateScrollState(); movePill(activeId, true); }
   else {
     // Work detail pages: Work is the current section.
     const cur = links.find((l) => l.getAttribute('aria-current') === 'page');
-    if (cur) placeIndicator(cur.dataset.section ?? null, true);
-    nav?.setAttribute('data-scrolled', String(scrollY > 16));
+    bar?.setAttribute('data-scrolled', String(scrollY > 16));
+    movePill(cur?.dataset.section ?? null, true);
   }
 
-  // Card entrance: fade up 16px once as they enter view, staggered ~70ms within a row.
-  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
-  if (cards.length) {
-    if (reduced()) cards.forEach((c) => c.removeAttribute('data-reveal'));
-    else {
-      const cols = matchMedia('(min-width: 768px)').matches ? 2 : 1;
-      inView(cards, (el) => {
-        const i = Number((el as HTMLElement).dataset.index ?? 0);
-        animate(el, { opacity: [0, 1], y: [16, 0] }, { duration: 0.6, delay: (i % cols) * 0.07, ease: EASE });
-      }, { amount: 0.15, margin: '0px 0px -6% 0px' });
+  if (!reduced()) {
+    // Section content fades up 12px once on entry; at most 4 staggered (~70 ms) per container.
+    const items = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    const index = (el: HTMLElement) => {
+      const sibs = Array.from(el.parentElement?.children ?? []).filter((c) => (c as HTMLElement).hasAttribute('data-reveal'));
+      return Math.min(sibs.indexOf(el), 3);
+    };
+    const cols = matchMedia('(min-width: 768px)').matches ? 2 : 1;
+    if (items.length) {
+      inView(items, (el) => {
+        const e = el as HTMLElement;
+        const isCard = e.classList.contains('card');
+        const delay = (isCard ? Number(e.dataset.index ?? 0) % cols : index(e)) * 0.07;
+        animate(e, { opacity: [0, 1], y: [12, 0] }, { duration: 0.6, delay, ease: EASE });
+        // Experience: the hairline segment draws down after the entry appears (reveals "along the hairline").
+        const seg = e.querySelector<HTMLElement>('[data-seg]');
+        if (seg) animate(seg, { scaleY: [0, 1] }, { duration: 0.7, delay: delay + 0.2, ease: EASE });
+      }, { amount: 0.2, margin: '0px 0px -6% 0px' });
     }
+
+    // Ink: strokes draw once as they enter view; the hero underline draws shortly after load.
+    document.querySelectorAll<HTMLElement>('[data-ink]').forEach((el) => {
+      if (el.hasAttribute('data-ink-load')) setTimeout(() => drawInk(el), 650);
+      else inView(el, () => { drawInk(el); }, { amount: 0.6 });
+    });
   }
 
   // Entrance is CSS-driven; drop the flag after it ends so returning to Home shows the final state.

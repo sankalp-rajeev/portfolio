@@ -1,153 +1,99 @@
 [
   {
-    "id": "university-of-michigan-dearborn-graduate-researcher",
+    "id": "umd-gra",
     "order": 0,
-    "title": "Graduate Research Assistant",
-    "company": "University of Michigan-Dearborn",
+    "company": "University of Michigan–Dearborn",
+    "role": "Graduate Research Assistant",
+    "detail": "LLM Software Repair Reliability",
+    "kind": "Research",
     "location": "Dearborn, MI",
-    "duration": "Sep 2026 – Present",
-    "contributions": [
-      "Building a Docker-isolated evaluation pipeline for LLM-generated software repairs on SWE-bench Verified, combining integrity checks, regression tests, static analysis, and issue-derived reproduction tests with 840+ automated tests.",
-      "A pre-registered audit halted an early study run after detecting environment leakage in 8 of 50 audited tasks; added container masking and integrity checks before restarting the experiment."
+    "start": "2026-09",
+    "end": "present",
+    "dates": "Sep 2026 – Present",
+    "logo": "umdearborn",
+    "verified": true,
+    "bullets": [
+      "Built a Docker-isolated pipeline that verifies LLM-generated SWE-bench Verified patches with regression, static and pre-frozen reproduction tests in network-disabled containers; over 100 tasks, accepted patches were correct 87% of the time (47/54).",
+      "Halted the study when a pre-registered audit caught environment leakage in 8 of 50 tasks from package copies baked into prebuilt images; added container masking and integrity checks, then reran all 100 tasks.",
+      "Rebuilt test execution with per-module isolation, retries and time budgets, raising conclusive verdicts from 31 to 58 of 83 tasks (95% of 37.6K selected test runs now return a result), backed by 1,100+ unit tests."
     ],
-    "technologies": [
+    "tags": [
       "Python",
       "SWE-bench",
       "Docker",
-      "Pytest",
-      "Static Analysis",
-      "LLM Evaluation"
-    ],
-    "image": "/assets/experience/umdearborn.png"
+      "pytest",
+      "Static analysis"
+    ]
   },
   {
-    "id": "magna-international-data-science-intern",
+    "id": "magna",
     "order": 1,
-    "title": "Data Science Intern",
     "company": "Magna International",
-    "team": "Advanced Manufacturing Innovation R&D",
+    "role": "Data Science Intern",
+    "detail": "Advanced Manufacturing Innovation R&D",
+    "kind": "Internship",
     "location": "Troy, MI",
-    "duration": "05/2026 – 08/2026",
-    "contributions": [
-      "Validated a multi-camera stamped-part inspection PoC with up to $7M/year in projected labor savings, proving feature registration and cross-camera deduplication on 2- and 4-camera rigs using SIFT/RANSAC calibration and geometric/Hungarian matching.",
-      "Delivered a lens-debris inspection pipeline projected to save ~$700K/year in labor, achieving 100% recall and 96% precision with high-pass filtering, CLAHE preprocessing, and PatchCore; handed the validated system off to the manufacturing plant.",
-      "Productionized an unsupervised visual-inspection pipeline for a Magna Seating plant in Spain, achieving 100% defect recall, 95.2% precision, and ~300 ms end-to-end latency on NVIDIA Jetson AGX Orin using YOLOX, NanoSAM, PatchCore, ONNX, TensorRT FP16, Docker, and NVIDIA Triton."
+    "start": "2026-05",
+    "end": "2026-08",
+    "dates": "May 2026 – Aug 2026",
+    "logo": "magna",
+    "bullets": [
+      "Productionized visual inspection for a Magna Seating plant in Spain, deploying YOLOX + NanoSAM + PatchCore with ONNX, TensorRT FP16, Docker and NVIDIA Triton on Jetson AGX Orin at ~300 ms latency and 100% defect recall.",
+      "Projected ~$700K/year in labor savings with a lens-debris inspection pipeline (100% recall, 96% precision), handed off to the plant.",
+      "Projected up to $7M/year in labor savings with a multi-camera stamped-part inspection PoC: built registration and cross-camera deduplication, proved it on 2- and 4-camera rigs, and handed it off with a path to 6- and 24-camera deployments."
     ],
-    "technologies": [
-      "Python",
-      "PyTorch",
-      "PatchCore",
+    "tags": [
       "YOLOX",
-      "NanoSAM",
-      "OpenCV",
-      "ONNX",
+      "PatchCore",
       "TensorRT",
       "NVIDIA Triton",
-      "Jetson AGX Orin",
-      "Docker"
-    ],
-    "image": "/assets/experience/magna.png"
+      "Jetson AGX Orin"
+    ]
   },
   {
-    "id": "zoetis-ai-engineering-intern",
+    "id": "zoetis",
     "order": 2,
-    "title": "AI Engineering Intern",
     "company": "Zoetis",
+    "role": "AI Engineering Intern",
+    "kind": "Internship",
     "location": "Kalamazoo, MI",
-    "duration": "05/2025 – 11/2025",
-    "contributions": [
-      "Deployed 4 production LLM tools on Azure Kubernetes using asynchronous ETL and semantic matching, reducing regulated documentation effort by 1,000+ engineer-hours annually.",
-      "Reduced incident misclassification by ~40% by building a real-time SQL-backed analytics workflow with Plotly dashboards and automated openpyxl Excel exports."
+    "start": "2025-05",
+    "end": "2025-11",
+    "dates": "May 2025 – Nov 2025",
+    "logo": "zoetis",
+    "bullets": [
+      "Saved 1,000+ engineer-hours/year in regulated documentation as the sole developer on a 6-person team, shipping 4 production LLM tools on Azure Kubernetes Service.",
+      "Cut incident misclassification by ~40% with a real-time SQL-backed analytics workflow, Plotly dashboards and Excel reporting."
     ],
-    "technologies": [
+    "tags": [
       "Python",
-      "Streamlit",
-      "MySQL",
       "LLM APIs",
-      "Plotly",
       "AKS",
-      "Posit Connect"
-    ],
-    "image": "/assets/experience/zoetis.png"
+      "MySQL",
+      "Plotly"
+    ]
   },
   {
-    "id": "mistral-solutions-pvt-ltd-ai-ml-engineer-intern",
+    "id": "mistral",
     "order": 3,
-    "title": "AI/ML Engineer Intern",
     "company": "Mistral Solutions Pvt Ltd",
-    "location": "Bangalore, KA",
-    "duration": "06/2024 – 08/2024",
-    "contributions": [
-      "Reduced UAV inference latency by 25% by quantizing YOLOv8 and ByteTrack with the Qualcomm SNPE SDK on a QRB5165 edge platform; built and deployed a VGG16-based vehicle classification model through the same SNPE pipeline.",
-      "Enabled real-time range and thermal telemetry by integrating Lightware LW20/C LiDAR and DS1820 sensors through Arduino and I2C-based hardware-software interfaces."
+    "role": "AI/ML Engineer Intern",
+    "kind": "Internship",
+    "location": "Bangalore, India",
+    "start": "2024-06",
+    "end": "2024-08",
+    "dates": "Jun 2024 – Aug 2024",
+    "logo": "mistral1",
+    "bullets": [
+      "Reduced UAV inference latency by 25% by quantizing YOLOv8 and ByteTrack with Qualcomm SNPE on QRB5165 hardware; deployed a VGG16 vehicle classifier with 96% accuracy through the same pipeline.",
+      "Integrated LiDAR and thermal sensors over Arduino and I2C for real-time range and thermal telemetry in onboard perception."
     ],
-    "technologies": [
+    "tags": [
       "Python",
       "TensorFlow",
       "YOLOv8",
-      "Arduino",
-      "Lua",
-      "Qualcomm SNPE SDK"
-    ],
-    "image": "/assets/experience/mistral1.png",
-    "report": "/reports/Internship Report.pdf"
-  },
-  {
-    "id": "astroseed-software-developer",
-    "order": 4,
-    "title": "Software Developer",
-    "company": "Astroseed",
-    "location": "Tempe, AZ",
-    "duration": "08/2023 – 05/2024",
-    "contributions": [
-      "Built ROS-based autonomous plant-care software for the Terra Pod, integrating depth-camera perception, YOLO/Canny-based vision, and robotic control for pruning and harvesting tasks.",
-      "Improved autonomous navigation and manipulation by combining 2D SLAM with depth-based distance and size estimation for robotic-arm interactions."
-    ],
-    "technologies": [
-      "YOLOv5",
-      "SLAM",
-      "Python",
-      "ROS",
-      "Gazebo"
-    ],
-    "image": "/assets/experience/astroseed.png",
-    "report": "/reports/Final Report_astroseed.pdf"
-  },
-  {
-    "id": "arizona-state-university-teaching-assistant",
-    "order": 5,
-    "title": "Teaching Assistant",
-    "company": "Arizona State University",
-    "location": "Tempe, AZ",
-    "duration": "08/2022 – 05/2024",
-    "contributions": [
-      "Mentored 100+ first-year students through individualized academic guidance and course support."
-    ],
-    "technologies": [
-      "Mentoring",
-      "Academic Guidance"
-    ],
-    "image": "/assets/experience/asu.png"
-  },
-  {
-    "id": "machani-robotics-software-development-engineering-intern",
-    "order": 6,
-    "title": "Software Development Engineering Intern",
-    "company": "Machani Robotics",
-    "location": "Bangalore, KA",
-    "duration": "06/2022 – 08/2022",
-    "contributions": [
-      "Built ROS/MoveIt control software for a 6-DOF robotic arm, integrating Intel RealSense D435i perception and inverse-kinematics-based pick-and-place workflows.",
-      "Implemented image-to-coordinate trajectory generation with OpenCV and Canny edge detection, while synchronizing RMD motors over CAN for robotic drawing and motion-control tasks."
-    ],
-    "technologies": [
-      "Python",
-      "ROS",
-      "C++",
-      "CAN Communication",
-      "3D Depth Cameras"
-    ],
-    "image": "/assets/experience/machani-robotics.png",
-    "report": "/reports/PROJECT REPORT_machanirobotics.pdf"
+      "Qualcomm SNPE",
+      "Arduino"
+    ]
   }
 ]

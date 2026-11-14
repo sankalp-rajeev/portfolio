@@ -1,52 +1,49 @@
 ---
 name: Sankalp Rajeev Portfolio
-description: A quiet, precise instrument for showing evidence of reliable AI work.
+description: A personal editorial portfolio on warm paper, annotated by hand like a reviewer's marked-up proof.
 colors:
-  bg-dark: "#0c0c0b"
-  surface-dark: "#151514"
-  surface-2-dark: "#1b1b1a"
-  text-dark: "#ededea"
-  text-2-dark: "#a8a8a2"
-  text-3-dark: "#8b8b85"
-  accent-dark: "#e8794a"
-  bg-light: "#fafaf8"
-  surface-light: "#ffffff"
-  surface-2-light: "#f3f2ee"
-  text-light: "#141413"
-  text-2-light: "#53534d"
-  text-3-light: "#6a6a63"
-  accent-light: "#b4451f"
+  paper: "#f4f1ea"
+  paper-raised: "#faf8f3"
+  paper-sunk: "#ebe7dd"
+  ink: "#1d1b18"
+  ink-2: "#4a463f"
+  ink-3: "#655f55"
+  vermilion: "#c2410c"
+  charcoal: "#161513"
+  charcoal-raised: "#1c1a18"
+  charcoal-sunk: "#252320"
+  paper-text: "#ece6da"
+  paper-text-2: "#b5aea1"
+  paper-text-3: "#958d80"
+  vermilion-dark: "#f2784a"
+  logo-tile: "#ffffff"
 typography:
   display:
-    fontFamily: "Cabinet Grotesk, Geist, system-ui, sans-serif"
-    fontSize: "clamp(40px, 5.5vw, 72px)"
-    fontWeight: 700
-    lineHeight: 1.02
-    letterSpacing: "-0.03em"
-  title:
-    fontFamily: "Cabinet Grotesk, Geist, system-ui, sans-serif"
-    fontSize: "1.5rem"
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "clamp(40px, 5vw, 64px)"
+    fontWeight: 400
+    lineHeight: 1.06
+    letterSpacing: "-0.02em"
+  heading:
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "clamp(1.75rem, 3vw, 2.125rem)"
     fontWeight: 500
-    lineHeight: 1.2
+    lineHeight: 1.15
     letterSpacing: "-0.01em"
+  title:
+    fontFamily: "Newsreader, Georgia, serif"
+    fontSize: "1.375rem"
+    fontWeight: 500
+    lineHeight: 1.25
+  lead:
+    fontFamily: "Geist, system-ui, sans-serif"
+    fontSize: "clamp(1.0625rem, 1.5vw, 1.25rem)"
+    lineHeight: 1.55
   body:
     fontFamily: "Geist, system-ui, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
-    lineHeight: 1.6
-  eyebrow:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 500
-    letterSpacing: "0.12em"
-  lead:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "clamp(1.0625rem, 1.6vw, 1.25rem)"
-    lineHeight: 1.55
-  figure:
-    fontFamily: "Geist Mono, ui-monospace, monospace"
-    fontSize: "1.25rem"
-    fontWeight: 500
+    lineHeight: 1.7
   label:
     fontFamily: "Geist, system-ui, sans-serif"
     fontSize: "0.9375rem"
@@ -58,16 +55,27 @@ typography:
     fontFamily: "Geist, system-ui, sans-serif"
     fontSize: "1rem"
     lineHeight: 1.55
+  figure:
+    fontFamily: "Geist Mono, ui-monospace, monospace"
+    fontSize: "1.25rem"
+    fontWeight: 500
   mono:
     fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "0.8125rem"
-    fontWeight: 400
+  eyebrow:
+    fontFamily: "Geist Mono, ui-monospace, monospace"
+    fontSize: "0.75rem"
+  note:
+    fontFamily: "Caveat, cursive"
+    fontSize: "1.375rem"
+    fontWeight: 500
 rounded:
-  sm: "4px"
-  md: "8px"
+  xs: "4px"
+  tag: "6px"
+  sm: "8px"
   surface: "12px"
   control: "10px"
-  hairline: "1px"
+  pill: "999px"
 spacing:
   s1: "8px"
   s2: "16px"
@@ -75,21 +83,20 @@ spacing:
   s4: "32px"
   s6: "48px"
   s10: "80px"
-  s16: "128px"
+  s12: "96px"
 components:
   button-primary:
-    backgroundColor: "{colors.text-dark}"
-    textColor: "{colors.bg-dark}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
     rounded: "{rounded.control}"
     height: "44px"
     padding: "0 20px"
   button-secondary:
-    textColor: "{colors.text-dark}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.control}"
     height: "44px"
-    padding: "0 20px"
   work-card-frame:
-    backgroundColor: "{colors.surface-dark}"
+    backgroundColor: "{colors.paper-raised}"
     rounded: "{rounded.surface}"
 ---
 
@@ -97,62 +104,58 @@ components:
 
 ## Overview
 
-**Creative north star: "A well-made instrument."** Crisp, precise, quiet. Mode: Experience. The work (screenshots, figures) leads and the interface recedes. Dark is the default; light is a real, equal theme. No gradients, blobs, glassmorphism, glows, particle backgrounds, custom cursors, typewriter effects, emoji or chip soup.
+**Creative north star: "a marked-up proof."** A quiet personal editorial portfolio on warm paper: a fixed profile sidebar, a single reading column, serif headings, and a thin layer of hand-drawn ink (vermilion strokes and Caveat notes) in the margins, as if a reviewer had checked the work. Mode: Experience. The content leads; the ink is sparse, exact and decorative only.
+
+Light is the default theme (warm paper, near-black ink). Dark is the alternative (warm charcoal, paper-toned text). A static film grain (~3%, no animation) sits over both. No gradients, glows, particle backgrounds, custom cursors, typewriter effects, emoji or chip soup.
+
+This replaces the earlier dark tech-brand direction and the hero background art. `src/scripts/hero-bg/trace-gate.ts` (+ `common.ts`) is kept unused for possible later use on the Nexus page.
 
 ## Colors
 
-Neutral greys carry all text levels. One accent, the current orange-red, used only for links on hover, the active nav indicator, focus rings, and at most one highlight per screen (the "Open to" status dot on Home). Dates and company names are neutral.
+Neutral everything, one accent: **vermilion ink**, used for annotations, link hover, focus rings. Never for body text, dates or company names.
 
-- Dark: bg `#0c0c0b` (slightly warm near-black), raised surface `#151514`, text `#ededea`, secondary `#a8a8a2`, tertiary `#8b8b85`, accent `#e8794a`.
-- Light: bg `#fafaf8`, raised surface `#ffffff`, text `#141413`, secondary `#53534d`, tertiary `#6a6a63`, accent `#b4451f`.
-- Hairlines: 1px at 9–10% of text colour; stronger hairline 20–28% for hover edges and control borders.
-- All text/background pairs meet WCAG AA (verified by script, see report).
+- Light: paper `#f4f1ea`, raised `#faf8f3`, sunk `#ebe7dd`, ink `#1d1b18`, secondary `#4a463f`, tertiary `#655f55`, vermilion `#c2410c` (4.59:1 on paper; annotations and focus only; 4.19:1 on the sunk tone, so never small text there).
+- Dark: charcoal `#161513`, raised `#1c1a18`, sunk `#252320`, text `#ece6da`, secondary `#b5aea1`, tertiary `#958d80`, vermilion `#f2784a` (6.57:1).
+- Hairlines: 1px at 12–13% of ink; 30% for hover edges and control borders.
+- All text pairs are AA in both themes (verified by script).
 
 ## Typography
 
-Geist Sans for body and UI, Geist Mono only for numbers, dates, tags and code names, **Cabinet Grotesk for headings only** (hero h1, card titles, work-page titles; weights 500 and 700). All self-hosted woff2; no off-host font requests.
+Newsreader (self-hosted variable, optical sizing on; roman 400/500, italic available) for headings, the name and the hero. Geist for body and UI. Geist Mono only for dates, durations, numbers, figures and tags. Caveat (self-hosted) only for ink notes. All woff2; no off-host requests. Cabinet Grotesk from step 1b is removed.
 
-**Deliberate override:** the impeccable detector flags Geist as an overused face (`overused-font`). The owner chose Geist for body/UI and added Cabinet Grotesk as the display face to give headings character. The finding is acknowledged and intentionally not acted on.
-
-- Display (Cabinet Grotesk) `clamp(40px, 5.5vw, 72px)`, weight 700, tracking -0.03em, line-height 1.02.
-- Body 17px / 1.6, max 65ch. Card description 16px.
-- Uppercase letter-spaced text exists only for small section eyebrows (12px, +0.12em).
-- Mono labels for facts (13px, normal case) and key figure values (20px).
+- Display `clamp(40px, 5vw, 64px)`, weight 400, tracking -0.02em, leading 1.06.
+- Section headings 28–34px weight 500; role and card titles 22px weight 500.
+- Body 17px / 1.7, measure ≤ 38em. UI 14–15px.
+- Annotations 22px Caveat, rotated about -3°.
 
 ## Layout
 
-12-column grid, max width 1200px, gutters 24px (mobile) / 40px (≥768px). 8px spacing scale. Section padding 80px mobile / 128px desktop. 1px low-opacity hairlines divide sections. Work grid: 2×2 on desktop, 1 column below 768px.
-
-## Hero
-
-No eyebrow. Headline in the left ~6 columns; the background art owns the right side and bleeds behind the text, masked (not decorated) so the text column and the facts row stay clean. Resume is the one solid button; GitHub and LinkedIn are text links with ↗; Instagram is a small text link. A static film-grain overlay (SVG noise, ~3% opacity, no animation, pointer-events none) sits over the whole page. The headline and subhead are visible from the first frame (they only translate), so LCP never waits on animation.
-
-Background art contract (all variants): DPR capped at 2; paused off-screen and when the tab is hidden; static first frame under prefers-reduced-motion and when hardwareConcurrency ≤ 4; neutral lines/dots use the text token (dark lines on light, light lines on dark); accent only for the gate-stopped traces/paths; no text, numbers or labels in the art; the gate sits at 62% of the width.
+≥1024px: fixed 300px sidebar (hairline right border) and a content column to its right; reading width 720px (work grid 800px) centred in the column, leaving right margin for ink notes. A sticky top bar over the column holds the section nav and the theme toggle. <1024px: the sidebar becomes a top profile block (photo, name, role, line, facts, buttons), then the sticky top bar, then the content. 8px spacing scale; sections 80/96px; hairline dividers.
 
 ## Elevation & Depth
 
-No shadows or glows. Depth is a one-step raised surface plus a hairline. Hover lightens the frame border via an overlay's opacity.
+None. Depth is a one-step raised or sunk paper tone plus a hairline. Hover lightens a frame border through an overlay's opacity.
 
 ## Shapes
 
-12px radius on surfaces (frames, cards); 10px on controls; 50% on dots.
+12px on image frames, 8px on the portrait and logo tiles, 10px on buttons, full pill for the section nav.
 
 ## Components
 
-- **Button**: 44px high; primary is solid neutral (inverse of the page), secondary is hairline outline. Press scales to 0.97 over 120ms; hover is a 6–12% wash (opacity only).
-- **Browser frame**: thin 28px chrome bar with three neutral dots over a raised surface; screenshot 16:10, top-aligned crop, never dimmed.
-- **Work card**: framed screenshot, title with arrow, one-line description, one key figure (mono value + sans label), mono stack line, links. The whole card is a stretched link to `/work/<slug>`; secondary links sit above it.
-- **Nav**: sticky; transparent at top, then hairline + blur after 16px (an overlay fading in); a 2px accent indicator slides between Work / Experience / About.
-- **Theme toggle**: circle reveal from the button via View Transitions, ~500ms; instant fallback.
+- **Sidebar**: grayscale portrait 96px, name in Newsreader 28px, role, one-line pitch, three facts with line icons, LinkedIn / GitHub / Instagram icon buttons, solid "Download CV", square email button.
+- **Section nav (pill)**: About · Experience · Work · Education. An inverted copy of the row is clipped to the active item; only `clip-path` animates (~400ms), so the pill keeps a true rounded shape while it slides and resizes.
+- **Experience timeline**: 44px grayscale logo tile, serif role title, "Company · Internship / Research", mono dates right-aligned with the computed duration beneath, a vertical hairline between roles, bullets verbatim from the resume, quiet outlined mono tags.
+- **Work card**: framed image (16:10; labelled placeholder when absent), serif title with arrow, one-line description, one figure (mono value + sans label), mono stack line (separators drawn in CSS at item starts), links. The whole card is a stretched link to `/work/<slug>`.
+- **Ink** (decorative, `aria-hidden`): pre-authored irregular SVG strokes drawn once on entering view (`stroke-dashoffset`, `pathLength=1`, 750ms, ease-out), then a Caveat note fades in 150ms later. Exactly six marks: hero underline under "check their own work."; "verified" + check beside the UM–Dearborn role; a loose circle around the Nexus figure; "live" by Nexus and "on PyPI" by its pip link; an arrow from "Focus" to its first item. Mobile keeps only the hero underline and the Nexus circle; margin notes hide below 1280px. Reduced motion: drawn and static.
 
 ## Motion
 
-Ease-out `cubic-bezier(0.16, 1, 0.3, 1)`. Hover/press 120–200ms; image scale 400ms; entrances 400–700ms; stagger ~70ms for at most 4 items. Only transform and opacity (plus clip-path for masks/theme reveal). Native scroll. Hero entrance plays once per session (CSS keyframes, gated by `sessionStorage`); cards fade up 16px once in view (motion `inView`). `prefers-reduced-motion` shows final states with no movement.
+Ease-out `cubic-bezier(0.16, 1, 0.3, 1)`. Hover/press 120–200ms; image scale 400ms; entrances 600–750ms; ~70ms stagger, at most 4. Only transform, opacity, clip-path and stroke-dashoffset animate. Native scroll. The hero headline and subhead are visible from the first frame (translate only), so LCP never waits on animation. The sidebar never animates on scroll. Reduced motion shows final states. The theme toggle reveals the new theme in a circle from the button (View Transitions, ~500ms; instant fallback).
 
 ## Do's and Don'ts
 
-- Do keep one idea per card: a single figure.
-- Do show missing screenshots as missing.
-- Don't use the accent for decoration, dates or company names.
+- Do keep one figure per card and label missing images as missing.
+- Do keep annotations in margins or whitespace, never across body text.
+- Don't add annotations beyond the six specified.
 - Don't animate layout properties, colour or shadows.
-- Don't add gradients, glows, tilt, or emoji.
+- Don't use vermilion for small text on sunk surfaces in the light theme.

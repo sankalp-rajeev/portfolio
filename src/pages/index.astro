@@ -1,31 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
 import SelectedWork from '../components/SelectedWork.astro';
-const bg = import.meta.env.PUBLIC_HERO_BG as "a" | "b" | "c" | undefined; // build-time switch used to measure variants
 ---
 
 <Base path="/">
-  <Hero bg={bg} />
-  <div class="wrap"><hr class="hairline" /></div>
+  <Hero />
+  <About />
+  <Experience />
   <SelectedWork />
-  <!-- Step 2 builds these sections. Anchors exist so the nav has real targets. -->
-  <div class="wrap"><hr class="hairline" /></div>
-  <section id="experience" class="section" aria-labelledby="experience-title">
-    <div class="wrap">
-      <h2 id="experience-title" class="eyebrow">Experience</h2>
-      <p class="mono pending">Built in step 2.</p>
-    </div>
-  </section>
-  <div class="wrap"><hr class="hairline" /></div>
-  <section id="about" class="section" aria-labelledby="about-title">
-    <div class="wrap">
-      <h2 id="about-title" class="eyebrow">About</h2>
+  <!-- Step 2 builds Education and the rest. The anchor exists so the section nav has a real target. -->
+  <section id="education" class="section" aria-labelledby="education-title">
+    <div class="col">
+      <h2 id="education-title" class="h2">Education</h2>
       <p class="mono pending">Built in step 2.</p>
     </div>
   </section>
 </Base>
 
 <style>
-  .pending { margin: 24px 0 0; font-size: var(--fs-mono); color: var(--text-3); }
+  .pending { margin: 0; font-size: var(--fs-mono); color: var(--text-3); }
 </style>

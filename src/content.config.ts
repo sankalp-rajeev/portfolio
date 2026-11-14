@@ -6,15 +6,18 @@ const experience = defineCollection({
   loader: file('src/content/experience.json'),
   schema: z.object({
     order: z.number(),
-    title: z.string(),
     company: z.string(),
-    team: z.string().optional(),
+    role: z.string(),
+    detail: z.string().optional(),
+    kind: z.enum(['Internship', 'Research']),
     location: z.string(),
-    duration: z.string(),
-    contributions: z.array(z.string()),
-    technologies: z.array(z.string()),
-    image: z.string(),
-    report: z.string().optional(),
+    start: z.string(), // YYYY-MM
+    end: z.string(), // YYYY-MM or 'present'
+    dates: z.string(),
+    logo: z.string(),
+    verified: z.boolean().optional(),
+    bullets: z.array(z.string()),
+    tags: z.array(z.string()),
   }),
 });
 
@@ -40,6 +43,8 @@ const projects = defineCollection({
     figure: z.object({ value: z.string(), label: z.string() }).optional(),
     stack: z.array(z.string()).optional(),
     pypi: z.string().optional(),
+    placeholder: z.string().optional(), // label for the image placeholder frame
+    linksTodo: z.boolean().optional(), // links not provided yet
   }),
 });
 

@@ -69,7 +69,6 @@
     ],
     "image": "/assets/projects/kairos.png",
     "github": "https://github.com/sankalp-rajeev/Kairos",
-    "featured": 4,
     "tagline": "Demand intelligence platform for recommendations and forecasting.",
     "figure": {
       "value": "411M+",
@@ -107,7 +106,7 @@
     "tagline": "Agent observability and self-healing platform.",
     "figure": {
       "value": "0.29 → 0.96",
-      "label": "macro recall on a 716-trace benchmark"
+      "label": "macro recall on a sealed 357-trace test split"
     },
     "stack": [
       "FastAPI",
@@ -150,7 +149,7 @@
     "id": "smriti",
     "order": 4,
     "category": "AI & Machine Learning",
-    "title": "Smriti — Offline Maternal-Health Visit Copilot",
+    "title": "Smriti",
     "intro": "Offline maternal-health visit copilot using an on-device LLM and local retrieval to generate reviewed, cited visit records without cloud connectivity.",
     "highlights": [
       "Runs fully offline in the field using Gemma and LiteRT-LM.",
@@ -167,9 +166,20 @@
       "Android",
       "RAG"
     ],
-    "videoLink": "https://www.youtube.com/watch?v=s5zeFpfrVQo",
-    "image": "/assets/projects/smriti.png",
-    "github": "https://github.com/sankalp-rajeev/Smriti"
+    "featured": 4,
+    "tagline": "Offline Android maternal-health copilot.",
+    "figure": {
+      "value": "15–22 s",
+      "label": "per cited note on CPU, Gemma 4 E2B on-device"
+    },
+    "stack": [
+      "Kotlin",
+      "Android",
+      "Gemma 4",
+      "LiteRT-LM"
+    ],
+    "placeholder": "Screenshot coming",
+    "linksTodo": true
   },
   {
     "id": "multimodal-document-q-a",
@@ -519,14 +529,15 @@
     "featured": 2,
     "tagline": "Research verifier for LLM-generated code repairs on SWE-bench Verified.",
     "figure": {
-      "value": "840+",
-      "label": "automated tests"
+      "value": "87%",
+      "label": "of accepted patches correct (47/54, 100 tasks)"
     },
     "stack": [
       "Python",
       "Docker",
       "pytest",
       "static analysis"
-    ]
+    ],
+    "placeholder": "Pipeline diagram coming"
   }
 ]

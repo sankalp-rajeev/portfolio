@@ -12,8 +12,8 @@ const p = project.data;
 
 <Base title={`${p.title} | Sankalp Rajeev`} description={p.tagline} path={`/work/${project.id}`}>
   <section class="section">
-    <div class="wrap">
-      <p class="eyebrow"><a class="link" href="/#work">← Selected work</a></p>
+    <div class="col">
+      <p class="back"><a class="link" href="/#work">← Selected work</a></p>
       <h1 class="title">{p.title}</h1>
       <p class="tagline">{p.tagline}</p>
       {p.figure && (
@@ -25,7 +25,8 @@ const p = project.data;
 </Base>
 
 <style>
-  .title { margin: 24px 0 0; font-family: var(--font-display); font-size: var(--fs-display); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+  .back { margin: 0; font-size: var(--fs-ui); }
+  .title { margin: 24px 0 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-display); font-weight: 500; letter-spacing: -0.02em; line-height: 1.06; }
   .tagline { margin: 24px 0 0; max-width: 60ch; color: var(--text-2); }
   .fig { margin: 24px 0 0; color: var(--text-2); }
   .fig .mono { color: var(--text); font-size: var(--fs-figure); margin-right: 8px; }
