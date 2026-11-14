@@ -23,7 +23,7 @@ const paths: Record<string, string> = {
 };
 ---
 
-<aside class="sidebar" aria-label="Profile">
+<aside class="sidebar" aria-label="Profile" transition:persist="sidebar">
   <div class="top">
     <Image class="portrait" src={portrait} alt="Portrait of Sankalp Rajeev" width={96} height={96} densities={[1, 2]} format="webp" quality={85} loading="eager" />
     <div class="id">

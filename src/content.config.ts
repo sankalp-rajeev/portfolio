@@ -93,4 +93,17 @@ const journey = defineCollection({
   }),
 });
 
-export const collections = { experience, projects, certificates, gallery, education, skills, journey };
+const caseStudies = defineCollection({
+  loader: file('src/content/casestudies.json'),
+  schema: z.object({
+    label: z.string(),
+    oneLine: z.string(),
+    figures: z.array(z.object({ value: z.string(), label: z.string() })).length(3),
+    problem: z.array(z.string()),
+    built: z.array(z.string()),
+    results: z.array(z.string()),
+    stack: z.array(z.string()),
+  }),
+});
+
+export const collections = { caseStudies, experience, projects, certificates, gallery, education, skills, journey };

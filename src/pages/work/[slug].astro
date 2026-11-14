@@ -1,34 +1,146 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import PipelineDiagram from '../../components/PipelineDiagram.astro';
+import { nb } from '../../lib/text';
+import storyLight from '../../assets/nexus/story-light.png';
+import storyDark from '../../assets/nexus/story-dark.png';
 
 export async function getStaticPaths() {
-  const featured = (await getCollection('projects')).filter((p) => p.data.featured !== undefined);
-  return featured.map((project) => ({ params: { slug: project.id }, props: { project } }));
+  const featured = (await getCollection('projects'))
+    .filter((p) => p.data.featured !== undefined)
+    .sort((a, b) => a.data.featured! - b.data.featured!);
+  const studies = await getCollection('caseStudies');
+  return featured.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      study: studies.find((s) => s.id === project.id)!,
+      prev: featured[(i + featured.length - 1) % featured.length],
+      next: featured[(i + 1) % featured.length],
+    },
+  }));
 }
-const { project } = Astro.props;
+const { project, study, prev, next } = Astro.props;
 const p = project.data;
+const s = study.data;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{png,jpg,webp}', { eager: true });
+const shot = p.image ? images[`/src/assets/projects/${p.image.split('/').pop()}`]?.default : undefined;
+const isNexus = project.id === 'nexus';
+const isTbv = project.id === 'trust-but-verify';
 ---
 
-<Base title={`${p.title} | Sankalp Rajeev`} description={p.tagline} path={`/work/${project.id}`}>
-  <section class="section">
+<Base title={`${p.title} | Sankalp Rajeev`} description={s.oneLine} path={`/work/${project.id}`}>
+  <article class="section case">
     <div class="col">
-      <p class="back"><a class="link" href="/#work">← Selected work</a></p>
-      <h1 class="title">{p.title}</h1>
-      <p class="tagline">{p.tagline}</p>
-      {p.figure && (
-        <p class="fig"><span class="mono">{p.figure.value}</span> {p.figure.label}</p>
-      )}
-      <p class="mono pending">Case study page: built in step 2.</p>
+      <header class="head">
+        {isNexus && <div class="band" data-trace-gate aria-hidden="true"></div>}
+        <p class="back"><a class="link" href="/#work">← Selected work</a></p>
+        <p class="label mono">{s.label}</p>
+        <h1 class="title">{p.title}</h1>
+        <p class="one" set:html={nb(s.oneLine)} />
+        <ul class="links">
+          {p.demoLink && <li><a class="link" href={p.demoLink} target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true">&nbsp;↗</span></a></li>}
+          {p.github && <li><a class="link" href={p.github} target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">&nbsp;↗</span></a></li>}
+          {p.videoLink && <li><a class="link" href={p.videoLink} target="_blank" rel="noopener noreferrer">Demo video<span aria-hidden="true">&nbsp;↗</span></a></li>}
+          {p.pypi && <li><a class="link mono" href={`https://pypi.org/project/${p.pypi}/`} target="_blank" rel="noopener noreferrer">pip install {p.pypi}</a></li>}
+        </ul>
+      </header>
+
+      <figure class="frame" transition:name={`shot-${project.id}`}>
+        <div class="shot">
+          {shot ? (
+            <Image src={shot} alt={`${p.title} interface`} widths={[640, 960, 1280]} sizes="(min-width: 900px) 800px, 92vw" format="webp" quality={84} loading="eager" />
+          ) : isTbv ? (
+            <div class="diagram"><PipelineDiagram variant="auto" /></div>
+          ) : null}
+        </div>
+      </figure>
+
+      <ul class="figures" aria-label="Key figures">
+        {s.figures.map((f) => (
+          <li>
+            <p class="fv mono">{f.value}</p>
+            <p class="fl">{f.label}</p>
+          </li>
+        ))}
+      </ul>
+
+      <section class="block" aria-labelledby="problem">
+        <h2 id="problem" class="h2">Problem</h2>
+        {s.problem.map((t) => <p set:html={nb(t)} />)}
+      </section>
+      <section class="block" aria-labelledby="built">
+        <h2 id="built" class="h2">What I built</h2>
+        {s.built.map((t) => <p set:html={nb(t)} />)}
+      </section>
+      <section class="block" aria-labelledby="results">
+        <h2 id="results" class="h2">Results</h2>
+        {s.results.map((t) => <p set:html={nb(t)} />)}
+        {isNexus && (
+          <figure class="story">
+            <Image class="theme-light" src={storyLight} alt="How Nexus decides whether a fix ships. Your agent, instrumented with the SDK or OpenTelemetry, sends traces to the Nexus live service, which detects failing runs and has an LLM critic write a proposed fix. The proposal goes to a separate verification job that runs against your agent's task suite: a fix check, a held-out check and a regression check. If all three pass the fix is promoted; if one fails it is rejected." widths={[640, 960, 1280]} sizes="(min-width: 900px) 800px, 92vw" format="webp" quality={86} loading="lazy" />
+            <Image class="theme-dark" src={storyDark} alt="" aria-hidden="true" widths={[640, 960, 1280]} sizes="(min-width: 900px) 800px, 92vw" format="webp" quality={86} loading="lazy" />
+            <figcaption class="mono">How it works: from the Nexus repository.</figcaption>
+          </figure>
+        )}
+      </section>
+      <section class="block" aria-labelledby="stack">
+        <h2 id="stack" class="h2">Stack</h2>
+        <ul class="tags" aria-label="Stack">{s.stack.map((t) => <li class="mono">{t}</li>)}</ul>
+      </section>
+
+      <nav class="pager" aria-label="More projects">
+        <a class="pg prev" href={`/work/${prev.id}`}><span class="dir mono">← Previous</span><span class="pt">{prev.data.title}</span></a>
+        <a class="pg next" href={`/work/${next.id}`}><span class="dir mono">Next →</span><span class="pt">{next.data.title}</span></a>
+      </nav>
     </div>
-  </section>
+  </article>
 </Base>
 
 <style>
+  .case { padding-top: var(--s-6); }
+  .head { position: relative; isolation: isolate; padding-bottom: var(--s-6); }
+  .band {
+    position: absolute; z-index: -1; inset: calc(var(--s-6) * -1) 0 0 0; opacity: 0.45; pointer-events: none; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%); mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+  .band :global(canvas) { position: absolute; inset: 0; width: 100%; height: 100%; }
   .back { margin: 0; font-size: var(--fs-ui); }
-  .title { margin: 24px 0 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-display); font-weight: 500; letter-spacing: -0.02em; line-height: 1.06; }
-  .tagline { margin: 24px 0 0; max-width: 60ch; color: var(--text-2); }
-  .fig { margin: 24px 0 0; color: var(--text-2); }
-  .fig .mono { color: var(--text); font-size: var(--fs-figure); margin-right: 8px; }
-  .pending { margin: 48px 0 0; font-size: var(--fs-mono); color: var(--text-3); }
+  .back .link { display: inline-flex; align-items: center; min-height: 40px; }
+  .label { margin: var(--s-3) 0 0; font-size: var(--fs-mono); color: var(--text-2); }
+  .title { margin: var(--s-2) 0 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.06; overflow-wrap: anywhere; }
+  .one { margin: var(--s-3) 0 0; max-width: 36em; font-size: var(--fs-lead); line-height: 1.55; color: var(--text-2); }
+  .links { list-style: none; margin: var(--s-3) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 var(--s-4); font-size: var(--fs-label); }
+  .links .link { display: inline-flex; align-items: center; min-height: 40px; }
+  .links .mono { font-size: var(--fs-mono); }
+
+  .frame { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-2); }
+  .shot :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .diagram { height: 100%; padding: clamp(12px, 3vw, 32px); display: grid; place-items: center; }
+  @media (max-width: 520px) { .shot:has(.diagram) { aspect-ratio: auto; } }
+
+  .figures { list-style: none; margin: var(--s-6) 0 0; padding: var(--s-4) 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4) var(--s-3); }
+  .fv { margin: 0; font-size: clamp(1.375rem, 3.4vw, 2.25rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+  .fl { margin: 8px 0 0; font-size: var(--fs-ui); line-height: 1.45; color: var(--text-2); }
+  @media (max-width: 640px) { .figures { grid-template-columns: 1fr; } }
+
+  .block { margin-top: var(--s-10); }
+  .block p { margin: 0 0 var(--s-2); max-width: 38em; font-size: var(--fs-body); line-height: 1.7; }
+  .block .h2 { margin-bottom: var(--s-3); }
+  .story { margin: var(--s-5) 0 0; }
+  .story :global(img) { width: 100%; height: auto; display: block; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+  .story figcaption { margin-top: 8px; font-size: var(--fs-mono); color: var(--text-3); }
+  :global(:root[data-theme='dark']) .theme-light, :global(:root:not([data-theme='dark'])) .theme-dark { display: none; }
+  .tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags li { padding: 3px 10px; font-size: var(--fs-mono); color: var(--text-2); border: 1px solid var(--line-strong); border-radius: 6px; }
+
+  .pager { margin-top: var(--s-12); padding-top: var(--s-4); border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+  .pg { display: grid; gap: 4px; padding-block: 8px; min-height: 56px; }
+  .pg.next { text-align: right; }
+  .dir { font-size: var(--fs-mono); color: var(--text-3); }
+  .pt { font-family: var(--font-serif); font-size: var(--fs-title); font-weight: 500; line-height: 1.2; }
+  .pg:hover .pt { color: var(--accent); }
 </style>

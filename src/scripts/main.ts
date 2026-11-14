@@ -44,6 +44,7 @@ document.addEventListener('click', (e) => {
 
 /* Keep theme and the JS flag across ClientRouter swaps (the incoming document carries static defaults). */
 document.addEventListener('astro:before-swap', (e) => {
+  (window as any).__tgDestroy?.();
   const nd = (e as unknown as { newDocument: Document }).newDocument.documentElement;
   nd.dataset.theme = root.dataset.theme;
   nd.classList.add('js');
@@ -141,6 +142,17 @@ function setupFilters() {
   buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? 'all')));
 }
 
+/* ───────── Case-study header band: the (otherwise unused) TraceGate, theme-aware and quiet ───────── */
+async function mountTraceGate() {
+  (window as any).__tgDestroy?.();
+  const host = document.querySelector<HTMLElement>('[data-trace-gate]');
+  if (!host) return;
+  const [{ mount }, { getEnv }] = await Promise.all([import('./hero-bg/trace-gate'), import('./hero-bg/common')]);
+  if (!host.isConnected) return;
+  const destroy = mount(host, getEnv());
+  (window as any).__tgDestroy = () => { destroy(); (window as any).__tgDestroy = null; };
+}
+
 /* ───────── Page setup (first load and after every ClientRouter navigation) ───────── */
 function setup() {
   bar = document.querySelector('[data-topbar]');
@@ -192,6 +204,7 @@ function setup() {
   }
 
   setupFilters();
+  mountTraceGate();
 
   // Entrance is CSS-driven; drop the flag after it ends so returning to Home shows the final state.
   if (root.classList.contains('entrance')) setTimeout(() => root.classList.remove('entrance'), 1500);

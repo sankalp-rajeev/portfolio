@@ -1,0 +1,86 @@
+[
+  {
+    "id": "nexus",
+    "label": "2026",
+    "oneLine": "Agent observability and self-healing platform: detects failures from traces, proposes a fix, and promotes it only if it passes the checks.",
+    "figures": [
+      { "value": "12/48", "label": "LLM-written patches that broke an already-passing task" },
+      { "value": "0.29 → 0.96", "label": "macro recall on a sealed 357-trace test split" },
+      { "value": "0.04 ms", "label": "SDK overhead per call" }
+    ],
+    "problem": [
+      "LLM agents fail quietly in production, and fixes written by an LLM can break things that already worked."
+    ],
+    "built": [
+      "An 11-service reliability platform. Agents send traces through a fail-open pip SDK (nexus-llmops, 0.04 ms overhead) or OpenTelemetry; traces stream over Kafka to NLI + rule detectors for 5 failure types; a LangGraph critic proposes a config patch (about $0.03 per heal); a pre-registered gate with repair, held-out and regression checks decides whether the patch is promoted."
+    ],
+    "results": [
+      "1 in 4 LLM-written patches broke an already-passing task (12/48). The gate avoided the 6 false promotions a naive before/after check made, and 0 of its 25 promotions failed on fresh seeds.",
+      "On NexusBench (716 traces, 5 injected failure types, rule-derived labels, 72/72 hand-checked), macro recall rose from 0.29 to 0.96 on a sealed 357-trace test split; live false alerts on normal traces fell from 118/118 to 1/118."
+    ],
+    "stack": ["FastAPI", "Kafka", "LangGraph", "OpenTelemetry"]
+  },
+  {
+    "id": "trust-but-verify",
+    "label": "Ongoing research · Fall 2026 · Graduate Research Assistant, UM–Dearborn",
+    "oneLine": "Research verifier for LLM-generated code repairs on SWE-bench Verified.",
+    "figures": [
+      { "value": "87%", "label": "of accepted patches correct (47/54, 100 tasks)" },
+      { "value": "31 → 58", "label": "conclusive verdicts out of 83 tasks" },
+      { "value": "1 of 14", "label": "incorrect patches caught by existing tests" }
+    ],
+    "problem": [
+      "Judging whether an AI agent's code fix is correct usually needs hidden tests, and real repositories don't have them."
+    ],
+    "built": [
+      "An oracle-blind verifier that accepts, flags or rejects LLM-generated SWE-bench Verified patches using existing regression tests, static analysis and reproduction tests frozen before the patch is seen, all in network-isolated Docker."
+    ],
+    "results": [
+      "Over 100 tasks, accepted patches were correct 87% of the time (47/54).",
+      "A pre-registered audit caught agents reading newer package copies baked into prebuilt images (8 of 50 tasks); I halted the study, added container masking and integrity checks, and reran all 100 tasks.",
+      "Rebuilding test execution with per-module isolation, retries and time budgets raised conclusive verdicts from 31 to 58 of 83 tasks (95% of 37.6K selected test runs now return a result).",
+      "The study also showed existing tests catch only 1 of 14 incorrect patches, and that SWE-bench's archived grades were bound to the wrong patch on 9 of 83 tasks. Backed by 1,100+ unit tests."
+    ],
+    "stack": ["Python", "Docker", "pytest", "Static analysis", "SWE-bench"]
+  },
+  {
+    "id": "contractrelay",
+    "label": "2026",
+    "oneLine": "Evidence-gated compatibility runtime for evolving AI agent tools.",
+    "figures": [
+      { "value": "0 false promotions", "label": "across the frozen benchmark and real migrations" },
+      { "value": "6 migrations", "label": "public MCP migrations evaluated" },
+      { "value": "195 records", "label": "in the frozen benchmark" }
+    ],
+    "problem": [
+      "Backend tools change their schemas, and an AI agent's existing tool calls break."
+    ],
+    "built": [
+      "A Model Context Protocol proxy that keeps an unchanged agent's tool calls working as tools evolve. Gemini-generated adapters are promoted only after independent replay and SQLite side-effect checks pass; it ships with a CLI and a live inspector."
+    ],
+    "results": [
+      "On a frozen 195-record benchmark and 6 public MCP migrations, it recovered 2 migrations before targeted fixes, then Fabric 3/3 and Mapbox 2/3 after extending the adapter language, and safely rejected 2, with 0 false-compatible promotions."
+    ],
+    "stack": ["TypeScript", "MCP", "Next.js", "GraphQL", "SQLite", "Gemini"]
+  },
+  {
+    "id": "smriti",
+    "label": "2026",
+    "oneLine": "Offline Android maternal-health copilot.",
+    "figures": [
+      { "value": "On-device", "label": "Gemma 4 E2B via LiteRT-LM, no network" },
+      { "value": "15–22 s", "label": "per cited note on a phone CPU" },
+      { "value": "300+ tests", "label": "unit tests" }
+    ],
+    "problem": [
+      "Health workers on home visits may have no connectivity, and their notes need to be accurate and traceable to protocol."
+    ],
+    "built": [
+      "An offline Android maternal-health copilot that runs Gemma 4 E2B on-device via LiteRT-LM, turning a visit observation, patient history and retrieved protocol text into a cited, structured note. Every note passes a strict parser, a citation validator, a safety post-processor and health-worker review."
+    ],
+    "results": [
+      "Cited notes in 15–22 s on a phone CPU, with no network; 300+ unit tests."
+    ],
+    "stack": ["Kotlin", "Android", "Gemma 4", "LiteRT-LM"]
+  }
+]

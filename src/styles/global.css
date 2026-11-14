@@ -252,6 +252,14 @@ a { color: inherit; text-decoration: none; }
   .js [data-ink] .note { opacity: 1; }
 }
 
+/* ───────── Shared-element morph (home card <-> case study image) ───────── */
+::view-transition-group(*) { animation-duration: 450ms; animation-timing-function: var(--ease); }
+::view-transition-group(root) { animation-duration: 200ms; }
+@media (prefers-reduced-motion: reduce) {
+  /* Crossfade only: no movement of the image between pages. */
+  ::view-transition-group(*) { animation: none; }
+}
+
 /* ───────── Theme reveal (View Transitions API) ───────── */
 html.theme-vt::view-transition-old(root),
 html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }

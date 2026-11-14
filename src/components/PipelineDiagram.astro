@@ -1,0 +1,99 @@
+---
+/**
+ * Trust but Verify pipeline: LLM patch -> three checks inside network-isolated Docker -> Accept / Flag / Reject.
+ * Inline, theme-aware (CSS variables). Sentence-case labels, no icons, no numbers; only "Reject" uses the accent.
+ * `card` always uses the wide layout; `auto` switches to a vertical layout when its container is narrow.
+ */
+interface Props { variant?: 'card' | 'auto' }
+const { variant = 'auto' } = Astro.props;
+const label = 'Pipeline: an LLM patch goes through three parallel checks (regression tests, static analysis, frozen reproduction tests) inside network-isolated Docker, and the verifier then accepts, flags or rejects it.';
+---
+
+<div class={`pipe ${variant}`}>
+  <!-- Wide layout -->
+  <svg class="wide" viewBox="0 0 400 250" role="img" aria-label={label} preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="pa" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="head"></path></marker>
+      <marker id="pr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="head acc"></path></marker>
+    </defs>
+    <rect class="box" x="8" y="100" width="72" height="50" rx="6"></rect>
+    <text class="t" x="44" y="129" text-anchor="middle">LLM patch</text>
+
+    <path class="ln" d="M80 125 C 98 125, 100 72, 116 72" marker-end="url(#pa)"></path>
+    <path class="ln" d="M80 125 L 116 142" marker-end="url(#pa)"></path>
+    <path class="ln" d="M80 125 C 98 125, 100 212, 116 212" marker-end="url(#pa)"></path>
+
+    <rect class="dock" x="104" y="12" width="196" height="226" rx="10"></rect>
+    <text class="t3" x="202" y="30" text-anchor="middle">Network-isolated Docker</text>
+    <rect class="box" x="118" y="48" width="168" height="48" rx="6"></rect>
+    <text class="t" x="202" y="76" text-anchor="middle">Regression tests</text>
+    <rect class="box" x="118" y="118" width="168" height="48" rx="6"></rect>
+    <text class="t" x="202" y="146" text-anchor="middle">Static analysis</text>
+    <rect class="box" x="118" y="188" width="168" height="48" rx="6"></rect>
+    <text class="t" x="202" y="216" text-anchor="middle">Frozen reproduction tests</text>
+
+    <path class="ln" d="M300 72 L 322 72" marker-end="url(#pa)"></path>
+    <path class="ln" d="M300 142 L 322 142" marker-end="url(#pa)"></path>
+    <path class="ln" d="M300 212 L 322 212" marker-end="url(#pa)"></path>
+    <rect class="box" x="324" y="52" width="68" height="40" rx="6"></rect>
+    <text class="t" x="358" y="76" text-anchor="middle">Accept</text>
+    <rect class="box" x="324" y="122" width="68" height="40" rx="6"></rect>
+    <text class="t" x="358" y="146" text-anchor="middle">Flag</text>
+    <rect class="box acc" x="324" y="192" width="68" height="40" rx="6"></rect>
+    <text class="t acc" x="358" y="216" text-anchor="middle">Reject</text>
+  </svg>
+
+  <!-- Vertical layout for narrow screens -->
+  <svg class="tall" viewBox="0 0 300 440" role="img" aria-label={label} preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="pa2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="head"></path></marker>
+      <marker id="pr2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="head acc"></path></marker>
+    </defs>
+    <rect class="box" x="100" y="6" width="100" height="40" rx="6"></rect>
+    <text class="t" x="150" y="31" text-anchor="middle">LLM patch</text>
+    <path class="ln" d="M150 46 L 150 76" marker-end="url(#pa2)"></path>
+
+    <rect class="dock" x="10" y="78" width="280" height="226" rx="10"></rect>
+    <text class="t3" x="150" y="98" text-anchor="middle">Network-isolated Docker</text>
+    <rect class="box" x="30" y="112" width="240" height="46" rx="6"></rect>
+    <text class="t" x="150" y="140" text-anchor="middle">Regression tests</text>
+    <rect class="box" x="30" y="170" width="240" height="46" rx="6"></rect>
+    <text class="t" x="150" y="198" text-anchor="middle">Static analysis</text>
+    <rect class="box" x="30" y="228" width="240" height="46" rx="6"></rect>
+    <text class="t" x="150" y="256" text-anchor="middle">Frozen reproduction tests</text>
+
+    <path class="ln" d="M52 304 L 52 352" marker-end="url(#pa2)"></path>
+    <path class="ln" d="M150 304 L 150 352" marker-end="url(#pa2)"></path>
+    <path class="ln" d="M248 304 L 248 352" marker-end="url(#pa2)"></path>
+    <rect class="box" x="10" y="354" width="84" height="44" rx="6"></rect>
+    <text class="t" x="52" y="381" text-anchor="middle">Accept</text>
+    <rect class="box" x="108" y="354" width="84" height="44" rx="6"></rect>
+    <text class="t" x="150" y="381" text-anchor="middle">Flag</text>
+    <rect class="box acc" x="206" y="354" width="84" height="44" rx="6"></rect>
+    <text class="t acc" x="248" y="381" text-anchor="middle">Reject</text>
+  </svg>
+</div>
+
+<style>
+  .pipe { container-type: inline-size; width: 100%; height: 100%; }
+  svg { display: block; width: 100%; height: 100%; font-family: var(--font-sans); overflow: visible; }
+  .tall { display: none; }
+  .auto.pipe { height: auto; }
+  @container (max-width: 520px) {
+    .auto .wide { display: none; }
+    .auto .tall { display: block; }
+  }
+  .box { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
+  .dock { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 4 4; }
+  .ln { fill: none; stroke: var(--text-3); stroke-width: 1.2; }
+  .head { fill: var(--text-3); }
+  .t { fill: var(--text); font-size: 12px; }
+  .t3 { fill: var(--text-3); font-size: 11px; }
+  .acc.box { stroke: var(--accent); stroke-width: 1.4; }
+  .acc.ln { stroke: var(--accent); }
+  .head.acc { fill: var(--accent); }
+  text.acc { fill: var(--accent); font-weight: 500; }
+  /* Tall layout is tuned for ~300px: scale labels so they read at 342px wide */
+  .tall .t { font-size: 13px; }
+  .tall .t3 { font-size: 12px; }
+</style>
