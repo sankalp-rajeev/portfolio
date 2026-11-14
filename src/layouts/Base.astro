@@ -1,0 +1,105 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+const {
+  title = 'Sankalp Rajeev | AI & Machine Learning Engineer | Portfolio',
+  description = "Sankalp Rajeev is an AI/ML Engineer and dual master's candidate at the University of Michigan-Dearborn building production ML, LLM reliability, computer vision, and ML systems. Graduating December 2026 and available January 2027.",
+  path = '/',
+} = Astro.props;
+const canonicalUrl = new URL(path, 'https://sankalprajeev.dev').href;
+const ogTitle = 'Sankalp Rajeev | AI & Machine Learning Engineer';
+const ogDescription =
+  'AI/ML Engineer building production ML, reliable LLM systems, computer vision, and ML infrastructure. Candidate for M.S. in Artificial Intelligence | M.S.E. in Robotics Engineering at the University of Michigan-Dearborn.';
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Sankalp Rajeev',
+  jobTitle: 'AI/ML Engineer',
+  url: 'https://sankalprajeev.dev/',
+  sameAs: ['https://github.com/sankalp-rajeev', 'https://www.linkedin.com/in/sankalp-rajeev/'],
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'University of Michigan-Dearborn' },
+  alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Arizona State University' }],
+  knowsAbout: ['Artificial Intelligence', 'Machine Learning', 'LLM Systems', 'AI Reliability', 'Computer Vision', 'ML Systems', 'MLOps', 'Edge AI', 'Python', 'PyTorch'],
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0c0c0b" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="Sankalp Rajeev, AI Engineer, Machine Learning Engineer, ML Engineer, LLM Engineer, Computer Vision Engineer, Applied AI Engineer, AI Reliability, ML Systems, MLOps, PyTorch, TensorRT, Docker, Kubernetes, University of Michigan"
+    />
+    <meta name="author" content="Sankalp Rajeev" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content="https://sankalprajeev.dev/logo.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={ogTitle} />
+    <meta property="twitter:description" content={ogDescription} />
+    <meta property="twitter:image" content="https://sankalprajeev.dev/logo.png" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+
+    <!-- Runs before first paint: theme, JS flag, and once-per-session entrance flag. -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          var t = localStorage.getItem('theme');
+          d.dataset.theme = t === 'light' ? 'light' : 'dark';
+        } catch (e) {}
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', d.dataset.theme === 'light' ? '#fafaf8' : '#0c0c0b');
+        var home = location.pathname === '/' || location.pathname === '/index.html';
+        var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var seen = false;
+        try { seen = sessionStorage.getItem('entered') === '1'; } catch (e) {}
+        if (home && !reduced && !seen) {
+          d.classList.add('entrance');
+          try { sessionStorage.setItem('entered', '1'); } catch (e) {}
+        }
+      })();
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav><ThemeToggle slot="toggle" /></Nav>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="wrap" style="padding-block: 48px;">
+      <hr class="hairline" />
+      <p class="mono" style="margin: 24px 0 0; font-size: 0.8125rem; color: var(--text-3);">
+        Sankalp Rajeev · srajeev@umich.edu
+      </p>
+    </footer>
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

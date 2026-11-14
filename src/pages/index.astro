@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SelectedWork from '../components/SelectedWork.astro';
+---
+
+<Base path="/">
+  <Hero />
+  <div class="wrap"><hr class="hairline" /></div>
+  <SelectedWork />
+  <!-- Step 2 builds these sections. Anchors exist so the nav has real targets. -->
+  <div class="wrap"><hr class="hairline" /></div>
+  <section id="experience" class="section" aria-labelledby="experience-title">
+    <div class="wrap">
+      <h2 id="experience-title" class="eyebrow">Experience</h2>
+      <p class="mono pending">Built in step 2.</p>
+    </div>
+  </section>
+  <div class="wrap"><hr class="hairline" /></div>
+  <section id="about" class="section" aria-labelledby="about-title">
+    <div class="wrap">
+      <h2 id="about-title" class="eyebrow">About</h2>
+      <p class="mono pending">Built in step 2.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pending { margin: 24px 0 0; font-size: 0.8125rem; color: var(--text-3); }
+</style>

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "b-s-computer-science-diploma",
+    "order": 0,
+    "title": "B.S. Computer Science Diploma",
+    "href": "/assets/certificates/eDiploma.pdf",
+    "kind": "pdf"
+  },
+  {
+    "id": "codepath-intermediate-technical-interview-prep",
+    "order": 1,
+    "title": "CodePath Intermediate Technical Interview Prep",
+    "href": "/assets/certificates/TIP.pdf",
+    "kind": "pdf"
+  },
+  {
+    "id": "cmu-computer-vision",
+    "order": 2,
+    "title": "CMU Computer Vision",
+    "href": "/assets/certificates/computervisionCertificate.pdf",
+    "kind": "pdf"
+  },
+  {
+    "id": "intro-to-applied-data-analytics",
+    "order": 3,
+    "title": "Intro to Applied Data Analytics",
+    "href": "https://www.credential.net/b8c8897b-7a62-4358-997d-1b7addd0e239#acc.kfhEQs3g",
+    "kind": "external"
+  },
+  {
+    "id": "tableau-certification",
+    "order": 4,
+    "title": "Tableau Certification",
+    "href": "https://www.credential.net/fd1fa7b0-7775-4048-b5cc-2ce6c43954b2#acc.2W7pwUl5",
+    "kind": "external"
+  }
+]
