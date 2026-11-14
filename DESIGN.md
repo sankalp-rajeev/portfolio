@@ -17,6 +17,16 @@ colors:
   paper-text-3: "#958d80"
   vermilion-dark: "#f2784a"
   logo-tile: "#ffffff"
+  graph-0-light: "#ebe7dd"
+  graph-1-light: "#d2744d"
+  graph-2-light: "#c95829"
+  graph-3-light: "#c2410c"
+  graph-4-light: "#903610"
+  graph-0-dark: "#252320"
+  graph-1-dark: "#9f5337"
+  graph-2-dark: "#cc6841"
+  graph-3-dark: "#f2784a"
+  graph-4-dark: "#f69e7d"
   lightbox-scrim: "rgb(14 13 12 / 0.92)"
   lightbox-control: "rgb(0 0 0 / 0.4)"
 typography:
@@ -123,6 +133,8 @@ This replaces the earlier dark tech-brand direction and the hero background art.
 
 ## Colors
 
+No grayscale or single-colour filters anywhere: the portrait, gallery, project images and company logos all show in full colour.
+
 Neutral everything, one accent: **vermilion ink**, used for annotations, link hover, focus rings. Never for body text, dates or company names.
 
 - Light: paper `#f4f1ea`, raised `#faf8f3`, sunk `#ebe7dd`, ink `#1d1b18`, secondary `#4a463f`, tertiary `#655f55`, vermilion `#c2410c` (4.59:1 on paper; annotations and focus only; 4.19:1 on the sunk tone, so never small text there).
@@ -153,10 +165,11 @@ None. Depth is a one-step raised or sunk paper tone plus a hairline. Hover light
 
 ## Components
 
-- **Sidebar**: grayscale portrait 96px, name in Newsreader 28px, role, one-line pitch, three facts with line icons, LinkedIn / GitHub / Instagram icon buttons, solid "Download CV", square email button.
+- **Sidebar**: full-colour portrait 96px, name in Newsreader 28px, role, one-line pitch, three facts with line icons, LinkedIn / GitHub / Instagram icon buttons, solid "Download CV", square email button.
 - **Section nav (pill)**: About · Experience · Work · Education. An inverted copy of the row is clipped to the active item; only `clip-path` animates (~400ms), so the pill keeps a true rounded shape while it slides and resizes.
-- **Experience timeline**: 44px grayscale logo tile, serif role title, "Company · Internship / Research", mono dates right-aligned with the computed duration beneath, a vertical hairline between roles, bullets verbatim from the resume, quiet outlined mono tags.
+- **Experience timeline**: 40px rounded tile (hairline border, raised surface) holding the original full-colour logo on its own white backing, so white-background logos look intentional in dark mode; serif role title, "Company · Internship / Research", mono dates right-aligned with the computed duration beneath, a vertical hairline between roles, bullets verbatim from the resume, quiet outlined mono tags.
 - **Work card**: framed image (16:10; labelled placeholder when absent), serif title with arrow, one-line description, one figure (mono value + sans label), mono stack line (separators drawn in CSS at item starts), links. The whole card is a stretched link to `/work/<slug>`.
+- **Activity graph** (own inline SVG, from the build-time GitHub snapshot `src/data/contributions.json`): 53×7 cells, 11px with 3px gaps, 2px radius; a five-level ramp from the sunk surface to the accent (level 1 is ≥ 3:1 against the surface in both themes: 3.12 light, 3.11 dark); month labels above, "N contributions in YEAR" below, Less→More legend. Year tabs at the right on desktop and below on mobile (JS only; without JS the latest year renders statically). Switching years crossfades opacity only (200ms). On narrow screens the graph scrolls inside its container, starting at the latest week. Hover/tap a cell for a tooltip ("N contributions on Mar 14"). The graph has an aria-label summary per year; cells are not tab stops. It fades in once on entry, with no per-cell stagger.
 - **Ink** (decorative, `aria-hidden`): pre-authored irregular SVG strokes drawn once on entering view (`stroke-dashoffset`, `pathLength=1`, 750ms, ease-out), then a Caveat note fades in 150ms later. Exactly six marks: hero underline under "check their own work."; "verified" + check beside the UM–Dearborn role; a loose circle around the Nexus figure; "live" by Nexus and "on PyPI" by its pip link; an arrow from "Focus" to its first item. Mobile keeps only the hero underline and the Nexus circle; margin notes hide below 1280px. Reduced motion: drawn and static.
 
 ## Motion

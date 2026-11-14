@@ -5,7 +5,7 @@ import Ink from './Ink.astro';
 import { duration } from '../lib/duration';
 
 const roles = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
-const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/mono/*.png', { eager: true });
+const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.png', { eager: true });
 ---
 
 <section id="experience" class="section" aria-labelledby="experience-title">
@@ -14,11 +14,11 @@ const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/mo
     <ol class="timeline">
       {roles.map((r, i) => {
         const d = r.data;
-        const logo = logos[`/src/assets/logos/mono/${d.logo}.png`]?.default;
+        const logo = logos[`/src/assets/logos/${d.logo}.png`]?.default;
         return (
           <li class="entry" data-reveal data-entry>
             <div class="rail">
-              <div class="logo">{logo && <Image src={logo} alt="" width={36} height={36} densities={[2, 3]} format="webp" loading="lazy" />}</div>
+              <div class="logo">{logo && <Image src={logo} alt="" width={32} height={32} densities={[2, 3]} format="webp" loading="lazy" />}</div>
               {i < roles.length - 1 && <span class="seg" data-seg aria-hidden="true"></span>}
             </div>
             <div class="body">
@@ -60,16 +60,17 @@ const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/mo
 
 <style>
   .timeline { list-style: none; margin: 0; padding: 0; }
-  .entry { display: grid; grid-template-columns: 44px 1fr; column-gap: var(--s-3); padding-bottom: var(--s-6); }
+  .entry { display: grid; grid-template-columns: 40px 1fr; column-gap: var(--s-3); padding-bottom: var(--s-6); }
   .entry:last-child { padding-bottom: 0; }
   .rail { position: relative; display: flex; flex-direction: column; align-items: center; }
+  /* Full-colour logos in small rounded tiles on a raised surface; each logo keeps its own white backing so it reads as intentional in dark mode. */
   .logo {
-    width: 44px; height: 44px; flex: none; display: grid; place-items: center; overflow: hidden;
-    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm);
+    width: 40px; height: 40px; flex: none; display: grid; place-items: center; overflow: hidden; padding: 3px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
   }
-  .logo :global(img) { width: 36px; height: 36px; object-fit: contain; /* logos are pre-processed single-colour PNGs (src/assets/logos/mono): no runtime filter */ }
+  .logo :global(img) { width: 32px; height: 32px; object-fit: contain; background: #fff; border-radius: 6px; }
   /* The vertical hairline connecting roles. */
-  .seg { position: absolute; top: 52px; bottom: calc(var(--s-6) * -1 + 8px); width: 1px; background: var(--line-strong); }
+  .seg { position: absolute; top: 48px; bottom: calc(var(--s-6) * -1 + 8px); width: 1px; background: var(--line-strong); }
   .body { position: relative; min-width: 0; }
   .head { display: flex; justify-content: space-between; gap: var(--s-3); align-items: flex-start; }
   .who { min-width: 0; }
@@ -85,8 +86,8 @@ const logos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/mo
 
   @media (max-width: 560px) {
     .entry { grid-template-columns: 36px 1fr; column-gap: var(--s-2); }
-    .logo { width: 36px; height: 36px; }
-    .logo :global(img) { width: 28px; height: 28px; }
+    .logo { width: 36px; height: 36px; padding: 2px; }
+    .logo :global(img) { width: 30px; height: 30px; }
     .seg { top: 44px; }
     .head { flex-direction: column; gap: 6px; }
     .when { justify-items: start; text-align: left; grid-auto-flow: column; column-gap: 12px; margin: 0; }

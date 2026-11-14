@@ -23,13 +23,16 @@ const { items } = Astro.props;
 const all = (items ?? (await getCollection('projects')))
   .filter((p) => p.data.featured === undefined && !p.data.hidden)
   .sort((a, b) => (a.id === 'kairos' ? -1 : b.id === 'kairos' ? 1 : (b.data.year ?? 0) - (a.data.year ?? 0) || a.data.order - b.data.order));
+// A filter tab with no projects is not shown.
+const present = new Set(all.map((p) => (MAP[p.data.category] ?? { f: 'ai' as Filter }).f));
+const tabs = FILTERS.filter((f) => f.id === 'all' || present.has(f.id));
 ---
 
 <section id="projects" class="section" aria-labelledby="projects-title">
   <div class="col">
     <h2 id="projects-title" class="h2" data-reveal>Projects</h2>
     <div class="filters" role="group" aria-label="Filter projects" data-filters hidden>
-      {FILTERS.map((f) => <button type="button" data-filter={f.id} aria-pressed={f.id === 'all' ? 'true' : 'false'}>{f.label}</button>)}
+      {tabs.map((f) => <button type="button" data-filter={f.id} aria-pressed={f.id === 'all' ? 'true' : 'false'}>{f.label}</button>)}
     </div>
     <p class="sr-only" role="status" aria-live="polite" data-filter-status></p>
     <ul class="list" data-project-list>
@@ -86,6 +89,11 @@ const all = (items ?? (await getCollection('projects')))
   .desc { margin: 4px 0 0; font-size: var(--fs-label); line-height: 1.55; color: var(--text-2); max-width: 62ch; }
   .empty { margin: var(--s-4) 0 0; color: var(--text-3); font-size: var(--fs-ui); }
 
+  /* Reduced motion: no height animation, a short opacity fade only. */
+  @media (prefers-reduced-motion: reduce) {
+    .row, .row.is-out { transition: opacity 150ms var(--ease), visibility 0s 150ms !important; }
+    .row:not(.is-out) { transition: opacity 150ms var(--ease) !important; }
+  }
   @media (min-width: 768px) {
     .row-in { grid-template-columns: minmax(0, 1fr) auto auto; align-items: start; }
     .meta { grid-column: 2; grid-row: 1; margin: 4px 0 0; min-width: 13em; white-space: nowrap; text-align: right; }

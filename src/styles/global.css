@@ -96,6 +96,8 @@
   --solid: #1d1b18;
   --on-solid: #f4f1ea;
   --topbar-bg: rgb(244 241 234 / 0.97);
+  /* Contribution graph ramp: l1 is >= 3:1 against --surface */
+  --g0: #ebe7dd; --g1: #d2744d; --g2: #c95829; --g3: #c2410c; --g4: #903610;
   color-scheme: light;
 }
 
@@ -112,6 +114,7 @@
   --solid: #ece6da;
   --on-solid: #161513;
   --topbar-bg: rgb(22 21 19 / 0.97);
+  --g0: #252320; --g1: #9f5337; --g2: #cc6841; --g3: #f2784a; --g4: #f69e7d;
   color-scheme: dark;
 }
 

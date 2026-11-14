@@ -370,7 +370,8 @@
     ],
     "paperLink": "/reports/FinalReport.pdf",
     "github": "https://github.com/srajeev234/ece5831-2024-final-project",
-    "year": 2024
+    "year": 2024,
+    "hidden": true
   },
   {
     "id": "cardiosync",
@@ -396,7 +397,8 @@
     ],
     "image": "/assets/projects/cardiosync.png",
     "github": "https://github.com/sankalp-rajeev/CardioSync",
-    "year": 2026
+    "year": 2026,
+    "hidden": true
   },
   {
     "id": "rt-mdaq",
@@ -419,7 +421,8 @@
       "gnuplot"
     ],
     "github": "https://github.com/sankalp-rajeev/RT-MDAQ",
-    "year": 2026
+    "year": 2026,
+    "hidden": true
   },
   {
     "id": "trafficcontroller",
@@ -441,7 +444,8 @@
       "Unit Testing"
     ],
     "github": "https://github.com/sankalp-rajeev/TrafficController",
-    "year": 2026
+    "year": 2026,
+    "hidden": true
   },
   {
     "id": "unit-genie",
@@ -466,7 +470,8 @@
     "paperLink": "/reports/UnitGenie.pdf",
     "image": "/assets/projects/unitgenie.webp",
     "github": "https://github.com/sankalp-rajeev/ConversionsApp",
-    "year": 2024
+    "year": 2024,
+    "hidden": true
   },
   {
     "id": "social-media-photo-share-app",
@@ -486,7 +491,8 @@
       "MySQL"
     ],
     "github": "https://github.com/sankalp-rajeev/social-media-2023",
-    "year": 2023
+    "year": 2023,
+    "hidden": true
   },
   {
     "id": "nasa-exoplanet-visualization",
@@ -506,7 +512,8 @@
       "CSS"
     ],
     "github": "https://github.com/sankalp-rajeev/Nasa-Data-Viz",
-    "year": 2023
+    "year": 2023,
+    "hidden": true
   },
   {
     "id": "car-performance-dashboard",
@@ -526,7 +533,8 @@
       "CSS"
     ],
     "github": "https://github.com/sankalp-rajeev/Car-Data-Viz",
-    "year": 2023
+    "year": 2023,
+    "hidden": true
   },
   {
     "id": "trust-but-verify",

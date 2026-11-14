@@ -1,4 +1,5 @@
 import { animate, inView } from 'motion';
+import { buildSvg, label, type Compact } from '../lib/activity';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const root = document.documentElement;
@@ -83,7 +84,6 @@ let sections: { id: string; el: HTMLElement; top: number }[] = [];
 let ro: ResizeObserver | null = null;
 const measure = () => sections.forEach((s) => (s.top = s.el.getBoundingClientRect().top + scrollY));
 let activeId: string | null = null;
-let currentClip = '';
 
 const HIDDEN = 'inset(0px 100% 0px 0px round 999px)';
 const clipFor = (id: string | null) => {
@@ -108,7 +108,6 @@ function movePill(id: string | null, immediate = false) {
   if (!immediate && !reduced() && from && from !== 'none' && from !== HIDDEN && !from.includes('100%') && to !== HIDDEN && from !== to) {
     pillAnim = animate(overlay, { clipPath: [from, to] }, { duration: 0.22, ease: EASE });
   }
-  currentClip = to;
 }
 
 function updateScrollState() {
@@ -135,7 +134,7 @@ addEventListener('scroll', () => {
   ticking = true;
   requestAnimationFrame(() => { ticking = false; updateScrollState(); });
 }, { passive: true });
-addEventListener('resize', () => { currentClip = ''; movePill(activeId, true); });
+addEventListener('resize', () => { movePill(activeId, true); });
 
 /* ───────── Ink: stroke draws in (stroke-dashoffset), then its note fades in 150 ms later ───────── */
 function drawInk(el: HTMLElement) {
@@ -171,6 +170,79 @@ function setupFilters() {
   buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? 'all')));
 }
 
+/* ───────── Activity graph: year tabs (opacity crossfade), tooltip, mobile scroll to the latest week ───────── */
+function setupActivity() {
+  const root2 = document.querySelector<HTMLElement>('[data-activity]');
+  if (!root2) return;
+  const scroller = root2.querySelector<HTMLElement>('[data-act-scroll]')!;
+  const tabs = root2.querySelector<HTMLElement>('[data-years]')!;
+  const tip = root2.querySelector<HTMLElement>('[data-act-tip]')!;
+  const stack = root2.querySelector<HTMLElement>('.stack')!;
+  const caps = root2.querySelector<HTMLElement>('.caps')!;
+  let extra: Compact[] = [];
+  try { extra = JSON.parse(root2.querySelector('[data-act-data]')?.textContent ?? '[]'); } catch {}
+  // Other years are built on first use (only the latest year is in the HTML).
+  const ensure = (year: string): HTMLElement | null => {
+    let p = stack.querySelector<HTMLElement>('.panel[data-year="' + year + '"]');
+    if (p) return p;
+    const c = extra.find((x) => String(x.year) === year);
+    if (!c) return null;
+    const { html, lastX } = buildSvg(c);
+    p = document.createElement('div');
+    p.className = 'panel';
+    p.dataset.year = year;
+    p.dataset.lastX = String(lastX);
+    p.innerHTML = html;
+    stack.appendChild(p);
+    const cap = document.createElement('p');
+    cap.className = 'cap';
+    cap.dataset.year = year;
+    cap.textContent = label(c);
+    caps.appendChild(cap);
+    return p;
+  };
+  const scrollToLatest = (panel: HTMLElement) => {
+    const svg = panel.querySelector('svg')!;
+    const scale = svg.getBoundingClientRect().width / 739;
+    const x = Number(panel.dataset.lastX ?? 739) * scale;
+    scroller.scrollLeft = Math.max(0, x - scroller.clientWidth + 8);
+  };
+  tabs.hidden = false; // tabs need JS; without it the latest year renders statically
+  tabs.querySelectorAll<HTMLButtonElement>('button').forEach((b) => b.addEventListener('click', () => {
+    tabs.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    const year = b.dataset.year ?? '';
+    const next = ensure(year);
+    if (!next) return;
+    const apply = () => {
+      root2.querySelectorAll<HTMLElement>('.panel').forEach((p) => p.classList.toggle('on', p === next));
+      root2.querySelectorAll<HTMLElement>('.cap').forEach((c) => c.classList.toggle('on', c.dataset.year === year));
+      scrollToLatest(next);
+    };
+    requestAnimationFrame(apply); // let a freshly built panel paint at opacity 0 first so it crossfades in
+    tip.hidden = true;
+  }));
+  const on = stack.querySelector<HTMLElement>('.panel.on');
+  if (on) requestAnimationFrame(() => scrollToLatest(on));
+
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const show = (cell: Element) => {
+    const n = Number(cell.getAttribute('data-n'));
+    const [, m, d] = (cell.getAttribute('data-d') ?? '').split('-').map(Number);
+    tip.textContent = (n === 0 ? 'No contributions' : n + ' contribution' + (n === 1 ? '' : 's')) + ' on ' + MON[m - 1] + ' ' + d;
+    tip.hidden = false;
+    const r = cell.getBoundingClientRect();
+    const host = root2.getBoundingClientRect();
+    const half = tip.offsetWidth / 2;
+    const cx = Math.min(Math.max(r.left + r.width / 2 - host.left, half + 4), host.width - half - 4);
+    tip.style.left = cx + 'px';
+    tip.style.top = r.top - host.top - 6 + 'px';
+  };
+  root2.addEventListener('pointerover', (e) => { const c = (e.target as Element).closest('rect.c'); if (c) show(c); else if (!(e.target as Element).closest('[data-act-tip]')) tip.hidden = true; });
+  root2.addEventListener('pointerdown', (e) => { const c = (e.target as Element).closest('rect.c'); if (c) show(c); else tip.hidden = true; });
+  root2.addEventListener('pointerleave', () => { tip.hidden = true; });
+  scroller.addEventListener('scroll', () => { tip.hidden = true; }, { passive: true });
+}
+
 /* ───────── Case-study header band: the (otherwise unused) TraceGate, theme-aware and quiet ───────── */
 async function mountTraceGate() {
   (window as any).__tgDestroy?.();
@@ -192,7 +264,7 @@ function setup() {
   overlay = document.querySelector('[data-pill-overlay]');
   links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-pills] ul:not(.overlay) a[data-section]'));
   // Section element id -> nav pill it belongs to (Open source sits under Projects; Beyond work under Education).
-  const NAV: Record<string, string> = { about: 'about', experience: 'experience', work: 'work', projects: 'projects', opensource: 'projects', education: 'education', beyond: 'education' };
+  const NAV: Record<string, string> = { about: 'about', activity: 'about', experience: 'experience', work: 'work', projects: 'projects', opensource: 'projects', education: 'education', beyond: 'education' };
   sections = Object.keys(NAV)
     .map((id) => ({ id: NAV[id], el: document.getElementById(id) as HTMLElement | null, top: 0 }))
     .filter((s): s is { id: string; el: HTMLElement; top: number } => !!s.el);
@@ -201,7 +273,6 @@ function setup() {
   ro = new ResizeObserver(() => { measure(); updateScrollState(); });
   ro.observe(document.body);
   activeId = null;
-  currentClip = '';
   syncToggleLabel();
 
   if (sections.length) { updateScrollState(); movePill(activeId, true); }
@@ -260,6 +331,7 @@ function setup() {
   }
 
   setupFilters();
+  setupActivity();
   // After a client-side navigation, move focus to the new page heading (WCAG 2.4.3).
   if (navigated) {
     navigated = false;
