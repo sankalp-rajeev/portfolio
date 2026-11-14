@@ -2,7 +2,9 @@
 import { getCollection } from 'astro:content';
 
 const edu = (await getCollection('education')).sort((a, b) => a.data.order - b.data.order);
-const certs = (await getCollection('certificates')).sort((a, b) => a.data.order - b.data.order);
+interface Props { certs?: { id: string; data: { order: number; title: string; href: string; kind: string } }[] }
+const props = Astro.props;
+const certs = (props.certs ?? (await getCollection('certificates'))).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <section id="education" class="section" aria-labelledby="education-title">

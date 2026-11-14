@@ -28,10 +28,12 @@ const s = study.data;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{png,jpg,webp}', { eager: true });
 const shot = p.image ? images[`/src/assets/projects/${p.image.split('/').pop()}`]?.default : undefined;
 const isNexus = project.id === 'nexus';
+const full = `${s.oneLine} ${s.problem[0]}`;
+const desc = full.length <= 158 ? full : full.slice(0, 155).replace(/s+S*$/, '') + '…';
 const isTbv = project.id === 'trust-but-verify';
 ---
 
-<Base title={`${p.title} | Sankalp Rajeev`} description={s.oneLine} path={`/work/${project.id}`}>
+<Base title={`${p.title} | Sankalp Rajeev`} description={desc} path={`/work/${project.id}`}>
   <article class="section case">
     <div class="col">
       <header class="head">

@@ -18,7 +18,9 @@ const MAP: Record<string, { f: Filter; label: string }> = {
   'Data Visualization': { f: 'viz', label: 'Data viz' },
 };
 
-const all = (await getCollection('projects'))
+interface Props { items?: { id: string; data: any }[] }
+const { items } = Astro.props;
+const all = (items ?? (await getCollection('projects')))
   .filter((p) => p.data.featured === undefined && !p.data.hidden)
   .sort((a, b) => (a.id === 'kairos' ? -1 : b.id === 'kairos' ? 1 : (b.data.year ?? 0) - (a.data.year ?? 0) || a.data.order - b.data.order));
 ---

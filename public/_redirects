@@ -1,5 +1,5 @@
-# Legacy SPA routes -> new anchors / pages (static site: no SPA fallback needed)
-/projects          /#work            301
-/experience        /#experience      301
-/certificates      /#about           301
-/wildlife-gallery  /#about           301
+# Legacy SPA routes -> new pages / anchors (static site: no SPA fallback needed)
+/projects          /#projects      301
+/experience        /#experience    301
+/certificates      /#education     301
+/wildlife-gallery  /gallery        301

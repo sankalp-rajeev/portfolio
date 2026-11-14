@@ -11,11 +11,13 @@ interface Props {
   title?: string;
   description?: string;
   path?: string;
+  noindex?: boolean;
 }
 const {
   title = 'Sankalp Rajeev | AI & Machine Learning Engineer | Portfolio',
   description = "Sankalp Rajeev is an AI/ML Engineer and dual master's candidate at the University of Michigan-Dearborn building production ML, LLM reliability, computer vision, and ML systems. Graduating December 2026 and available January 2027.",
   path = '/',
+  noindex = false,
 } = Astro.props;
 const canonicalUrl = new URL(path, 'https://sankalprajeev.dev').href;
 const ogTitle = 'Sankalp Rajeev | AI & Machine Learning Engineer';
@@ -25,11 +27,14 @@ const ld = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Sankalp Rajeev',
-  jobTitle: 'AI/ML Engineer',
+  jobTitle: 'Graduate Research Assistant',
+  description: 'AI/ML engineer focused on reliable LLM systems, verifiers for LLM code repairs and production ML pipelines.',
+  worksFor: { '@type': 'CollegeOrUniversity', name: 'University of Michigan-Dearborn' },
   url: 'https://sankalprajeev.dev/',
-  sameAs: ['https://github.com/sankalp-rajeev', 'https://www.linkedin.com/in/sankalp-rajeev/'],
+  sameAs: ['https://github.com/sankalp-rajeev', 'https://www.linkedin.com/in/sankalp-rajeev/', 'https://www.instagram.com/sankalp_rajeev/'],
   affiliation: { '@type': 'CollegeOrUniversity', name: 'University of Michigan-Dearborn' },
   alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Arizona State University' }],
+  email: 'mailto:srajeev@umich.edu',
   knowsAbout: ['Artificial Intelligence', 'Machine Learning', 'LLM Systems', 'AI Reliability', 'Computer Vision', 'ML Systems', 'MLOps', 'Edge AI', 'Python', 'PyTorch'],
 };
 ---
@@ -39,8 +44,9 @@ const ld = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href={geistUrl} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={newsreaderUrl} as="font" type="font/woff2" crossorigin />
     <link rel="manifest" href="/manifest.json" />
@@ -53,19 +59,22 @@ const ld = {
       content="Sankalp Rajeev, AI Engineer, Machine Learning Engineer, ML Engineer, LLM Engineer, Computer Vision Engineer, Applied AI Engineer, AI Reliability, ML Systems, MLOps, PyTorch, TensorRT, Docker, Kubernetes, University of Michigan"
     />
     <meta name="author" content="Sankalp Rajeev" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={ogTitle} />
-    <meta property="og:description" content={ogDescription} />
-    <meta property="og:image" content="https://sankalprajeev.dev/logo.png" />
+    <meta property="og:title" content={path === '/' ? ogTitle : title} />
+    <meta property="og:description" content={path === '/' ? ogDescription : description} />
+    <meta property="og:image" content="https://sankalprajeev.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sankalp Rajeev: I build AI systems that check their own work." />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalUrl} />
-    <meta property="twitter:title" content={ogTitle} />
-    <meta property="twitter:description" content={ogDescription} />
-    <meta property="twitter:image" content="https://sankalprajeev.dev/logo.png" />
+    <meta property="twitter:title" content={path === '/' ? ogTitle : title} />
+    <meta property="twitter:description" content={path === '/' ? ogDescription : description} />
+    <meta property="twitter:image" content="https://sankalprajeev.dev/og.png" />
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 
     <!-- Runs before first paint: theme, JS flag, and once-per-session entrance flag. -->
