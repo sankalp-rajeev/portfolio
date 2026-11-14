@@ -9,6 +9,20 @@
   font-display: swap;
 }
 @font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('../assets/fonts/CabinetGrotesk-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('../assets/fonts/CabinetGrotesk-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Geist Mono';
   src: url('../assets/fonts/GeistMono-Variable.woff2') format('woff2');
   font-weight: 100 900;
@@ -40,14 +54,17 @@
   --fs-lead: clamp(1.0625rem, 1.6vw, 1.25rem);
   --fs-figure: 1.25rem;
   --fs-title: 1.5rem;
-  --fs-display: clamp(44px, 7vw, 96px);
+  --fs-display: clamp(40px, 5.5vw, 72px);
 
   --radius: 12px;
   --max: 1200px;
   --gutter: 24px;
+  --gate: 0.62; /* hero background gate position (share of width) */
   --nav-h: 64px;
 
   --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Display face for headings only (deliberate override of the overused-font finding; see DESIGN.md) */
+  --font-display: 'Cabinet Grotesk', 'Geist', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 
   /* Motion */
@@ -106,6 +123,9 @@
   --radius-surface: var(--radius);
 }
 
+@media (max-width: 340px) {
+  :root { --gutter: 16px; }
+}
 @media (min-width: 768px) {
   :root { --gutter: 40px; }
 }
@@ -181,6 +201,13 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 768px) { .section { padding-block: var(--s-16); } }
 .hairline { border: 0; border-top: 1px solid var(--line); margin: 0; }
 
+/* Film grain: static SVG noise, ~3% opacity, no animation, never intercepts input. */
+.grain {
+  position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
 /* ───────── Buttons ───────── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -207,17 +234,18 @@ a { color: inherit; text-decoration: none; }
 
 /* Hero entrance: CSS keyframes so nothing waits on JS. Class `entrance` is set by an
    inline head script only on the first Home view of a session (and never under reduced motion). */
-@keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes settle { from { transform: translateY(0.3em); } to { transform: none; } }
+@keyframes settle-sm { from { transform: translateY(12px); } to { transform: none; } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
 .entrance .nav-enter { animation: fade 300ms var(--ease) both; }
-.entrance .rise-line > span { animation: rise 700ms var(--ease) both; }
-.entrance .rise-line:nth-child(1) > span { animation-delay: 80ms; }
-.entrance .rise-line:nth-child(2) > span { animation-delay: 150ms; }
-.entrance .enter-sub { animation: fade-up 500ms var(--ease) 380ms both; }
-.entrance .enter-actions { animation: fade-up 500ms var(--ease) 450ms both; }
-.entrance .enter-facts { animation: fade-up 500ms var(--ease) 560ms both; }
+/* Headline + subhead are visible from the first frame (LCP): they only translate. */
+.entrance .rise-line > span { animation: settle 700ms var(--ease) both; }
+.entrance .rise-line:nth-child(2) > span { animation-delay: 70ms; }
+.entrance .enter-sub { animation: settle-sm 600ms var(--ease) 140ms both; }
+.entrance .enter-actions { animation: fade-up 500ms var(--ease) 260ms both; }
+.entrance .enter-facts { animation: fade-up 500ms var(--ease) 380ms both; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

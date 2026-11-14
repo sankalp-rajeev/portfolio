@@ -2,10 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import SelectedWork from '../components/SelectedWork.astro';
+const bg = import.meta.env.PUBLIC_HERO_BG as "a" | "b" | "c" | undefined; // build-time switch used to measure variants
 ---
 
 <Base path="/">
-  <Hero />
+  <Hero bg={bg} />
   <div class="wrap"><hr class="hairline" /></div>
   <SelectedWork />
   <!-- Step 2 builds these sections. Anchors exist so the nav has real targets. -->

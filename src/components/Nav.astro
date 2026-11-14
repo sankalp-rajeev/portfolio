@@ -72,6 +72,9 @@ const onWork = Astro.url.pathname.startsWith('/work');
     .brand-last { display: none; }
     .links a { padding-inline: 7px; font-size: var(--fs-mono); }
   }
+  @media (max-width: 340px) {
+    .links a { padding-inline: 4px; }
+  }
   @media (max-width: 375px) {
     .nav-inner { gap: 8px; }
     .links { gap: 0; }

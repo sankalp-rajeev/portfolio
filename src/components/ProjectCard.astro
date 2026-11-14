@@ -50,7 +50,7 @@ const href = `/work/${project.id}`;
       </p>
     )}
 
-    {p.stack && <p class="stack mono">{p.stack.join(' · ')}</p>}
+    {p.stack && p.stack.length > 0 && <ul class="stack mono" aria-label="Stack">{p.stack.map((s) => <li>{s}</li>)}</ul>}
 
     <ul class="links">
       {p.demoLink && <li><a class="link" href={p.demoLink} target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> for {p.title}</span> ↗</a></li>}
@@ -90,7 +90,7 @@ const href = `/work/${project.id}`;
   }
 
   .body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-  .title { margin: 0; display: flex; align-items: center; gap: 8px; font-size: var(--fs-title); font-weight: 550; letter-spacing: -0.02em; line-height: 1.2; }
+  .title { margin: 0; display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: var(--fs-title); font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; }
   .title a { overflow-wrap: anywhere; min-width: 0; }
   .title a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
   .title a:focus-visible { outline: none; }
@@ -104,7 +104,10 @@ const href = `/work/${project.id}`;
   }
   .value { font-size: var(--fs-figure); font-weight: 500; color: var(--text); letter-spacing: -0.01em; overflow-wrap: anywhere; }
   .label { font-size: var(--fs-label); color: var(--text-2); }
-  .stack { margin: 0; font-size: var(--fs-mono); line-height: 1.6; color: var(--text-3); overflow-wrap: anywhere; }
+  /* Separators are CSS, attached to the START of each item, so a dot can never end a line. */
+  .stack { display: flex; flex-wrap: wrap; column-gap: 0.6em; margin: 0; padding: 0; list-style: none; font-size: var(--fs-mono); line-height: 1.7; color: var(--text-3); }
+  .stack li { overflow-wrap: anywhere; min-width: 0; }
+  .stack li + li::before { content: '·'; margin-right: 0.6em; }
 
   .links { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; margin: 4px 0 0; padding: 0; font-size: var(--fs-label); }
   .links .link { display: inline-block; padding-block: 4px; }

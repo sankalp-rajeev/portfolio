@@ -18,17 +18,17 @@ colors:
   accent-light: "#b4451f"
 typography:
   display:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "clamp(44px, 7vw, 96px)"
-    fontWeight: 550
-    lineHeight: 1
-    letterSpacing: "-0.035em"
+    fontFamily: "Cabinet Grotesk, Geist, system-ui, sans-serif"
+    fontSize: "clamp(40px, 5.5vw, 72px)"
+    fontWeight: 700
+    lineHeight: 1.02
+    letterSpacing: "-0.03em"
   title:
-    fontFamily: "Geist, system-ui, sans-serif"
+    fontFamily: "Cabinet Grotesk, Geist, system-ui, sans-serif"
     fontSize: "1.5rem"
-    fontWeight: 550
+    fontWeight: 500
     lineHeight: 1.2
-    letterSpacing: "-0.02em"
+    letterSpacing: "-0.01em"
   body:
     fontFamily: "Geist, system-ui, sans-serif"
     fontSize: "1.0625rem"
@@ -110,9 +110,11 @@ Neutral greys carry all text levels. One accent, the current orange-red, used on
 
 ## Typography
 
-Geist Sans for everything, Geist Mono only for numbers, dates, tags and code names. Self-hosted variable woff2.
+Geist Sans for body and UI, Geist Mono only for numbers, dates, tags and code names, **Cabinet Grotesk for headings only** (hero h1, card titles, work-page titles; weights 500 and 700). All self-hosted woff2; no off-host font requests.
 
-- Display `clamp(44px, 7vw, 96px)`, weight 550, tracking -0.035em, line-height 1.0.
+**Deliberate override:** the impeccable detector flags Geist as an overused face (`overused-font`). The owner chose Geist for body/UI and added Cabinet Grotesk as the display face to give headings character. The finding is acknowledged and intentionally not acted on.
+
+- Display (Cabinet Grotesk) `clamp(40px, 5.5vw, 72px)`, weight 700, tracking -0.03em, line-height 1.02.
 - Body 17px / 1.6, max 65ch. Card description 16px.
 - Uppercase letter-spaced text exists only for small section eyebrows (12px, +0.12em).
 - Mono labels for facts (13px, normal case) and key figure values (20px).
@@ -120,6 +122,12 @@ Geist Sans for everything, Geist Mono only for numbers, dates, tags and code nam
 ## Layout
 
 12-column grid, max width 1200px, gutters 24px (mobile) / 40px (≥768px). 8px spacing scale. Section padding 80px mobile / 128px desktop. 1px low-opacity hairlines divide sections. Work grid: 2×2 on desktop, 1 column below 768px.
+
+## Hero
+
+No eyebrow. Headline in the left ~6 columns; the background art owns the right side and bleeds behind the text, masked (not decorated) so the text column and the facts row stay clean. Resume is the one solid button; GitHub and LinkedIn are text links with ↗; Instagram is a small text link. A static film-grain overlay (SVG noise, ~3% opacity, no animation, pointer-events none) sits over the whole page. The headline and subhead are visible from the first frame (they only translate), so LCP never waits on animation.
+
+Background art contract (all variants): DPR capped at 2; paused off-screen and when the tab is hidden; static first frame under prefers-reduced-motion and when hardwareConcurrency ≤ 4; neutral lines/dots use the text token (dark lines on light, light lines on dark); accent only for the gate-stopped traces/paths; no text, numbers or labels in the art; the gate sits at 62% of the width.
 
 ## Elevation & Depth
 

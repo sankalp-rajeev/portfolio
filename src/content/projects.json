@@ -31,8 +31,8 @@
     "featured": 3,
     "tagline": "Evidence-gated compatibility runtime for evolving AI agent tools.",
     "figure": {
-      "value": "33/33",
-      "label": "compatible trials recovered"
+      "value": "0",
+      "label": "false-compatible promotions across 6 public MCP migrations"
     },
     "stack": [
       "TypeScript",

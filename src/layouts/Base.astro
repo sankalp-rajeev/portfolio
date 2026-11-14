@@ -4,6 +4,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import geistUrl from '../assets/fonts/Geist-Variable.woff2?url';
+import cabinet700Url from '../assets/fonts/CabinetGrotesk-700.woff2?url';
 
 interface Props {
   title?: string;
@@ -40,6 +41,7 @@ const ld = {
     <link rel="icon" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
     <link rel="preload" href={geistUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={cabinet700Url} as="font" type="font/woff2" crossorigin />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#0c0c0b" />
 
@@ -89,6 +91,7 @@ const ld = {
     <ClientRouter />
   </head>
   <body>
+    <div class="grain" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Skip to content</a>
     <Nav><ThemeToggle /></Nav>
     <main id="main">

@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://sankalprajeev.dev',
   output: 'static',
-  outDir: 'build',
+  outDir: process.env.OUT_DIR || 'build',
   trailingSlash: 'never',
   build: { format: 'file', inlineStylesheets: 'always' },
   vite: { plugins: [tailwindcss()] },
