@@ -2,9 +2,14 @@ import { animate, inView } from 'motion';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const root = document.documentElement;
-(window as any).__mainReady = true;
 let navigated = false;
+/** Set when the next page load is a back/forward (history) navigation: reveals and ink are skipped, content shows final. */
+let historyNav = false;
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+document.addEventListener('astro:before-preparation', (e) => {
+  historyNav = (e as unknown as { navigationType?: string }).navigationType === 'traverse';
+});
 
 /* ───────── Theme (instant everywhere; circular reveal from the button when supported) ───────── */
 function applyTheme(next: 'light' | 'dark') {
@@ -17,9 +22,18 @@ function syncToggleLabel() {
   const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
   document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-label', `Switch to ${next} theme`));
 }
+/** Each toggle takes a token; only the latest one may remove the transition class (a rapid second click can't strip it mid-flight). */
+let themeToken = 0;
 async function toggleTheme(button: Element) {
   const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  if (!('startViewTransition' in document) || reduced()) return applyTheme(next);
+  const my = ++themeToken;
+  if (!('startViewTransition' in document)) return applyTheme(next);
+  if (reduced()) {
+    // Reduced motion: a short opacity-only crossfade, no movement.
+    root.classList.add('theme-fade');
+    try { await document.startViewTransition(() => applyTheme(next)).finished; } catch { /* skipped */ } finally { if (my === themeToken) root.classList.remove('theme-fade'); }
+    return;
+  }
   const r = button.getBoundingClientRect();
   const x = r.left + r.width / 2;
   const y = r.top + r.height / 2;
@@ -36,7 +50,7 @@ async function toggleTheme(button: Element) {
   } catch {
     /* transition skipped: theme is already applied */
   } finally {
-    root.classList.remove('theme-vt');
+    if (my === themeToken) root.classList.remove('theme-vt');
   }
 }
 document.addEventListener('click', (e) => {
@@ -54,6 +68,7 @@ document.addEventListener('astro:before-swap', (e) => {
   const nd = (e as unknown as { newDocument: Document }).newDocument.documentElement;
   nd.dataset.theme = root.dataset.theme;
   nd.classList.add('js');
+  if (historyNav) nd.classList.add('history-nav'); // back/forward: show final states, no reveals
   // The incoming head carries the static (light) theme-color; keep it in step with the current theme.
   e2meta((e as unknown as { newDocument: Document }).newDocument);
   navigated = true;
@@ -81,15 +96,17 @@ const clipFor = (id: string | null) => {
   const right = pr.width - (lr.right - pr.left);
   return `inset(0px ${right.toFixed(1)}px 0px ${left.toFixed(1)}px round 999px)`;
 };
-/** Only clip-path animates: the pill keeps a true rounded shape while it slides and resizes. */
+let pillAnim: { cancel: () => void } | null = null;
+/** Only clip-path animates: the pill keeps a true rounded shape. It always starts from where it is *now*, so an interrupted move retargets smoothly. */
 function movePill(id: string | null, immediate = false) {
   if (!overlay) return;
   const to = clipFor(id);
-  if (immediate || reduced() || !currentClip || currentClip === HIDDEN || to === HIDDEN) {
-    overlay.style.clipPath = to;
-  } else {
-    animate(overlay, { clipPath: [currentClip, to] }, { duration: 0.4, ease: EASE });
-    overlay.style.clipPath = to;
+  const from = getComputedStyle(overlay).clipPath; // current visual position (mid-flight if interrupted)
+  pillAnim?.cancel();
+  pillAnim = null;
+  overlay.style.clipPath = to;
+  if (!immediate && !reduced() && from && from !== 'none' && from !== HIDDEN && !from.includes('100%') && to !== HIDDEN && from !== to) {
+    pillAnim = animate(overlay, { clipPath: [from, to] }, { duration: 0.22, ease: EASE });
   }
   currentClip = to;
 }
@@ -126,7 +143,7 @@ function drawInk(el: HTMLElement) {
   const note = el.querySelector<HTMLElement>('.note');
   const dur = 0.75;
   paths.forEach((p) => animate(p, { strokeDashoffset: [1, 0] }, { duration: dur, ease: EASE }));
-  if (note) animate(note, { opacity: [0, 1] }, { duration: 0.2, delay: (paths.length ? dur : 0) + 0.15, ease: 'easeOut' });
+  if (note) animate(note, { opacity: [0, 1] }, { duration: 0.2, delay: (paths.length ? dur : 0) + 0.15, ease: EASE });
 }
 
 /* ───────── Projects filter: rows collapse (height + opacity) instead of jumping ───────── */
@@ -195,31 +212,51 @@ function setup() {
     movePill(cur?.dataset.section ?? null, true);
   }
 
-  if (!reduced()) {
+  // Back/forward navigations show final states immediately: no reveals, no ink drawing (CSS keeps them visible via .history-nav).
+  const skip = historyNav || root.classList.contains('history-nav');
+  historyNav = false;
+  const rm = reduced();
+
+  if (!skip) {
     // Section content fades up 12px once on entry; at most 4 staggered (~70 ms) per container.
-    const items = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    // Only elements BELOW the fold start hidden: anything already in view at load is never hidden or animated.
+    const vh = innerHeight;
+    const items = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]')).filter((el) => el.getBoundingClientRect().top > vh);
     const index = (el: HTMLElement) => {
       const sibs = Array.from(el.parentElement?.children ?? []).filter((c) => (c as HTMLElement).hasAttribute('data-reveal'));
       return Math.min(sibs.indexOf(el), 3);
     };
     const cols = matchMedia('(min-width: 768px)').matches ? 2 : 1;
+    items.forEach((el) => {
+      el.setAttribute('data-hide', '');
+      el.querySelector('[data-seg]')?.setAttribute('data-hide-seg', '');
+    });
     if (items.length) {
       inView(items, (el) => {
         const e = el as HTMLElement;
+        const seg = e.querySelector<HTMLElement>('[data-seg]');
+        const done = () => { e.removeAttribute('data-hide'); e.style.opacity = ''; e.style.transform = ''; };
+        if (rm) {
+          // Reduced motion: a short opacity-only fade, no movement.
+          animate(e, { opacity: [0, 1] }, { duration: 0.15, ease: EASE }).then(done);
+          seg?.removeAttribute('data-hide-seg');
+          return;
+        }
         const isCard = e.classList.contains('card');
         const delay = (isCard ? Number(e.dataset.index ?? 0) % cols : index(e)) * 0.07;
-        animate(e, { opacity: [0, 1], y: [12, 0] }, { duration: 0.6, delay, ease: EASE });
+        animate(e, { opacity: [0, 1], y: [12, 0] }, { duration: 0.6, delay, ease: EASE }).then(done);
         // Experience: the hairline segment draws down after the entry appears (reveals "along the hairline").
-        const seg = e.querySelector<HTMLElement>('[data-seg]');
-        if (seg) animate(seg, { scaleY: [0, 1] }, { duration: 0.7, delay: delay + 0.2, ease: EASE });
+        if (seg) animate(seg, { scaleY: [0, 1] }, { duration: 0.7, delay: delay + 0.2, ease: EASE }).then(() => { seg.removeAttribute('data-hide-seg'); seg.style.transform = ''; });
       }, { amount: 0.2, margin: '0px 0px -6% 0px' });
     }
 
-    // Ink: strokes draw once as they enter view; the hero underline draws shortly after load.
-    document.querySelectorAll<HTMLElement>('[data-ink]').forEach((el) => {
-      if (el.hasAttribute('data-ink-load')) setTimeout(() => drawInk(el), 650);
-      else inView(el, () => { drawInk(el); }, { amount: 0.6 });
-    });
+    // Ink (decorative): strokes draw once as they enter view; the hero underline draws shortly after load. Reduced motion: drawn and static.
+    if (!rm) {
+      document.querySelectorAll<HTMLElement>('[data-ink]').forEach((el) => {
+        if (el.hasAttribute('data-ink-load')) setTimeout(() => drawInk(el), 650);
+        else inView(el, () => { drawInk(el); }, { amount: 0.6 });
+      });
+    }
   }
 
   setupFilters();

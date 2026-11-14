@@ -72,8 +72,8 @@ const all = (items ?? (await getCollection('projects')))
 
   .list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
   /* Filtering: the row's height (via grid-template-rows 1fr→0fr) and opacity animate, so nothing jumps. */
-  .row { display: grid; grid-template-rows: 1fr; opacity: 1; transition: grid-template-rows 450ms var(--ease), opacity 300ms var(--ease), visibility 0s; }
-  .row.is-out { grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows 450ms var(--ease), opacity 220ms var(--ease), visibility 0s 450ms; }
+  .row { display: grid; grid-template-rows: 1fr; opacity: 1; transition: grid-template-rows 300ms var(--ease), opacity 200ms var(--ease), visibility 0s; }
+  .row.is-out { grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows 300ms var(--ease), opacity 200ms var(--ease), visibility 0s 300ms; }
   .row-in {
     min-height: 0; overflow: hidden; border-top: 1px solid var(--line);
     display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px var(--s-3); padding-block: var(--s-3);

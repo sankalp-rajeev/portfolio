@@ -150,7 +150,6 @@ h1, h2, h3, h4 { text-wrap: balance; }
 /* Larger tap area for inline text links without changing layout. */
 .hit { padding-block: 11px; margin-block: -11px; }
 html:not(.js) .theme-toggle { display: none; } /* the toggle needs JS */
-.reveal-failsafe [data-reveal] { opacity: 1 !important; transform: none !important; }
 /* Lightbox open: lock page scroll. */
 html:has(dialog[open]) { overflow: hidden; }
 .serif { font-family: var(--font-serif); font-optical-sizing: auto; }
@@ -223,15 +222,23 @@ a { color: inherit; text-decoration: none; }
   content: ''; position: absolute; inset: -1px; border-radius: inherit;
   background: var(--text); opacity: 0; transition: opacity var(--dur-hover) var(--ease); pointer-events: none;
 }
-.btn:hover::before { opacity: 0.06; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover::before { opacity: 0.06; }
+}
 .btn:active { transform: scale(0.97); }
 .btn-primary { background: var(--solid); color: var(--on-solid); border-color: var(--solid); }
 .btn-primary::before { background: var(--on-solid); }
-.btn-primary:hover::before { opacity: 0.14; }
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover::before { opacity: 0.14; }
+}
 
 /* ───────── Reveal states (JS-gated: content is visible without JS) ───────── */
-.js [data-reveal] { opacity: 0; transform: translateY(12px); }
-.js [data-seg] { transform: scaleY(0); transform-origin: top; }
+/* Set by JS only on below-the-fold elements (never on anything in view at load; never on history navigations). */
+[data-hide] { opacity: 0; transform: translateY(12px); }
+[data-hide-seg] { transform: scaleY(0); transform-origin: top; }
+/* Back/forward navigations: ink shown drawn, nothing hidden. */
+:root.history-nav [data-ink] .stroke path { stroke-dashoffset: 0; }
+:root.history-nav [data-ink] .note { opacity: 1; }
 /* Ink strokes: drawn fully by default; JS-gated hidden state so they draw in once. */
 .js [data-ink] .stroke path { stroke-dasharray: 1; stroke-dashoffset: 1; }
 .js [data-ink] .note { opacity: 0; }
@@ -252,8 +259,9 @@ a { color: inherit; text-decoration: none; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .js [data-reveal] { opacity: 1; transform: none; }
-  .js [data-seg] { transform: none; }
+  /* Reveals keep a short opacity-only fade (JS, ~150ms); movement is removed. */
+  [data-hide] { transform: none; }
+  [data-hide-seg] { transform: none; }
   .js [data-ink] .stroke path { stroke-dashoffset: 0; }
   .js [data-ink] .note { opacity: 1; }
 }
@@ -269,6 +277,9 @@ a { color: inherit; text-decoration: none; }
 /* ───────── Theme reveal (View Transitions API) ───────── */
 html.theme-vt::view-transition-old(root),
 html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+/* Reduced-motion theme swap: ~150ms opacity-only crossfade. */
+html.theme-fade::view-transition-old(root),
+html.theme-fade::view-transition-new(root) { animation-duration: 150ms; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
 html.theme-vt::view-transition-old(root) { z-index: 1; }
 html.theme-vt::view-transition-new(root) { z-index: 2; }
 

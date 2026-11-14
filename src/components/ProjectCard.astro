@@ -167,5 +167,6 @@ const isNexus = project.id === 'nexus';
     .card:hover .edge { opacity: 1; }
     .card:hover .arrow { transform: translateX(4px); color: var(--text); }
   }
-  .card:has(.title a:focus-visible) .arrow { transform: translateX(4px); color: var(--text); }
+  /* Keyboard focus: instant (no transition). Uses the separate `translate` property, which is not in the transition list. */
+  .card:has(.title a:focus-visible) .arrow { translate: 4px 0; color: var(--text); }
 </style>

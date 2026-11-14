@@ -92,8 +92,8 @@ const ld = {
         var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
         var seen = false;
         try { seen = sessionStorage.getItem('entered') === '1'; } catch (e) {}
-        // If the main script never runs, un-hide reveal content so nothing stays invisible.
-        setTimeout(function () { if (!window.__mainReady) d.classList.add('reveal-failsafe'); }, 4000);
+        // Reload / back-forward: show final states (no reveals, ink drawn).
+        try { var nav = performance.getEntriesByType('navigation')[0]; if (nav && nav.type === 'back_forward') d.classList.add('history-nav'); } catch (e) {}
         if (home && !reduced && !seen) {
           d.classList.add('entrance');
           try { sessionStorage.setItem('entered', '1'); } catch (e) {}

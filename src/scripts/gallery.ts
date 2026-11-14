@@ -18,7 +18,19 @@ export function initLightbox() {
     // Warm the neighbours so next/prev feel instant.
     [i + 1, i - 1].forEach((k) => { const n2 = tiles[(k + tiles.length) % tiles.length]; if (n2?.dataset.full) new Image().src = n2.dataset.full; });
   };
-  const open = (n: number, from: HTMLElement) => { opener = from; show(n); if (!dlg.open) dlg.showModal(); };
+  const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  const open = (n: number, from: HTMLElement) => {
+    opener = from;
+    show(n);
+    if (dlg.open) return;
+    dlg.showModal();
+    // Opens with a 200ms fade and a scale-in from 0.98. Reduced motion: a ~150ms fade only. (WAAPI: unaffected by the global reduced-motion CSS clamp.)
+    const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const t = { duration: rm ? 150 : 200, easing: EASE };
+    dlg.animate([{ opacity: 0 }, { opacity: 1 }], t);
+    dlg.animate([{ opacity: 0 }, { opacity: 1 }], { ...t, pseudoElement: '::backdrop' });
+    if (!rm) dlg.querySelector('figure')?.animate([{ transform: 'scale(0.98)' }, { transform: 'none' }], t);
+  };
 
   tiles.forEach((t, n) => t.addEventListener('click', (e) => { e.preventDefault(); open(n, t); }));
   dlg.querySelector('[data-lb-close]')!.addEventListener('click', () => dlg.close());
