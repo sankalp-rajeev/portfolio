@@ -1,0 +1,41 @@
+---
+import Ink from './Ink.astro';
+---
+
+<section id="opensource" class="section" aria-labelledby="oss-title">
+  <div class="col">
+    <h2 id="oss-title" class="h2" data-reveal>Open source</h2>
+    <article class="oss" data-reveal>
+      <div class="head">
+        <h3 class="name">
+          <a class="link" href="https://github.com/dunetrace/dunetrace/pull/85" target="_blank" rel="noopener noreferrer">Dunetrace: agent runtime reliability (Apache-2.0)<span class="sr-only"> pull request #85</span><span aria-hidden="true">&nbsp;↗</span></a>
+        </h3>
+        <p class="meta mono">Merged PR #85 · Nov 2026</p>
+      </div>
+      <p class="text">
+        Built a detector for agent runs that write to memory 3x+ more often than they read it back, end to end: SDK detector, root-cause
+        explanation, calibration harness and tests (~1K lines), reviewed and merged by the maintainers.
+      </p>
+      <Ink
+        class="ink-desk ink-margin"
+        vb="0 0 34 26"
+        par="xMidYMid meet"
+        d="M3 14 C 7 16, 9 20, 12 23 C 15 15, 21 8, 31 3"
+        width={2.8}
+        style="left:calc(100% + 18px);top:6px;width:26px;height:20px;"
+        note="merged"
+        noteStyle="left:32px;top:-1px;--r:-3deg;"
+      />
+    </article>
+  </div>
+</section>
+
+<style>
+  .oss { position: relative; }
+  .head { display: flex; justify-content: space-between; gap: var(--s-3); align-items: baseline; flex-wrap: wrap; }
+  .name { margin: 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-title); font-weight: 500; line-height: 1.25; }
+  .name .link { text-decoration-color: transparent; }
+  .name .link:hover { text-decoration-color: var(--accent); }
+  .meta { margin: 0; font-size: var(--fs-mono); color: var(--text-2); }
+  .text { margin: var(--s-2) 0 0; max-width: 62ch; font-size: var(--fs-label); line-height: 1.65; color: var(--text); }
+</style>

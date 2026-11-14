@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+const photos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/photos/*.jpg', { eager: true });
+const gallery = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
+// Three thumbnails: tiger, leopard, elephant.
+const pick = ['photo1.jpg', 'photo10.jpg', 'elephant2.jpg']
+  .map((f) => gallery.find((g) => g.data.src === f))
+  .filter((g): g is NonNullable<typeof g> => !!g);
+---
+
+<section id="beyond" class="section" aria-labelledby="beyond-title">
+  <div class="col">
+    <h2 id="beyond-title" class="h2" data-reveal>Beyond work</h2>
+    <p class="line" data-reveal>When I'm away from the keyboard I photograph wildlife: tigers, leopards, lions and elephants.</p>
+    <ul class="thumbs" data-reveal>
+      {pick.map((g) => {
+        const img = photos[`/src/assets/photos/${g.data.src}`]?.default;
+        return (
+          <li>
+            <a href="/gallery" aria-label={`Open the gallery: ${g.data.caption}`}>
+              {img && <Image src={img} alt="" widths={[320, 480, 640]} sizes="(min-width: 800px) 256px, 30vw" format="webp" quality={78} loading="lazy" decoding="async" />}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="more" data-reveal><a class="link" href="/gallery">See the gallery <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+
+<style>
+  .line { margin: 0 0 var(--s-4); max-width: 38em; font-size: var(--fs-body); line-height: 1.7; }
+  .thumbs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-2); }
+  .thumbs a { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--surface-2); }
+  .thumbs :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1); transition: transform var(--dur-image) var(--ease); }
+  @media (hover: hover) { .thumbs a:hover :global(img) { transform: scale(1.03); } }
+  .more { margin: var(--s-3) 0 0; }
+  .more .link { display: inline-flex; align-items: center; gap: 0.3em; min-height: 40px; }
+</style>

@@ -88,11 +88,14 @@ function updateScrollState() {
   const line = innerHeight * 0.4;
   let id: string | null = null;
   for (const s of sections) if (s.el.getBoundingClientRect().top <= line) id = s.id;
-  if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) id = sections[sections.length - 1].id;
   if (id !== activeId) {
     activeId = id;
     links.forEach((l) => (l.dataset.section === id ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current')));
     movePill(id);
+    // On narrow screens the section nav scrolls sideways; keep the active item in view.
+    const nav = document.querySelector<HTMLElement>('[data-secnav]');
+    const cur = links.find((l) => l.dataset.section === id);
+    if (nav && cur && nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: cur.offsetLeft - nav.clientWidth / 2 + cur.offsetWidth / 2, behavior: reduced() ? 'auto' : 'smooth' });
   }
 }
 
@@ -113,14 +116,41 @@ function drawInk(el: HTMLElement) {
   if (note) animate(note, { opacity: [0, 1] }, { duration: 0.2, delay: (paths.length ? dur : 0) + 0.15, ease: 'easeOut' });
 }
 
+/* ───────── Projects filter: rows collapse (height + opacity) instead of jumping ───────── */
+function setupFilters() {
+  const group = document.querySelector<HTMLElement>('[data-filters]');
+  const list = document.querySelector<HTMLElement>('[data-project-list]');
+  if (!group || !list) return;
+  group.hidden = false; // filters need JS; without it every project stays visible
+  const rows = Array.from(list.querySelectorAll<HTMLElement>('.row'));
+  const status = document.querySelector<HTMLElement>('[data-filter-status]');
+  const empty = document.querySelector<HTMLElement>('[data-filter-empty]');
+  const buttons = Array.from(group.querySelectorAll<HTMLButtonElement>('button'));
+  const apply = (f: string) => {
+    let shown = 0;
+    rows.forEach((r) => {
+      const match = f === 'all' || r.dataset.cat === f;
+      r.classList.toggle('is-out', !match);
+      (r as HTMLElement & { inert: boolean }).inert = !match;
+      if (match) shown++;
+    });
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
+    if (empty) empty.hidden = shown !== 0;
+    if (status) status.textContent = 'Showing ' + shown + ' project' + (shown === 1 ? '' : 's');
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? 'all')));
+}
+
 /* ───────── Page setup (first load and after every ClientRouter navigation) ───────── */
 function setup() {
   bar = document.querySelector('[data-topbar]');
   pills = document.querySelector('[data-pills]');
   overlay = document.querySelector('[data-pill-overlay]');
   links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-pills] ul:not(.overlay) a[data-section]'));
-  sections = ['about', 'experience', 'work', 'education']
-    .map((id) => ({ id, el: document.getElementById(id) as HTMLElement | null }))
+  // Section element id -> nav pill it belongs to (Open source sits under Projects; Beyond work under Education).
+  const NAV: Record<string, string> = { about: 'about', experience: 'experience', work: 'work', projects: 'projects', opensource: 'projects', education: 'education', beyond: 'education' };
+  sections = Object.keys(NAV)
+    .map((id) => ({ id: NAV[id], el: document.getElementById(id) as HTMLElement | null }))
     .filter((s): s is { id: string; el: HTMLElement } => !!s.el);
   activeId = null;
   currentClip = '';
@@ -160,6 +190,8 @@ function setup() {
       else inView(el, () => { drawInk(el); }, { amount: 0.6 });
     });
   }
+
+  setupFilters();
 
   // Entrance is CSS-driven; drop the flag after it ends so returning to Home shows the final state.
   if (root.classList.contains('entrance')) setTimeout(() => root.classList.remove('entrance'), 1500);

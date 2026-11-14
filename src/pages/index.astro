@@ -4,6 +4,10 @@ import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Experience from '../components/Experience.astro';
 import SelectedWork from '../components/SelectedWork.astro';
+import Projects from '../components/Projects.astro';
+import OpenSource from '../components/OpenSource.astro';
+import Education from '../components/Education.astro';
+import Beyond from '../components/Beyond.astro';
 ---
 
 <Base path="/">
@@ -11,15 +15,9 @@ import SelectedWork from '../components/SelectedWork.astro';
   <About />
   <Experience />
   <SelectedWork />
-  <!-- Step 2 builds Education and the rest. The anchor exists so the section nav has a real target. -->
-  <section id="education" class="section" aria-labelledby="education-title">
-    <div class="col">
-      <h2 id="education-title" class="h2">Education</h2>
-      <p class="mono pending">Built in step 2.</p>
-    </div>
-  </section>
+  <Projects />
+  <OpenSource />
+  <Education />
+  <Beyond />
 </Base>
 
-<style>
-  .pending { margin: 0; font-size: var(--fs-mono); color: var(--text-3); }
-</style>

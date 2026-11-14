@@ -78,9 +78,9 @@ const isNexus = project.id === 'nexus';
 
     {/* Smriti: links intentionally absent until provided (p.linksTodo). */}
     <ul class="links">
-      {p.demoLink && <li><a class="link" href={p.demoLink} target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> for {p.title}</span> ↗</a></li>}
-      {p.videoLink && <li><a class="link" href={p.videoLink} target="_blank" rel="noopener noreferrer">Demo video<span class="sr-only"> for {p.title}</span> ↗</a></li>}
-      {p.github && <li><a class="link" href={p.github} target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> for {p.title}</span> ↗</a></li>}
+      {p.demoLink && <li><a class="link" href={p.demoLink} target="_blank" rel="noopener noreferrer">Live demo<span class="sr-only"> for {p.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+      {p.videoLink && <li><a class="link" href={p.videoLink} target="_blank" rel="noopener noreferrer">Demo video<span class="sr-only"> for {p.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+      {p.github && <li><a class="link" href={p.github} target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> for {p.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
       {p.pypi && (
         <li class="pypi">
           <span class="pypi-link">

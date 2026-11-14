@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Sidebar from '../components/Sidebar.astro';
 import TopBar from '../components/TopBar.astro';
+import Contact from '../components/Contact.astro';
 import geistUrl from '../assets/fonts/Geist-Variable.woff2?url';
 import newsreaderUrl from '../assets/fonts/Newsreader-opsz.woff2?url';
 
@@ -100,9 +101,7 @@ const ld = {
       <main id="main">
         <slot />
       </main>
-      <footer class="col foot">
-        <p class="mono">Sankalp Rajeev · srajeev@umich.edu</p>
-      </footer>
+      <Contact />
     </div>
     <script>
       import '../scripts/main.ts';

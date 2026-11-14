@@ -1,38 +1,20 @@
 [
   {
-    "id": "university-of-michigan-dearborn",
+    "id": "umd",
     "order": 0,
-    "degree": "M.S. in Artificial Intelligence | M.S.E. in Robotics Engineering",
-    "institution": "University of Michigan-Dearborn",
-    "years": "09/2024 - 12/2026",
-    "gpa": "3.9/4.0",
-    "transcriptLink": "/transcripts/umich_transcript.pdf",
-    "description": "Computer Vision concentration",
-    "courses": [
-      "Deep Learning",
-      "Robot Vision",
-      "Mobile Robots",
-      "Embedded Systems",
-      "Pat. Rec. & Neural Networks",
-      "Advanced AI"
-    ]
+    "degree": "M.S. Artificial Intelligence & M.S.E. Robotics Engineering",
+    "institution": "University of Michigan–Dearborn",
+    "gpa": "3.90/4.00",
+    "date": "Dec 2026",
+    "transcriptLink": "/transcripts/umich_transcript.pdf"
   },
   {
-    "id": "arizona-state-university",
+    "id": "asu",
     "order": 1,
-    "degree": "B.S. in Computer Science",
+    "degree": "B.S. Computer Science",
     "institution": "Arizona State University",
-    "years": "08/2020 - 05/2024",
-    "gpa": "3.7/4.0",
-    "transcriptLink": "/transcripts/ASU_FinalTranscript.pdf",
-    "description": "Certificate in Mathematical Concepts of Engineering",
-    "courses": [
-      "Foundations of Machine Learning",
-      "Applied Linear Algebra",
-      "Data Visualization",
-      "Exploring Data in R & Python",
-      "Probability & Stats for Engr",
-      "Intro to Theoretical CS"
-    ]
+    "gpa": "3.71/4.00",
+    "date": "May 2024",
+    "transcriptLink": "/transcripts/ASU_FinalTranscript.pdf"
   }
 ]

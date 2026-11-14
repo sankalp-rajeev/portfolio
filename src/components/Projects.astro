@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+
+type Filter = 'ai' | 'cv' | 'apps' | 'viz';
+const FILTERS: { id: 'all' | Filter; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'ai', label: 'AI & ML' },
+  { id: 'cv', label: 'Computer vision' },
+  { id: 'apps', label: 'Apps' },
+  { id: 'viz', label: 'Data viz' },
+];
+// Existing categories mapped onto the five filters (Embedded Systems is grouped with Apps).
+const MAP: Record<string, { f: Filter; label: string }> = {
+  'AI & Machine Learning': { f: 'ai', label: 'AI & ML' },
+  'Computer Vision': { f: 'cv', label: 'Computer vision' },
+  'Embedded Systems': { f: 'apps', label: 'Embedded' },
+  'App Development': { f: 'apps', label: 'App' },
+  'Data Visualization': { f: 'viz', label: 'Data viz' },
+};
+
+const all = (await getCollection('projects'))
+  .filter((p) => p.data.featured === undefined && !p.data.hidden)
+  .sort((a, b) => (a.id === 'kairos' ? -1 : b.id === 'kairos' ? 1 : (b.data.year ?? 0) - (a.data.year ?? 0) || a.data.order - b.data.order));
+---
+
+<section id="projects" class="section" aria-labelledby="projects-title">
+  <div class="col">
+    <h2 id="projects-title" class="h2" data-reveal>Projects</h2>
+    <div class="filters" role="group" aria-label="Filter projects" data-filters hidden>
+      {FILTERS.map((f) => <button type="button" data-filter={f.id} aria-pressed={f.id === 'all' ? 'true' : 'false'}>{f.label}</button>)}
+    </div>
+    <p class="sr-only" role="status" aria-live="polite" data-filter-status></p>
+    <ul class="list" data-project-list>
+      {all.map((p) => {
+        const d = p.data;
+        const m = MAP[d.category] ?? { f: 'ai' as Filter, label: d.category };
+        return (
+          <li class="row" data-cat={m.f}>
+            <div class="row-in">
+              <div class="main">
+                <h3 class="name">{d.title}</h3>
+                <p class="desc">{d.summary ?? d.intro}</p>
+              </div>
+              <p class="meta mono">{d.year ? `${d.year} · ` : ''}{m.label}</p>
+              <ul class="rlinks">
+                {d.github && <li><a class="link" href={d.github} target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> for {d.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+                {d.demoLink && <li><a class="link" href={d.demoLink} target="_blank" rel="noopener noreferrer">Demo<span class="sr-only"> for {d.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+                {d.paperLink && <li><a class="link" href={d.paperLink} target="_blank" rel="noopener noreferrer">Report<span class="sr-only"> for {d.title}</span><span aria-hidden="true">&nbsp;↗</span></a></li>}
+              </ul>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="empty" data-filter-empty hidden>Nothing in this category yet.</p>
+  </div>
+</section>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 var(--s-4); }
+  .filters[hidden] { display: none; }
+  .filters button {
+    height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong);
+    background: none; color: var(--text-2); font: inherit; font-size: var(--fs-ui); font-weight: 500; cursor: pointer;
+    transition: transform var(--dur-press) var(--ease); touch-action: manipulation;
+  }
+  .filters button:active { transform: scale(0.97); }
+  .filters button:hover { color: var(--text); }
+  .filters button[aria-pressed='true'] { background: var(--solid); color: var(--on-solid); border-color: var(--solid); }
+
+  .list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+  /* Filtering: the row's height (via grid-template-rows 1fr→0fr) and opacity animate, so nothing jumps. */
+  .row { display: grid; grid-template-rows: 1fr; opacity: 1; transition: grid-template-rows 450ms var(--ease), opacity 300ms var(--ease), visibility 0s; }
+  .row.is-out { grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows 450ms var(--ease), opacity 220ms var(--ease), visibility 0s 450ms; }
+  .row-in {
+    min-height: 0; overflow: hidden; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px var(--s-3); padding-block: var(--s-3);
+  }
+  .main { min-width: 0; }
+  .meta { margin: 2px 0 0; font-size: var(--fs-mono); color: var(--text-3); }
+  .rlinks { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); list-style: none; margin: 4px 0 0; padding: 0; font-size: var(--fs-ui); }
+  .rlinks .link { display: inline-flex; align-items: center; min-height: 40px; }
+  .name { margin: 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-title); font-weight: 500; line-height: 1.25; overflow-wrap: anywhere; }
+  .desc { margin: 4px 0 0; font-size: var(--fs-label); line-height: 1.55; color: var(--text-2); max-width: 62ch; }
+  .empty { margin: var(--s-4) 0 0; color: var(--text-3); font-size: var(--fs-ui); }
+
+  @media (min-width: 768px) {
+    .row-in { grid-template-columns: minmax(0, 1fr) auto auto; align-items: start; }
+    .meta { grid-column: 2; grid-row: 1; margin: 4px 0 0; min-width: 9.5em; white-space: nowrap; text-align: right; }
+    .rlinks { grid-column: 3; grid-row: 1; margin: 0; justify-content: flex-end; flex-direction: column; align-items: flex-end; min-width: 84px; }
+    .rlinks .link { min-height: 28px; }
+  }
+</style>

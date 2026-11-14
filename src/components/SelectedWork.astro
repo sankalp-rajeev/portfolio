@@ -22,5 +22,5 @@ const featured = (await getCollection('projects'))
   /* The grid overhangs the 720px text column symmetrically; the heading keeps the column's left edge. */
   @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-10); align-items: stretch; } }
   .all { margin: var(--s-6) 0 0; font-size: var(--fs-base); }
-  .all .link { display: inline-flex; align-items: center; min-height: 40px; }
+  .all .link { display: inline-flex; align-items: center; gap: 0.3em; min-height: 40px; }
 </style>

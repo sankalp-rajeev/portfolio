@@ -1,0 +1,75 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const photos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/photos/*.jpg', { eager: true });
+const gallery = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
+const items = await Promise.all(
+  gallery.map(async (g) => {
+    const img = photos[`/src/assets/photos/${g.data.src}`]?.default;
+    if (!img) return null;
+    const full = await getImage({ src: img, width: 1600, format: 'webp', quality: 82 });
+    return { g, img, full: full.src };
+  }),
+);
+const list = items.filter((x): x is NonNullable<typeof x> => !!x);
+---
+
+<Base title="Wildlife gallery | Sankalp Rajeev" description="Wildlife photography by Sankalp Rajeev: tigers, leopards, lions, cheetahs and elephants." path="/gallery">
+  <section class="section">
+    <div class="col">
+      <p class="back"><a class="link" href="/#beyond">← Beyond work</a></p>
+      <h1 class="title">Wildlife gallery</h1>
+      <p class="lede">Photographs from the wild: tigers, lions, leopards, cheetahs and an elephant in Maasai Mara.</p>
+      <ul class="masonry" data-gallery>
+        {list.map(({ g, img, full }, i) => (
+          <li>
+            <button type="button" class="tile" data-index={i} data-full={full} data-caption={g.data.caption} aria-label={`View larger: ${g.data.caption}`}>
+              <Image src={img} alt={g.data.caption} widths={[360, 540, 720]} sizes="(min-width: 900px) 260px, (min-width: 500px) 45vw, 92vw" format="webp" quality={78} loading={i < 3 ? 'eager' : 'lazy'} decoding="async" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <dialog class="lightbox" data-lightbox aria-label="Photo viewer">
+    <figure>
+      <img alt="" draggable="false" data-lb-img />
+      <figcaption data-lb-caption></figcaption>
+    </figure>
+    <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Close">✕</button>
+    <button type="button" class="lb-btn lb-prev" data-lb-prev aria-label="Previous photo">←</button>
+    <button type="button" class="lb-btn lb-next" data-lb-next aria-label="Next photo">→</button>
+  </dialog>
+</Base>
+
+<script>
+  import { initLightbox } from '../scripts/gallery';
+  document.addEventListener('astro:page-load', initLightbox);
+</script>
+
+<style>
+  .back { margin: 0; font-size: var(--fs-ui); }
+  .title { margin: var(--s-3) 0 0; font-family: var(--font-serif); font-optical-sizing: auto; font-size: var(--fs-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.06; }
+  .lede { margin: var(--s-3) 0 var(--s-6); max-width: 38em; color: var(--text-2); }
+  .masonry { list-style: none; margin: 0; padding: 0; column-count: 1; column-gap: var(--s-2); }
+  @media (min-width: 500px) { .masonry { column-count: 2; } }
+  @media (min-width: 900px) { .masonry { column-count: 3; } }
+  .masonry li { break-inside: avoid; margin-bottom: var(--s-2); }
+  .tile { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface-2); cursor: zoom-in; }
+  .tile :global(img) { display: block; width: 100%; height: auto; transform: scale(1); transition: transform var(--dur-image) var(--ease); }
+  @media (hover: hover) { .tile:hover :global(img) { transform: scale(1.03); } }
+
+  .lightbox { border: 0; padding: 0; background: transparent; color: #fff; width: 100vw; height: 100dvh; max-width: none; max-height: none; }
+  .lightbox::backdrop { background: rgb(14 13 12 / 0.92); }
+  .lightbox figure { margin: 0; height: 100%; display: grid; place-items: center; align-content: center; gap: var(--s-2); padding: 56px 16px; touch-action: pan-y; }
+  .lightbox img { -webkit-user-drag: none; user-select: none; max-width: min(96vw, 1400px); max-height: calc(100dvh - 140px); width: auto; height: auto; object-fit: contain; border-radius: var(--radius-sm); }
+  .lightbox figcaption { max-width: 60ch; text-align: center; font-size: var(--fs-ui); color: rgb(255 255 255 / 0.85); }
+  .lb-btn { position: fixed; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgb(255 255 255 / 0.35); background: rgb(0 0 0 / 0.4); color: #fff; font-size: 18px; cursor: pointer; touch-action: manipulation; }
+  .lb-btn:focus-visible { outline-color: #fff; }
+  .lb-close { top: 12px; right: 12px; }
+  .lb-prev { left: 12px; top: 50%; margin-top: -22px; }
+  .lb-next { right: 12px; top: 50%; margin-top: -22px; }
+</style>

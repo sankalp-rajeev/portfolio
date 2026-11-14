@@ -39,7 +39,8 @@
       "MCP",
       "Docker",
       "SQLite"
-    ]
+    ],
+    "year": 2026
   },
   {
     "id": "kairos",
@@ -79,7 +80,9 @@
       "Kafka",
       "Airflow"
     ],
-    "subtitle": "Demand Intelligence Platform"
+    "subtitle": "Demand Intelligence Platform",
+    "year": 2026,
+    "summary": "Demand intelligence platform: 411M+ e-commerce events (PySpark, Kafka, Airflow); SASRec → Two-Tower → XGBoost recommender (AUC 0.9883), demand forecasting at 9.44% WMAPE."
   },
   {
     "id": "nexus",
@@ -117,7 +120,8 @@
     "demoLink": "https://nexus-llmops.vercel.app",
     "pypi": "nexus-llmops",
     "image": "/assets/projects/nexus.png",
-    "subtitle": "LLMOps Observability & Self-Healing Platform"
+    "subtitle": "LLMOps Observability & Self-Healing Platform",
+    "year": 2026
   },
   {
     "id": "codemind",
@@ -143,7 +147,8 @@
       "MLflow"
     ],
     "image": "/assets/projects/codemind.png",
-    "github": "https://github.com/sankalp-rajeev/CodeMind"
+    "github": "https://github.com/sankalp-rajeev/CodeMind",
+    "year": 2026
   },
   {
     "id": "smriti",
@@ -180,7 +185,8 @@
     ],
     "image": "/assets/projects/smriti.png",
     "github": "https://github.com/sankalp-rajeev/Smriti",
-    "videoLink": "https://www.youtube.com/watch?v=s5zeFpfrVQo"
+    "videoLink": "https://www.youtube.com/watch?v=s5zeFpfrVQo",
+    "year": 2026
   },
   {
     "id": "multimodal-document-q-a",
@@ -206,7 +212,8 @@
     ],
     "paperLink": "/reports/Sankalp_Rajeev_CIS583_Project-report.docx",
     "image": "/assets/projects/docqa.png",
-    "github": "https://github.com/sankalp-rajeev/multimodal-doc-qa"
+    "github": "https://github.com/sankalp-rajeev/multimodal-doc-qa",
+    "year": 2025
   },
   {
     "id": "meetingmind-ai",
@@ -234,7 +241,8 @@
       "ChromaDB",
       "Vertex AI"
     ],
-    "github": "https://github.com/sankalp-rajeev/meetingsmindAI"
+    "github": "https://github.com/sankalp-rajeev/meetingsmindAI",
+    "year": 2025
   },
   {
     "id": "repository-health-predictor",
@@ -259,7 +267,8 @@
       "NumPy"
     ],
     "image": "/assets/projects/repohealth.png",
-    "github": "https://github.com/sankalp-rajeev/repo_health_predictor"
+    "github": "https://github.com/sankalp-rajeev/repo_health_predictor",
+    "year": 2025
   },
   {
     "id": "apertureai",
@@ -286,7 +295,8 @@
       "DOE"
     ],
     "image": "/assets/projects/apertureai.png",
-    "github": "https://github.com/sankalp-rajeev/ApertureAI"
+    "github": "https://github.com/sankalp-rajeev/ApertureAI",
+    "year": 2026
   },
   {
     "id": "ai-powered-adaptive-cruise-control",
@@ -310,7 +320,8 @@
     ],
     "paperLink": "/reports/AI-Powered Adaptive Cruise Control.pdf",
     "image": "/assets/projects/acc.jpg",
-    "github": "https://github.com/sankalp-rajeev/Carla-Autonomous-Vehicle"
+    "github": "https://github.com/sankalp-rajeev/Carla-Autonomous-Vehicle",
+    "year": 2025
   },
   {
     "id": "stereo-visual-slam-in-carla",
@@ -334,7 +345,8 @@
     ],
     "paperLink": "/reports/ECE-544-Visual-Slam-Final.pdf",
     "image": "/assets/projects/slam.png",
-    "github": "https://github.com/sankalp-rajeev/Stereo-Visual-SLAM"
+    "github": "https://github.com/sankalp-rajeev/Stereo-Visual-SLAM",
+    "year": 2025
   },
   {
     "id": "image-caption-generation",
@@ -357,7 +369,8 @@
       "LSTM"
     ],
     "paperLink": "/reports/FinalReport.pdf",
-    "github": "https://github.com/srajeev234/ece5831-2024-final-project"
+    "github": "https://github.com/srajeev234/ece5831-2024-final-project",
+    "year": 2024
   },
   {
     "id": "cardiosync",
@@ -382,7 +395,8 @@
       "MIT-BIH"
     ],
     "image": "/assets/projects/cardiosync.png",
-    "github": "https://github.com/sankalp-rajeev/CardioSync"
+    "github": "https://github.com/sankalp-rajeev/CardioSync",
+    "year": 2026
   },
   {
     "id": "rt-mdaq",
@@ -404,7 +418,8 @@
       "ncurses",
       "gnuplot"
     ],
-    "github": "https://github.com/sankalp-rajeev/RT-MDAQ"
+    "github": "https://github.com/sankalp-rajeev/RT-MDAQ",
+    "year": 2026
   },
   {
     "id": "trafficcontroller",
@@ -425,7 +440,8 @@
       "SFML",
       "Unit Testing"
     ],
-    "github": "https://github.com/sankalp-rajeev/TrafficController"
+    "github": "https://github.com/sankalp-rajeev/TrafficController",
+    "year": 2026
   },
   {
     "id": "unit-genie",
@@ -449,7 +465,8 @@
     ],
     "paperLink": "/reports/UnitGenie.pdf",
     "image": "/assets/projects/unitgenie.webp",
-    "github": "https://github.com/sankalp-rajeev/ConversionsApp"
+    "github": "https://github.com/sankalp-rajeev/ConversionsApp",
+    "year": 2024
   },
   {
     "id": "social-media-photo-share-app",
@@ -468,7 +485,8 @@
       "Node.js",
       "MySQL"
     ],
-    "github": "https://github.com/sankalp-rajeev/social-media-2023"
+    "github": "https://github.com/sankalp-rajeev/social-media-2023",
+    "year": 2023
   },
   {
     "id": "nasa-exoplanet-visualization",
@@ -487,7 +505,8 @@
       "HTML",
       "CSS"
     ],
-    "github": "https://github.com/sankalp-rajeev/Nasa-Data-Viz"
+    "github": "https://github.com/sankalp-rajeev/Nasa-Data-Viz",
+    "year": 2023
   },
   {
     "id": "car-performance-dashboard",
@@ -506,7 +525,8 @@
       "HTML",
       "CSS"
     ],
-    "github": "https://github.com/sankalp-rajeev/Car-Data-Viz"
+    "github": "https://github.com/sankalp-rajeev/Car-Data-Viz",
+    "year": 2023
   },
   {
     "id": "trust-but-verify",

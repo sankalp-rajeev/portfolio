@@ -43,6 +43,9 @@ const projects = defineCollection({
     figure: z.object({ value: z.string(), label: z.string() }).optional(),
     stack: z.array(z.string()).optional(),
     pypi: z.string().optional(),
+    year: z.number().optional(),
+    summary: z.string().optional(), // one-line text for the Projects index (falls back to intro)
+    hidden: z.boolean().optional(), // hide from the Projects index
     placeholder: z.string().optional(), // label for the image placeholder frame
     linksTodo: z.boolean().optional(), // links not provided yet
   }),
@@ -69,11 +72,9 @@ const education = defineCollection({
     order: z.number(),
     degree: z.string(),
     institution: z.string(),
-    years: z.string(),
     gpa: z.string(),
+    date: z.string(),
     transcriptLink: z.string(),
-    description: z.string(),
-    courses: z.array(z.string()),
   }),
 });
 
